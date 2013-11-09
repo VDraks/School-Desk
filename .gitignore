@@ -2,3 +2,7 @@
 *.swp
 .~lock*
 *~
+
+# Ignore IDE-specific files
+.idea/
+*.iml
