@@ -15,5 +15,6 @@
         <module>core</module>
         <module>dao</module>
         <module>dao-impl</module>
+        <module>web-service</module>
     </modules>
 </project>
