@@ -8,7 +8,7 @@ public interface IGroupDto extends IDto {
 
 	public void setName(String name);
 
-	public Set<Long> getRightsIds();
+	public Set<Long> getRightIds();
 
-	public void setRightsIds(Set<Long> rightsIds);
+	public void setRightIds(Set<Long> rightsIds);
 }

@@ -24,7 +24,7 @@ public interface IUserDto extends IDto {
 
 	public void setPassword(String password);
 
-	public Set<Long> getGroupsIds();
+	public Set<Long> getGroupIds();
 
-	public void setGroupsIds(Set<Long> groupsIds);
+	public void setGroupIds(Set<Long> groupIds);
 }
