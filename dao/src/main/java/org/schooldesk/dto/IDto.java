@@ -1,5 +1,5 @@
 package org.schooldesk.dto;
 
-public interface IDTO {
+public interface IDto {
 	public long getId();
 }

@@ -1,9 +1,9 @@
 package org.schooldesk.dao;
 
-import org.schooldesk.dto.IDTO;
+import org.schooldesk.dto.IDto;
 
 
-public interface IDAO<T extends IDTO> {
+public interface IDao<T extends IDto> {
 	public T save(T entity);
 	public T update(T entity);
 	public T loadById(Long id);

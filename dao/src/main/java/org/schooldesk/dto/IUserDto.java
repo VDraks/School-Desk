@@ -3,7 +3,7 @@ package org.schooldesk.dto;
 import java.util.Set;
 
 
-public interface IUserDTO extends IDTO {
+public interface IUserDto extends IDto {
 	public String getFirstName();
 
 	public void setFirstName(String firstName);
