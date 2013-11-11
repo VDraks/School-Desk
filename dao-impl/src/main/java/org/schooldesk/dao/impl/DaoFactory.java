@@ -1,9 +1,8 @@
 package org.schooldesk.dao.impl;
 
-import org.schooldesk.dao.*;
+import java.util.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.schooldesk.dao.*;
 
 public class DaoFactory implements IDaoFactory {
 	// hibernate api should be here
@@ -18,21 +17,14 @@ public class DaoFactory implements IDaoFactory {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends IDao<?>> T getFromPool(Class<T> daoClass)
-	{
+	private <T extends IDao<?>> T getFromPool(Class<T> daoClass) {
 		IDao<?> dao = daoPool.get(daoClass);
-		if (dao == null)
-		{
-			if (daoClass == IGroupDao.class)
-			{
+		if (dao == null) {
+			if (daoClass == IGroupDao.class) {
 				daoPool.put(daoClass, dao = new GroupDao());
-			}
-			else if (daoClass == IRightDao.class)
-			{
+			} else if (daoClass == IRightDao.class) {
 				daoPool.put(daoClass, dao = new RightDao());
-			}
-			else if (daoClass == IUserDao.class)
-			{
+			} else if (daoClass == IUserDao.class) {
 				daoPool.put(daoClass, dao = new UserDao());
 			}
 		}

@@ -1,8 +1,8 @@
 package org.schooldesk.dao.impl;
 
-import org.schooldesk.dao.IRightDao;
-import org.schooldesk.dto.IRightDto;
-import org.schooldesk.dto.impl.RightDto;
+import org.schooldesk.dao.*;
+import org.schooldesk.dto.*;
+import org.schooldesk.dto.impl.*;
 
 public class RightDao extends Dao<IRightDto> implements IRightDao{
 	//	public RightDao(API api) {

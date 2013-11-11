@@ -1,9 +1,8 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IUserDto;
+import java.util.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.schooldesk.dto.*;
 
 public class UserDto extends Dto implements IUserDto{
 	private String firstName;

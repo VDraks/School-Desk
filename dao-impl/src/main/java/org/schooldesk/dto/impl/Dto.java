@@ -1,6 +1,6 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IDto;
+import org.schooldesk.dto.*;
 
 public abstract class Dto implements IDto{
 	private Long id;

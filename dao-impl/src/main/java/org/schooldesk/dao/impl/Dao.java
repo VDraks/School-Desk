@@ -1,10 +1,9 @@
 package org.schooldesk.dao.impl;
 
-import org.schooldesk.dao.IDao;
-import org.schooldesk.dto.IDto;
+import java.util.*;
 
-import java.util.Collections;
-import java.util.Set;
+import org.schooldesk.dao.*;
+import org.schooldesk.dto.*;
 
 public abstract class Dao<T extends IDto> implements IDao<T> {
 	// hibernate api should be here
