@@ -6,11 +6,13 @@ public abstract class Dto implements IDto{
 	private Long id;
 
 	@Override
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
     }
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 }

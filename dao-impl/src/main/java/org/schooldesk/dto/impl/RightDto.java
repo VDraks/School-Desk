@@ -10,14 +10,16 @@ public class RightDto extends Dto implements IRightDto{
 	 */
 	public RightDto() {}
 
-	public static RightDto createNew(String code) {
+	public static RightDto createNew(String code)
+	{
 		RightDto dto = new RightDto();
 		dto.setCode(code);
 		return dto;
 	}
 
 	@Override
-	public String getCode() {
+	public String getCode()
+	{
 		return code;
 	}
 
