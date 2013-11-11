@@ -14,9 +14,7 @@ public class UserDto extends Dto implements IUserDto{
 
 	private Set<Long> groupIds;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated @UsedForMapping
 	public UserDto() {}
 
 	public static UserDto createNew() {

@@ -17,10 +17,14 @@ public class RightCore extends CoreObject {
 
 	@Override
 	public RightDto toDto() {
-		RightDto dto = new RightDto();
-		dto.setId(getId());
-		dto.setCode(getCode());
-		return dto;
+		return mapDto(new RightDto());
+	}
+
+	@Override
+	protected RightDto mapDto(Dto dto) {
+		RightDto rightDto = (RightDto) super.mapDto(dto);
+		rightDto.setCode(getCode());
+		return rightDto;
 	}
 
 	@Override

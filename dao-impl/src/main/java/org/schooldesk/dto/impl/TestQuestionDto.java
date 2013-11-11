@@ -9,9 +9,7 @@ public class TestQuestionDto extends ResourceDto implements ITestQuestionDto {
 	private List<String> answers;
 	private int rightAnswerIndex;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated @UsedForMapping
 	public TestQuestionDto() {}
 
 	public static TestQuestionDto createNew() {

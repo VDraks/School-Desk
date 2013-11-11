@@ -28,11 +28,16 @@ public class GroupCore extends CoreObject {
 
 	@Override
 	public GroupDto toDto() {
-		GroupDto dto = new GroupDto();
-		dto.setId(getId());
-		dto.setName(getName());
-		dto.setRightIds(getIds(getRights()));
-		return dto;
+		return mapDto(new GroupDto());
+	}
+
+	@Override
+	protected GroupDto mapDto(Dto dto)
+	{
+		GroupDto groupDto = (GroupDto) super.mapDto(dto);
+		groupDto.setName(getName());
+		groupDto.setRightIds(getIds(getRights()));
+		return groupDto;
 	}
 
 	@Override

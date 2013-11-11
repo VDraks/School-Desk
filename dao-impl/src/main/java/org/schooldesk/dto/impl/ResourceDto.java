@@ -6,6 +6,9 @@ public abstract class ResourceDto extends Dto implements IResourceDto {
 	private Long rightId;
 	private String name;
 
+	@Deprecated @UsedForMapping
+	public ResourceDto() {}
+
 	@Override
 	public Long getRightId() {
 		return rightId;

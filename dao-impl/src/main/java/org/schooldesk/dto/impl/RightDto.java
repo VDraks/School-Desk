@@ -5,9 +5,7 @@ import org.schooldesk.dto.*;
 public class RightDto extends Dto implements IRightDto{
 	private String code;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated @UsedForMapping
 	public RightDto() {}
 
 	public static RightDto createNew(String code) {

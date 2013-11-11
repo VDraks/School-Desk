@@ -7,9 +7,7 @@ import org.schooldesk.dto.*;
 public class TestDto extends ResourceDto implements ITestDto {
 	private Set<Long> testQuestionIds;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated @UsedForMapping
 	public TestDto() {}
 
 	public static TestDto createNew() {

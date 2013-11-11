@@ -8,9 +8,7 @@ public class GroupDto extends Dto implements IGroupDto{
 	private String name;
 	private Set<Long> rightIds;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated @UsedForMapping
 	public GroupDto() {}
 
 	public static GroupDto createNew() {

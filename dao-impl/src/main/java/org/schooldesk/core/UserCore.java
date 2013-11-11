@@ -66,15 +66,20 @@ public class UserCore extends CoreObject {
 
 	@Override
 	public UserDto toDto() {
-		UserDto dto = new UserDto();
-		dto.setId(getId());
-		dto.setFirstName(getFirstName());
-		dto.setMiddleName(getMiddleName());
-		dto.setLastName(getLastName());
-		dto.setLogin(getLogin());
-		dto.setPassword(getPassword());
-		dto.setGroupIds(getIds(getGroups()));
-		return dto;
+		return mapDto(new UserDto());
+	}
+
+	@Override
+	protected UserDto mapDto(Dto dto)
+	{
+		UserDto userDto = (UserDto) super.mapDto(dto);
+		userDto.setFirstName(getFirstName());
+		userDto.setMiddleName(getMiddleName());
+		userDto.setLastName(getLastName());
+		userDto.setLogin(getLogin());
+		userDto.setPassword(getPassword());
+		userDto.setGroupIds(getIds(getGroups()));
+		return userDto;
 	}
 
 	@Override
