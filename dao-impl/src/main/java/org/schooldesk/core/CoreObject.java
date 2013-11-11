@@ -2,6 +2,8 @@ package org.schooldesk.core;
 
 import java.util.*;
 
+import org.schooldesk.dto.impl.*;
+
 public abstract class CoreObject implements Dtoable {
 	private Long id;
 
@@ -13,6 +15,11 @@ public abstract class CoreObject implements Dtoable {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	protected Dto mapDto(Dto dto) {
+		dto.setId(getId());
+		return dto;
 	}
 
 	protected static List<Long> getIds(List<? extends Dtoable> dtoables) {
