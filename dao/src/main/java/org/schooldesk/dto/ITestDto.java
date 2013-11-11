@@ -1,9 +1,9 @@
 package org.schooldesk.dto;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ITestDto extends IResourceDto {
-	public List<ITestQuestionDto> getTestQuestions();
+	public Set<Long> getTestQuestionIds();
 
-	public void setTestQuestions(List<ITestQuestionDto> testQuestions);
+	public void setTestQuestionIds(Set<Long> testQuestionIds);
 }

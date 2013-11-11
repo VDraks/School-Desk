@@ -1,9 +1,9 @@
 package org.schooldesk.dto;
 
 public interface IResourceDto extends IDto {
-	public IRightDto getRight();
+	public Long getRightId();
 
-	public void setRight(IRightDto right);
+	public void setRight(Long rightId);
 
 	public String getName();
 
