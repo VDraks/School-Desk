@@ -8,8 +8,7 @@ public class UserModel {
 	private String middleName;
 	private String lastName;
 
-	private String login;
-	private String password;
+	private String email;
 
 	private Set<Long> groupIds;
 
@@ -37,20 +36,12 @@ public class UserModel {
 		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<Long> getGroupIds() {

@@ -1,5 +1,4 @@
 package org.schooldesk.core.models;
 
-public class CourseModel {
-
+public class TestResultModel {
 }

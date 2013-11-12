@@ -1,14 +1,16 @@
 package org.schooldesk.core.services;
 
-import org.schooldesk.core.models.CourseModel;
-import org.schooldesk.core.models.CourseTopicModel;
-import org.schooldesk.core.models.TestModel;
+import org.schooldesk.core.models.*;
 
 import java.util.Set;
 
 
 public interface ITestService extends IService {
+	// TODO: add CRUD methods
+
 	Set<CourseModel> getCourses(long stageId);
-	Set<CourseTopicModel> getCourseTopics(long courseId);
-	TestModel getTest(long topicId);
+	Set<CourseSectionModel> getCourseSections(long courseId);
+	TestModel getTest(long courseSectionId);
+
+	TestResultModel validateUserTestPassing(UserTestPassing userTestPassing);
 }

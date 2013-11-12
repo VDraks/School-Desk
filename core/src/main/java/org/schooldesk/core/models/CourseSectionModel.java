@@ -1,4 +1,4 @@
 package org.schooldesk.core.models;
 
-public class CourseTopicModel {
+public class CourseSectionModel {
 }
