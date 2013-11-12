@@ -1,15 +1,16 @@
 package org.schooldesk.dao.impl;
 
-import org.hibernate.SessionFactory;
-import org.schooldesk.dao.IUserDao;
-import org.schooldesk.dto.IUserDto;
-import org.schooldesk.dto.impl.UserDto;
+import org.hibernate.*;
+import org.schooldesk.core.*;
+import org.schooldesk.dao.*;
+import org.schooldesk.dto.*;
+import org.schooldesk.dto.impl.*;
 
-public class UserDao extends Dao<IUserDto> implements IUserDao
+public class UserDao extends AbstractDao<IUserDto> implements IUserDao
 {
 	public UserDao(SessionFactory sessionFactory)
 	{
-		super(sessionFactory);
+		super(sessionFactory, UserCore.class);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package org.schooldesk.dto.impl;
 
 import org.schooldesk.dto.*;
 
-public abstract class ResourceDto extends Dto implements IResourceDto {
+public abstract class ResourceDto extends AbstractDto implements IResourceDto {
 	private Long rightId;
 	private String name;
 

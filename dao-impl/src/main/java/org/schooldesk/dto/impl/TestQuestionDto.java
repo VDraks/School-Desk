@@ -6,15 +6,15 @@ import org.schooldesk.dto.*;
 
 public class TestQuestionDto extends ResourceDto implements ITestQuestionDto {
 	private String question;
-	private List<String> answers;
-	private int rightAnswerIndex;
+	private Set<Long> answerIds;
+	private Long correctAnswerId;
 
 	@Deprecated @UsedForMapping
 	public TestQuestionDto() {}
 
 	public static TestQuestionDto createNew() {
 		TestQuestionDto dto = new TestQuestionDto();
-		dto.setAnswers(new ArrayList<String>());
+		dto.setAnswerIds(new HashSet<Long>());
 		return dto;
 	}
 
@@ -29,22 +29,26 @@ public class TestQuestionDto extends ResourceDto implements ITestQuestionDto {
 	}
 
 	@Override
-	public List<String> getAnswers() {
-		return answers;
+	public Set<Long> getAnswerIds()
+	{
+		return answerIds;
 	}
 
 	@Override
-	public void setAnswers(List<String> answers) {
-		this.answers = answers;
+	public void setAnswerIds(Set<Long> answerIds)
+	{
+		this.answerIds = answerIds;
 	}
 
 	@Override
-	public int getRightAnswerIndex() {
-		return rightAnswerIndex;
+	public Long getCorrectAnswerId()
+	{
+		return correctAnswerId;
 	}
 
 	@Override
-	public void setRightAnswerIndex(int index) {
-		this.rightAnswerIndex = index;
+	public void setCorrectAnswerId(Long id)
+	{
+		this.correctAnswerId = id;
 	}
 }

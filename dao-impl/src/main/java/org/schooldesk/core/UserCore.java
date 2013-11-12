@@ -2,13 +2,14 @@ package org.schooldesk.core;
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 @Entity
-public class UserCore extends CoreObject {
+public class UserCore extends AbstractCore
+{
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -75,7 +76,7 @@ public class UserCore extends CoreObject {
 	}
 
 	@Override
-	protected UserDto mapDto(Dto dto)
+	protected UserDto mapDto(AbstractDto dto)
 	{
 		UserDto userDto = (UserDto) super.mapDto(dto);
 		userDto.setFirstName(getFirstName());
@@ -88,7 +89,7 @@ public class UserCore extends CoreObject {
 	}
 
 	@Override
-	public void fromDto(Dto dto) {
+	public void fromDto(IDto dto) {
 		UserDto userDto = (UserDto) dto;
 		setFirstName(userDto.getFirstName());
 		setMiddleName(userDto.getMiddleName());

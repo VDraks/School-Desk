@@ -13,5 +13,4 @@ import java.lang.annotation.*;
 @Target(value={CONSTRUCTOR, METHOD})
 public @interface UsedForMapping
 {
-	Class<?> value() default Deprecated.class;
 }

@@ -2,15 +2,14 @@ package org.schooldesk.core;
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
-import org.schooldesk.core.CoreObject;
-import org.schooldesk.core.RightCore;
+import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 @Entity
-public class GroupCore extends CoreObject {
+public class GroupCore extends AbstractCore
+{
 	private String name;
 	
 	@OneToMany
@@ -40,7 +39,7 @@ public class GroupCore extends CoreObject {
 	}
 
 	@Override
-	protected GroupDto mapDto(Dto dto)
+	protected GroupDto mapDto(AbstractDto dto)
 	{
 		GroupDto groupDto = (GroupDto) super.mapDto(dto);
 		groupDto.setName(getName());
@@ -49,9 +48,9 @@ public class GroupCore extends CoreObject {
 	}
 
 	@Override
-	public void fromDto(Dto dto) {
+	public void fromDto(IDto dto) {
 		GroupDto groupDto = (GroupDto) dto;
 		setName(groupDto.getName());
-//		setRights(dtoGroup.getRightIds()); // FIXME
+//		setRights(groupDto.getRightIds()); // FIXME
 	}
 }

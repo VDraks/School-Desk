@@ -1,14 +1,16 @@
 package org.schooldesk.dao;
 
-import org.schooldesk.dto.IDto;
+import java.util.*;
 
-import java.util.Set;
+import org.schooldesk.dto.*;
 
 
 public interface IDao<T extends IDto>
 {
 	public T save(T entity) throws Exception;
-	public T update(T entity) throws Exception;
+	public Set<T> save(Set<T> entities) throws Exception;
+	public void update(T entity) throws Exception;
+	public void update(Set<T> entities) throws Exception;
 	public T loadById(Long id) throws Exception;
 	public Set<T> loadByIds(Set<Long> ids) throws Exception;
 	public Set<T> loadAll() throws Exception;

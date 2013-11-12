@@ -2,16 +2,14 @@ package org.schooldesk.core;
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import org.schooldesk.dao.impl.Dtoable;
+import org.schooldesk.dao.impl.*;
 import org.schooldesk.dto.impl.*;
 
 @Entity
-public abstract class CoreObject implements Dtoable {
+public abstract class AbstractCore implements IDtoable
+{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,23 +25,23 @@ public abstract class CoreObject implements Dtoable {
 		this.id = id;
 	}
 
-	protected Dto mapDto(Dto dto) {
-		dto.setId(getId());
+	protected AbstractDto mapDto(AbstractDto dto) {
+		dto.setId(id);
 		return dto;
 	}
 
-	protected static List<Long> getIds(List<? extends Dtoable> dtoables) {
+	protected static List<Long> getIds(List<? extends IDtoable> dtoables) {
 		List<Long> ids = new ArrayList<Long>(dtoables.size());
-		for (Dtoable dtoable : dtoables)
+		for (IDtoable dtoable : dtoables)
 		{
 			ids.add(dtoable.getId());
 		}
 		return ids;
 	}
 
-	protected static Set<Long> getIds(Set<? extends Dtoable> dtoables) {
+	protected static Set<Long> getIds(Set<? extends IDtoable> dtoables) {
 		Set<Long> ids = new HashSet<Long>(dtoables.size());
-		for (Dtoable dtoable : dtoables)
+		for (IDtoable dtoable : dtoables)
 		{
 			ids.add(dtoable.getId());
 		}

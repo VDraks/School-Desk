@@ -1,11 +1,13 @@
 package org.schooldesk.core;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
+import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 @Entity
-public class RightCore extends CoreObject {
+public class RightCore extends AbstractCore
+{
 	private String code;
 
 	public RightCore() {}
@@ -24,14 +26,14 @@ public class RightCore extends CoreObject {
 	}
 
 	@Override
-	protected RightDto mapDto(Dto dto) {
+	protected RightDto mapDto(AbstractDto dto) {
 		RightDto rightDto = (RightDto) super.mapDto(dto);
 		rightDto.setCode(getCode());
 		return rightDto;
 	}
 
 	@Override
-	public void fromDto(Dto dto) {
+	public void fromDto(IDto dto) {
 		RightDto rightDto = (RightDto) dto;
 		setCode(rightDto.getCode());
 	}
