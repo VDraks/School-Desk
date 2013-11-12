@@ -1,20 +1,12 @@
 package org.schooldesk.dao.impl;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
-import org.schooldesk.dao.IDao;
-import org.schooldesk.dao.IDaoFactory;
-import org.schooldesk.dao.IGroupDao;
-import org.schooldesk.dao.IRightDao;
-import org.schooldesk.dao.IUserDao;
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+import org.schooldesk.dao.*;
 
 public class DaoFactory implements IDaoFactory
 {
@@ -36,12 +28,12 @@ public class DaoFactory implements IDaoFactory
 	
 	private Map<Class<? extends IDao<?>>, IDao<?>> daoPool = new HashMap<Class<? extends IDao<?>>, IDao<?>>();
 
-	private static Configuration INSTANCE = new AnnotationConfiguration();
+	private static Configuration CONFIGURATION = new AnnotationConfiguration();
 	private SessionFactory sessionFactory;
 	
 	public DaoFactory(String login, String password, String connectionURL)
 	{
-		java.util.Properties properties = new java.util.Properties();
+		Properties properties = new Properties();
 //		properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 		properties.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
 		properties.setProperty("hibernate.connection.url", connectionURL);
@@ -51,16 +43,16 @@ public class DaoFactory implements IDaoFactory
 //	    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 	    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 	    properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		INSTANCE.setProperties(properties);
+		CONFIGURATION.setProperties(properties);
 		
 		List<Class<?>> classesInPackage = getClassesForPackage("org.schooldesk.dao.impl");
 		
-		for (Class<?> classX : classesInPackage)
+		for (Class<?> annotatedClass : classesInPackage)
 		{
-			INSTANCE.addAnnotatedClass(classX);
+			CONFIGURATION.addAnnotatedClass(annotatedClass);
 		}
 		
-		sessionFactory = INSTANCE.buildSessionFactory();
+		sessionFactory = CONFIGURATION.buildSessionFactory();
 	}
 
 	@Override
@@ -103,17 +95,15 @@ public class DaoFactory implements IDaoFactory
         }
 	}
 
-	private static void processDirectory(File directory, String pkgname, ArrayList<Class<?>> classes)
+	private static void processDirectory(File directory, String packageName, ArrayList<Class<?>> classes)
 	{
-        String[] files = directory.list();
-        for (int i = 0; i < files.length; i++)
+        for (String fileName : directory.list())
         {
-            String fileName = files[i];
             String className = null;
             
             if (fileName.endsWith(".class"))
             {
-				className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);
+				className = packageName + '.' + fileName.substring(0, fileName.length() - 6);
             }
             if (className != null)
             {
@@ -122,11 +112,11 @@ public class DaoFactory implements IDaoFactory
         }
 	}
 
-	private static ArrayList<Class<?>> getClassesForPackage(String pkgname)
+	private static ArrayList<Class<?>> getClassesForPackage(String packageName)
 	{
 		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
 		
-		String relPath = pkgname.replace('.', '/');
+		String relPath = packageName.replace('.', '/');
 		
 		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
 		if (resource == null)
@@ -134,7 +124,7 @@ public class DaoFactory implements IDaoFactory
 		        throw new RuntimeException("Unexpected problem: No resource for " + relPath);
 		}
 		
-		processDirectory(new File(resource.getPath()), pkgname, classes);
+		processDirectory(new File(resource.getPath()), packageName, classes);
 		
 		return classes;
 	}
