@@ -1,7 +1,10 @@
 package org.schooldesk.core;
 
+import javax.persistence.Entity;
+
 import org.schooldesk.dto.impl.*;
 
+@Entity
 public class RightCore extends CoreObject {
 	private String code;
 

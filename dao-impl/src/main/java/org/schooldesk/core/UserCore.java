@@ -2,8 +2,12 @@ package org.schooldesk.core;
 
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import org.schooldesk.dto.impl.*;
 
+@Entity
 public class UserCore extends CoreObject {
 	private String firstName;
 	private String middleName;
@@ -12,6 +16,7 @@ public class UserCore extends CoreObject {
 	private String login;
 	private String password;
 
+	@OneToMany
 	private Set<GroupCore> groups;
 
 	public UserCore() {}

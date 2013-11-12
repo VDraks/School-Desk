@@ -2,10 +2,18 @@ package org.schooldesk.core;
 
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import org.schooldesk.core.CoreObject;
+import org.schooldesk.core.RightCore;
 import org.schooldesk.dto.impl.*;
 
+@Entity
 public class GroupCore extends CoreObject {
 	private String name;
+	
+	@OneToMany
 	private Set<RightCore> rights;
 
 	public GroupCore() {}
