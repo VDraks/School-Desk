@@ -2,7 +2,7 @@ package org.schooldesk.dto;
 
 import java.util.Set;
 
-public interface ITestResultDto extends IDto {
+public interface ITestResult extends IDto {
 	public Long getTestId();
 
 	public Long getUserId();

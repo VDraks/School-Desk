@@ -1,12 +1,12 @@
 package org.schooldesk.dao.impl;
 
-import org.hibernate.*;
-import org.schooldesk.core.*;
-import org.schooldesk.dao.*;
-import org.schooldesk.dto.*;
-import org.schooldesk.dto.impl.*;
+import org.hibernate.SessionFactory;
+import org.schooldesk.core.UserCore;
+import org.schooldesk.dao.IUserDao;
+import org.schooldesk.dto.IUser;
+import org.schooldesk.dto.impl.UserDto;
 
-public class UserDao extends AbstractDao<IUserDto> implements IUserDao
+public class UserDao extends AbstractDao<IUser> implements IUserDao
 {
 	public UserDao(SessionFactory sessionFactory)
 	{
@@ -14,7 +14,7 @@ public class UserDao extends AbstractDao<IUserDto> implements IUserDao
 	}
 
 	@Override
-	public IUserDto createNew()
+	public IUser createNew()
 	{
 		return UserDto.createNew();
 	}

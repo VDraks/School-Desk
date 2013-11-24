@@ -2,7 +2,7 @@ package org.schooldesk.dto;
 
 import java.util.Set;
 
-public interface ITestQuestionDto extends IResourceDto {
+public interface ITestQuestion extends IResource {
 	public String getQuestion();
 
 	public void setQuestion(String question);

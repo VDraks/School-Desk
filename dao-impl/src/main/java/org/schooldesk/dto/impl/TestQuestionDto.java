@@ -1,10 +1,11 @@
 package org.schooldesk.dto.impl;
 
-import java.util.*;
+import org.schooldesk.dto.ITestQuestion;
 
-import org.schooldesk.dto.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class TestQuestionDto extends ResourceDto implements ITestQuestionDto {
+public class TestQuestionDto extends ResourceDto implements ITestQuestion {
 	private String question;
 	private Set<Long> answerIds;
 	private Long correctAnswerId;

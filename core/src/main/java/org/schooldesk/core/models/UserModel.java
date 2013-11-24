@@ -1,9 +1,12 @@
 package org.schooldesk.core.models;
 
+import org.schooldesk.dto.IUser;
+
 import java.util.Set;
 
 
 public class UserModel {
+	private Long id;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -11,6 +14,35 @@ public class UserModel {
 	private String email;
 
 	private Set<Long> groupIds;
+
+	public UserModel(Long id, String firstName, String middleName, String lastName, String email, Set<Long> groupIds) {
+		setId(id);
+		setFirstName(firstName);
+		setMiddleName(middleName);
+		setLastName(lastName);
+		setEmail(email);
+		setGroupIds(groupIds);
+	}
+
+	public UserModel(IUser user) {
+		this(user.getId(), user.getLogin(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getGroupIds());
+	}
+
+	public void applyTo(IUser user) {
+		user.setFirstName(getFirstName());
+		user.setMiddleName(getMiddleName());
+		user.setLastName(getLastName());
+		user.setLogin(getEmail());
+		user.setGroupIds(getGroupIds());
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;

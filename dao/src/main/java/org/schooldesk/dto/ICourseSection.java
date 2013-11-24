@@ -1,6 +1,6 @@
 package org.schooldesk.dto;
 
-public interface ICourseSectionDto extends IDto {
+public interface ICourseSection extends IDto {
 	public String getName();
 	public void setName(String name);
 }

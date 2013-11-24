@@ -1,12 +1,12 @@
 package org.schooldesk.dao.impl;
 
-import org.hibernate.*;
-import org.schooldesk.core.*;
-import org.schooldesk.dao.*;
-import org.schooldesk.dto.*;
-import org.schooldesk.dto.impl.*;
+import org.hibernate.SessionFactory;
+import org.schooldesk.core.GroupCore;
+import org.schooldesk.dao.IGroupDao;
+import org.schooldesk.dto.IGroup;
+import org.schooldesk.dto.impl.GroupDto;
 
-public class GroupDao extends AbstractDao<IGroupDto> implements IGroupDao{
+public class GroupDao extends AbstractDao<IGroup> implements IGroupDao{
 	
 	public GroupDao(SessionFactory sessionFactory)
 	{
@@ -14,7 +14,7 @@ public class GroupDao extends AbstractDao<IGroupDto> implements IGroupDao{
 	}
 
 	@Override
-	public IGroupDto createNew()
+	public IGroup createNew()
 	{
 		return GroupDto.createNew();
 	}
