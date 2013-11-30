@@ -1,13 +1,16 @@
 package org.schooldesk.dto.impl;
 
-import java.util.*;
+import org.schooldesk.dto.ITest;
 
-import org.schooldesk.dto.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class TestDto extends ResourceDto implements ITestDto {
+
+public class TestDto extends ResourceDto implements ITest {
 	private Set<Long> testQuestionIds;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public TestDto() {}
 
 	public static TestDto createNew() {

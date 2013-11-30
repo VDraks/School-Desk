@@ -1,8 +1,8 @@
 package org.schooldesk.dao;
 
-import org.schooldesk.dto.IGroupDto;
+import org.schooldesk.dto.IGroup;
 
 
-public interface IGroupDao extends IDao<IGroupDto> {
-	public IGroupDto createNew();
+public interface IGroupDao extends IDao<IGroup> {
+	public IGroup createNew();
 }

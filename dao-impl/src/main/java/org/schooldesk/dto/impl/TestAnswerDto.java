@@ -1,14 +1,16 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.*;
+import org.schooldesk.dto.ITestAnswer;
 
-public class TestAnswerDto extends ResourceDto implements ITestAnswerDto {
+
+public class TestAnswerDto extends ResourceDto implements ITestAnswer {
 	private String answer;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public TestAnswerDto() {}
 
-	public static TestAnswerDto createNew()	{
+	public static TestAnswerDto createNew() {
 		return new TestAnswerDto();
 	}
 

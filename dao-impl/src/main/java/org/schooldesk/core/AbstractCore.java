@@ -4,15 +4,14 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import org.schooldesk.dao.impl.*;
+import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.impl.*;
 
+
 @Entity
-public abstract class AbstractCore implements IDtoable
-{
-	
+public abstract class AbstractCore implements IDtoable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Override
@@ -32,8 +31,7 @@ public abstract class AbstractCore implements IDtoable
 
 	protected static List<Long> getIds(List<? extends IDtoable> dtoables) {
 		List<Long> ids = new ArrayList<Long>(dtoables.size());
-		for (IDtoable dtoable : dtoables)
-		{
+		for (IDtoable dtoable : dtoables) {
 			ids.add(dtoable.getId());
 		}
 		return ids;
@@ -41,8 +39,7 @@ public abstract class AbstractCore implements IDtoable
 
 	protected static Set<Long> getIds(Set<? extends IDtoable> dtoables) {
 		Set<Long> ids = new HashSet<Long>(dtoables.size());
-		for (IDtoable dtoable : dtoables)
-		{
+		for (IDtoable dtoable : dtoables) {
 			ids.add(dtoable.getId());
 		}
 		return ids;

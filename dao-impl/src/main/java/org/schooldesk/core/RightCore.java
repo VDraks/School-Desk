@@ -5,9 +5,9 @@ import javax.persistence.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+
 @Entity
-public class RightCore extends AbstractCore
-{
+public class RightCore extends AbstractCore {
 	private String code;
 
 	public RightCore() {}

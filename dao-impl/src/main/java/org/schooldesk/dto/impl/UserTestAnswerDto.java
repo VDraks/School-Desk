@@ -1,12 +1,14 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.*;
+import org.schooldesk.dto.IUserTestAnswer;
 
-public class UserTestAnswerDto extends AbstractDto implements IUserTestAnswerDto {
+
+public class UserTestAnswerDto extends AbstractDto implements IUserTestAnswer {
 	private Long questionId;
 	private Long answerId;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public UserTestAnswerDto() {}
 
 	public static UserTestAnswerDto createNew(Long questionId, Long answerId) {

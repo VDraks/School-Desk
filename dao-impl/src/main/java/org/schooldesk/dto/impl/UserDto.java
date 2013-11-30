@@ -1,15 +1,17 @@
 package org.schooldesk.dto.impl;
 
-import java.util.*;
+import org.schooldesk.dto.IUser;
 
-import org.schooldesk.dto.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class UserDto extends AbstractDto implements IUserDto{
+
+public class UserDto extends AbstractDto implements IUser {
 	private String firstName;
 	private String middleName;
 	private String lastName;
 
-	private String login;
+	private String email;
 	private String password;
 
 	private Set<Long> groupIds;
@@ -19,82 +21,69 @@ public class UserDto extends AbstractDto implements IUserDto{
 	 */
 	public UserDto() {}
 
-	public static UserDto createNew()
-	{
+	public static UserDto createNew() {
 		UserDto dto = new UserDto();
 		dto.setGroupIds(new HashSet<Long>());
 		return dto;
 	}
 
 	@Override
-	public String getFirstName()
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 
 	@Override
-	public void setFirstName(String firstName)
-	{
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	@Override
-	public String getMiddleName()
-	{
+	public String getMiddleName() {
 		return middleName;
 	}
 
 	@Override
-	public void setMiddleName(String middleName)
-	{
+	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
 
 	@Override
-	public String getLastName()
-	{
+	public String getLastName() {
 		return lastName;
 	}
 
 	@Override
-	public void setLastName(String lastName)
-	{
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
 	@Override
-	public String getLogin()
-	{
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
 	@Override
-	public void setLogin(String login)
-	{
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
-	public String getPassword()
-	{
+	public String getPassword() {
 		return password;
 	}
 
 	@Override
-	public void setPassword(String password)
-	{
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	@Override
-	public Set<Long> getGroupIds()
-	{
+	public Set<Long> getGroupIds() {
 		return groupIds;
 	}
 
 	@Override
-	public void setGroupIds(Set<Long> groupIds)
-	{
+	public void setGroupIds(Set<Long> groupIds) {
 		this.groupIds = groupIds;
 	}
 }
