@@ -1,5 +1,6 @@
 package org.schooldesk.dao.hibernateimpl;
 
+import java.io.*;
 import java.util.*;
 
 import org.hibernate.*;
@@ -7,11 +8,26 @@ import org.schooldesk.dao.*;
 
 
 public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
+	private static final String CONFIG_FILE = "dao.factory.config";
+
 	private Map<Class<? extends IDao<?>>, IDao<?>> daoPool = new HashMap<>();
 	private SessionFactory sessionFactory;
 
-	public HibernateDaoFactory(String login, String password, String connectionURL) {
-		sessionFactory = HibernateConfiguration.buildSessionFactory(login, password, connectionURL);
+	public HibernateDaoFactory() throws IOException {
+		Properties configuration = getFactoryConfiguration();
+		sessionFactory = HibernateConfiguration.buildSessionFactory(
+				configuration.getProperty("db_login"),
+				configuration.getProperty("db_password"),
+				configuration.getProperty("db_connection")
+		);
+	}
+
+	private Properties getFactoryConfiguration() throws IOException {
+		Properties configuration = new Properties();
+		try (InputStream is = new BufferedInputStream(new FileInputStream(CONFIG_FILE))) {
+			configuration.load(is);
+		}
+		return configuration;
 	}
 
 	@Override
