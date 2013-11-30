@@ -1,16 +1,16 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.logging.*;
-
 import org.hibernate.*;
 import org.hibernate.criterion.*;
 import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
+import org.slf4j.Logger;
+import org.slf4j.*;
 
 import java.lang.InstantiationException;
+import java.lang.reflect.*;
+import java.util.*;
 
 
 public abstract class AbstractDao<T extends IDto> implements IDao<T> {
@@ -18,7 +18,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 
 	private /*final ThreadLocal<*/ Session/*>*/ session/* = new ThreadLocal<Session>()*/;
 	private SessionFactory sessionFactory;
-	private static final Logger log = Logger.getAnonymousLogger();
+	private static final Logger logger = LoggerFactory.getLogger(AbstractDao.class);
 
 	public AbstractDao(SessionFactory sessionFactory, Class<? extends AbstractCore> coreClass) {
 		this.sessionFactory = sessionFactory;
@@ -47,14 +47,14 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			getSession().getTransaction().rollback();
 		}
 		catch (HibernateException e) {
-			log.log(Level.WARNING, "Cannot rollback transaction", e);
+			logger.warn("Cannot rollback transaction", e);
 		}
 
 		try {
 			getSession().close();
 		}
 		catch (HibernateException e) {
-			log.log(Level.WARNING, "Cannot close session", e);
+			logger.warn("Cannot close session", e);
 		}
 
 //		CAbstractAPI.session.set(null);
@@ -249,7 +249,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			return coreObject;
 		}
 		catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-			log.log(Level.WARNING, "Cannot create core object", e);
+			logger.warn("Cannot create core object", e);
 		}
 		return null;
 	}
