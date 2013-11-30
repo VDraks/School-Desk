@@ -11,7 +11,7 @@ public class UserDto extends AbstractDto implements IUser {
 	private String middleName;
 	private String lastName;
 
-	private String login;
+	private String email;
 	private String password;
 
 	private Set<Long> groupIds;
@@ -58,13 +58,13 @@ public class UserDto extends AbstractDto implements IUser {
 	}
 
 	@Override
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
 	@Override
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
