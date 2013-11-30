@@ -13,6 +13,7 @@
 
     <modules>
         <module>core</module>
+		<module>core-impl</module>
         <module>dao</module>
         <module>dao-impl</module>
         <module>web-service</module>
