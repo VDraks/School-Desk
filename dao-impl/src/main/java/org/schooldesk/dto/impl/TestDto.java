@@ -5,10 +5,12 @@ import org.schooldesk.dto.ITest;
 import java.util.HashSet;
 import java.util.Set;
 
+
 public class TestDto extends ResourceDto implements ITest {
 	private Set<Long> testQuestionIds;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public TestDto() {}
 
 	public static TestDto createNew() {

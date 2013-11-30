@@ -7,9 +7,9 @@ import javax.persistence.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+
 @Entity
-public class UserCore extends AbstractCore
-{
+public class UserCore extends AbstractCore {
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -76,8 +76,7 @@ public class UserCore extends AbstractCore
 	}
 
 	@Override
-	protected UserDto mapDto(AbstractDto dto)
-	{
+	protected UserDto mapDto(AbstractDto dto) {
 		UserDto userDto = (UserDto) super.mapDto(dto);
 		userDto.setFirstName(getFirstName());
 		userDto.setMiddleName(getMiddleName());

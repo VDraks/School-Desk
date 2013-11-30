@@ -2,11 +2,13 @@ package org.schooldesk.dto.impl;
 
 import org.schooldesk.dto.IResource;
 
+
 public abstract class ResourceDto extends AbstractDto implements IResource {
 	private Long rightId;
 	private String name;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public ResourceDto() {}
 
 	@Override

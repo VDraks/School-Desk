@@ -6,11 +6,13 @@ import org.schooldesk.dto.ICourseSection;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CourseDto extends AbstractDto implements ICourse {
 	private String name;
 	private List<ICourseSection> courseSections;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public CourseDto() {}
 
 	public static CourseDto createNew() {
