@@ -1,10 +1,10 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import java.io.*;
-import java.util.*;
-
 import org.hibernate.*;
 import org.schooldesk.dao.*;
+
+import java.io.*;
+import java.util.*;
 
 
 /**
@@ -20,6 +20,7 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 	 * Constructor for the DAO factory<br/>
 	 * Needs <b>dao.factory.config</b> for the factory configuration with
 	 * properties <b>db_login</b>, <b>db_password</b>, <b>db_connection</b> set.
+	 *
 	 * @throws IOException if config is missing or can't be read
 	 */
 	public HibernateDaoFactory() throws IOException {

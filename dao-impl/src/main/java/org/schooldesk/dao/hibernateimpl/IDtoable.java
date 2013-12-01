@@ -7,5 +7,5 @@ public interface IDtoable {
 	Long getId();
 	void setId(Long id);
 	IDto toDto();
-	void fromDto(IDto dto);
+	void fromDto(IDto dto, CoreApi coreApi);
 }

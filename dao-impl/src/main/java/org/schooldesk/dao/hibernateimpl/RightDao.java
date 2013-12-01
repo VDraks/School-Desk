@@ -9,7 +9,7 @@ import org.schooldesk.dto.impl.*;
 
 public class RightDao extends AbstractDao<IRightDto> implements IRightDao {
 	public RightDao(SessionFactory sessionFactory) {
-		super(sessionFactory, RightCore.class);
+		super(sessionFactory, IRightDto.class, RightCore.class);
 	}
 
 	@Override

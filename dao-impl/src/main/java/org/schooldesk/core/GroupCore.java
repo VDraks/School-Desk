@@ -1,11 +1,11 @@
 package org.schooldesk.core;
 
-import java.util.*;
-
-import javax.persistence.*;
-
+import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
+
+import javax.persistence.*;
+import java.util.*;
 
 
 @Entity
@@ -47,9 +47,9 @@ public class GroupCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto) {
+	public void fromDto(IDto dto, CoreApi coreApi) {
 		GroupDto groupDto = (GroupDto) dto;
 		setName(groupDto.getName());
-//		setRights(groupDto.getRightIds()); // FIXME
+		setRights(coreApi.loadByIdsSafe(groupDto.getRightIds(), RightCore.class));
 	}
 }

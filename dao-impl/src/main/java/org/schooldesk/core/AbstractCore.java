@@ -1,11 +1,10 @@
 package org.schooldesk.core;
 
-import java.util.*;
-
-import javax.persistence.*;
-
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.impl.*;
+
+import javax.persistence.*;
+import java.util.*;
 
 
 @Entity
@@ -27,14 +26,6 @@ public abstract class AbstractCore implements IDtoable {
 	protected AbstractDto mapDto(AbstractDto dto) {
 		dto.setId(id);
 		return dto;
-	}
-
-	protected static List<Long> getIds(List<? extends IDtoable> dtoables) {
-		List<Long> ids = new ArrayList<Long>(dtoables.size());
-		for (IDtoable dtoable : dtoables) {
-			ids.add(dtoable.getId());
-		}
-		return ids;
 	}
 
 	protected static Set<Long> getIds(Set<? extends IDtoable> dtoables) {
