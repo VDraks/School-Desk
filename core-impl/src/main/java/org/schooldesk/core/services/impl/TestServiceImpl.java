@@ -9,23 +9,12 @@ import java.util.*;
 
 
 class TestServiceImpl extends AbstractServiceImpl implements ITestService {
-	interface IEducationStageDao extends IDao<IEducationStage> {}
-	final private IDao<IEducationStage> educationStageDao;
-
-	interface ICourseDao extends IDao<ICourse> {}
-	final private IDao<ICourse> courseDao;
-
-	interface ICourseSectionDao extends IDao<ICourseSection> {}
-	final private IDao<ICourseSection> courseSectionDao;
-
-	interface ITestDao extends IDao<ITest> {}
-	final private IDao<ITest> testDao;
-
-	interface ITestQuestionDao extends IDao<ITestQuestion> {}
-	final private IDao<ITestQuestion> testQuestionDao;
-
-	interface ITestAnswerDao extends IDao<ITestAnswer> {}
-	final private IDao<ITestAnswer> testAnswerDao;
+	final private IEducationStageDao educationStageDao;
+	final private ICourseDao courseDao;
+	final private ICourseSectionDao courseSectionDao;
+	final private ITestDao testDao;
+	final private ITestQuestionDao testQuestionDao;
+	final private ITestAnswerDao testAnswerDao;
 
 	public TestServiceImpl(IDaoFactory daoFactory) {
 		super(daoFactory);
@@ -110,15 +99,28 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return testResultModel;
 	}
 
-	private EducationStageModel loadEducationStageModel(long id) throws DataAccessException{
-		EducationStageModel educationStageModel = new EducationStageModel();
-		IEducationStage educationStage = educationStageDao.loadById(id);
+	@Override
+	public Set<EducationStageModel> getAllAvailableEducationStages() throws DataAccessException {
+		Set<EducationStageModel> result = new HashSet<EducationStageModel>();
+		for (IEducationStage stage : educationStageDao.loadAll())
+		{
+			result.add(getEducationStageModel(stage));
+		}
 
-		educationStageModel.setId(id);
-		educationStageModel.setName(educationStage.getName());
+		return result;
+	}
+
+	private EducationStageModel loadEducationStageModel(long id) throws DataAccessException{
+		return getEducationStageModel(educationStageDao.loadById(id));
+	}
+
+	private EducationStageModel getEducationStageModel(IEducationStage stage) throws DataAccessException{
+		EducationStageModel educationStageModel = new EducationStageModel();
+		educationStageModel.setId(stage.getId());
+		educationStageModel.setName(stage.getName());
 
 		Set<CourseModel> courseModels = new HashSet<>();
-		for (long courseId : educationStage.getCourseIds()) {
+		for (long courseId : stage.getCourseIds()) {
 			courseModels.add(loadCourseModel(courseId));
 		}
 		educationStageModel.setCourseModels(courseModels);
