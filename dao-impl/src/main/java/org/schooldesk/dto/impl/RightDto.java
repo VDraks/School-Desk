@@ -1,9 +1,8 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.*;
+import org.schooldesk.dto.IRight;
 
-
-public class RightDto extends AbstractDto implements IRightDto {
+public class RightDto extends AbstractDto implements IRight {
 	private String code;
 
 	/**

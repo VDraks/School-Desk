@@ -4,5 +4,5 @@ import org.schooldesk.dto.IGroup;
 
 
 public interface IGroupDao extends IDao<IGroup> {
-	public IGroup createNew();
+	IGroup createDto();
 }
