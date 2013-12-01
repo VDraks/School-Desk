@@ -1,20 +1,18 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IUserTestAnswer;
+import org.schooldesk.dto.*;
 
 
 public class UserTestAnswerDto extends AbstractDto implements IUserTestAnswer {
 	private Long questionId;
-	private Long answerId;
 
 	@Deprecated
 	@UsedForMapping
 	public UserTestAnswerDto() {}
 
-	public static UserTestAnswerDto createNew(Long questionId, Long answerId) {
+	public static UserTestAnswerDto createNew(Long questionId) {
 		UserTestAnswerDto result = new UserTestAnswerDto();
 		result.setQuestionId(questionId);
-		result.setAnswerId(answerId);
 		return result;
 	}
 
@@ -23,18 +21,8 @@ public class UserTestAnswerDto extends AbstractDto implements IUserTestAnswer {
 		return questionId;
 	}
 
-	@UsedForMapping
+	@Override
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
-	}
-
-	@Override
-	public Long getAnswerId() {
-		return answerId;
-	}
-
-	@UsedForMapping
-	public void setAnswerId(Long answerId) {
-		this.answerId = answerId;
 	}
 }
