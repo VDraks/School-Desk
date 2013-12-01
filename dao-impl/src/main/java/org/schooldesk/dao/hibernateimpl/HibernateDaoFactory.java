@@ -60,6 +60,9 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 			else if (daoClass == ICourseDao.class) {
 				daoPool.put(daoClass, dao = new CourseDao(coreApi));
 			}
+			else if (daoClass == ICourseSectionDao.class) {
+				daoPool.put(daoClass, dao = new CourseSectionDao(coreApi));
+			}
 			else {
 				throw new NoImplementationException();
 			}
