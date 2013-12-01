@@ -7,14 +7,14 @@ import javax.persistence.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+
 @Entity
-public class UserCore extends AbstractCore
-{
+public class UserCore extends AbstractCore {
 	private String firstName;
 	private String middleName;
 	private String lastName;
 
-	private String login;
+	private String email;
 	private String password;
 
 	@OneToMany
@@ -46,12 +46,12 @@ public class UserCore extends AbstractCore
 		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -76,13 +76,12 @@ public class UserCore extends AbstractCore
 	}
 
 	@Override
-	protected UserDto mapDto(AbstractDto dto)
-	{
+	protected UserDto mapDto(AbstractDto dto) {
 		UserDto userDto = (UserDto) super.mapDto(dto);
 		userDto.setFirstName(getFirstName());
 		userDto.setMiddleName(getMiddleName());
 		userDto.setLastName(getLastName());
-		userDto.setLogin(getLogin());
+		userDto.setEmail(getEmail());
 		userDto.setPassword(getPassword());
 		userDto.setGroupIds(getIds(getGroups()));
 		return userDto;
@@ -94,7 +93,7 @@ public class UserCore extends AbstractCore
 		setFirstName(userDto.getFirstName());
 		setMiddleName(userDto.getMiddleName());
 		setLastName(userDto.getLastName());
-		setLogin(userDto.getLogin());
+		setEmail(userDto.getEmail());
 		setPassword(userDto.getPassword());
 //		setGroups(userDto.getGroupIds()); // FIXME
 	}

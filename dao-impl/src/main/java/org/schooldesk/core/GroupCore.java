@@ -7,11 +7,11 @@ import javax.persistence.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+
 @Entity
-public class GroupCore extends AbstractCore
-{
+public class GroupCore extends AbstractCore {
 	private String name;
-	
+
 	@OneToMany
 	private Set<RightCore> rights;
 
@@ -39,8 +39,7 @@ public class GroupCore extends AbstractCore
 	}
 
 	@Override
-	protected GroupDto mapDto(AbstractDto dto)
-	{
+	protected GroupDto mapDto(AbstractDto dto) {
 		GroupDto groupDto = (GroupDto) super.mapDto(dto);
 		groupDto.setName(getName());
 		groupDto.setRightIds(getIds(getRights()));

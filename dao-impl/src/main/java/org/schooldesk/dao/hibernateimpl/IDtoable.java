@@ -1,9 +1,9 @@
-package org.schooldesk.dao.impl;
+package org.schooldesk.dao.hibernateimpl;
 
 import org.schooldesk.dto.*;
 
-public interface IDtoable
-{
+
+public interface IDtoable {
 	Long getId();
 	void setId(Long id);
 	IDto toDto();

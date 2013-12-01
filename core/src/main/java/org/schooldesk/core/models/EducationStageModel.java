@@ -1,12 +1,11 @@
 package org.schooldesk.core.models;
 
-import java.util.Set;
+import java.util.*;
 
-
-public class CourseModel {
+public class EducationStageModel {
 	private long id;
 	private String name;
-	private Set<CourseSectionModel> sectionModels;
+	private Set<CourseModel> courseModels;
 
 	public long getId() {
 		return id;
@@ -24,11 +23,11 @@ public class CourseModel {
 		this.name = name;
 	}
 
-	public Set<CourseSectionModel> getSectionModels() {
-		return sectionModels;
+	public Set<CourseModel> getCourseModels() {
+		return courseModels;
 	}
 
-	public void setSectionModels(Set<CourseSectionModel> sectionModels) {
-		this.sectionModels = sectionModels;
+	public void setCourseModels(Set<CourseModel> courseModels) {
+		this.courseModels = courseModels;
 	}
 }

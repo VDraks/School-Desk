@@ -8,6 +8,29 @@ public class UserTestPassing {
 	private long userId;
 	private Set<UserAnswer> userAnswers;
 
+	public long getTestId() {
+		return testId;
+	}
+
+	public void setTestId(long testId) {
+		this.testId = testId;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public Set<UserAnswer> getUserAnswers() {
+		return userAnswers;
+	}
+
+	public void setUserAnswers(Set<UserAnswer> userAnswers) {
+		this.userAnswers = userAnswers;
+	}
 
 	public static class UserAnswer {
 		private long questionId;

@@ -2,7 +2,8 @@ package org.schooldesk.dto.impl;
 
 import org.schooldesk.dto.*;
 
-public class RightDto extends AbstractDto implements IRightDto{
+
+public class RightDto extends AbstractDto implements IRightDto {
 	private String code;
 
 	/**
@@ -10,22 +11,19 @@ public class RightDto extends AbstractDto implements IRightDto{
 	 */
 	public RightDto() {}
 
-	public static RightDto createNew(String code)
-	{
+	public static RightDto createNew(String code) {
 		RightDto dto = new RightDto();
 		dto.setCode(code);
 		return dto;
 	}
 
 	@Override
-	public String getCode()
-	{
+	public String getCode() {
 		return code;
 	}
 
 	@UsedForMapping
-	public void setCode(String code)
-	{
+	public void setCode(String code) {
 		this.code = code;
 	}
 }

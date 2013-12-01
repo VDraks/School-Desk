@@ -4,12 +4,14 @@ import org.schooldesk.dto.ITestResult;
 
 import java.util.Set;
 
+
 public class TestResultDto extends AbstractDto implements ITestResult {
 	private Long testId;
 	private Long userId;
 	private Set<Long> userTestAnswerIds;
 
-	@Deprecated @UsedForMapping
+	@Deprecated
+	@UsedForMapping
 	public TestResultDto() {}
 
 	public static TestResultDto createNew(Long testId, Long userId, Set<Long> userTestAnswerIds) {

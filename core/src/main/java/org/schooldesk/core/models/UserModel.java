@@ -25,14 +25,14 @@ public class UserModel {
 	}
 
 	public UserModel(IUser user) {
-		this(user.getId(), user.getLogin(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getGroupIds());
+		this(user.getId(), user.getEmail(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getGroupIds());
 	}
 
 	public void applyTo(IUser user) {
 		user.setFirstName(getFirstName());
 		user.setMiddleName(getMiddleName());
 		user.setLastName(getLastName());
-		user.setLogin(getEmail());
+		user.setEmail(getEmail());
 		user.setGroupIds(getGroupIds());
 	}
 

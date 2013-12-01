@@ -16,9 +16,9 @@ public interface IUser extends IDto {
 
 	public void setLastName(String lastName);
 
-	public String getLogin();
+	public String getEmail();
 
-	public void setLogin(String login);
+	public void setEmail(String email);
 
 	public String getPassword();
 
