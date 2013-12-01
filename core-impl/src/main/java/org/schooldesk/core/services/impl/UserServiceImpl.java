@@ -62,10 +62,11 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	}
 
 	@Override
-	public boolean checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException {
+	public Long checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException {
 		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		final IUser user = userDao.loadByEmail(userCredentialModel.getEmail());
 
-		return user.getPassword().equals(userCredentialModel.getPassword());
+		boolean validPassword = user.getPassword().equals(userCredentialModel.getPassword());
+		return validPassword ? user.getId() : null;
 	}
 }

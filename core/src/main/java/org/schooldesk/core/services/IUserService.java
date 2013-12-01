@@ -13,5 +13,5 @@ public interface IUserService extends IService {
 
 	UserModel fetchUserByEmail(UserFetchByEmailModel userFetchModel) throws DataAccessException;
 
-	boolean checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException;
+	Long checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException;
 }
