@@ -12,7 +12,7 @@ public class CourseSectionDao extends AbstractDao<ICourseSection> implements ICo
 	}
 
 	@Override
-	public ICourseSection createNew() {
+	public ICourseSection createDto() {
 		return CourseSectionDto.createNew();
 	}
 }

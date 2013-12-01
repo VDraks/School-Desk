@@ -12,7 +12,7 @@ public class CourseDao extends AbstractDao<ICourse> implements ICourseDao {
 	}
 
 	@Override
-	public ICourse createNew() {
+	public ICourse createDto() {
 		return CourseDto.createNew();
 	}
 }
