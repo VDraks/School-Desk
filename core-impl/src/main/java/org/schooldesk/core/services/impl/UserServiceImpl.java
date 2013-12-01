@@ -23,7 +23,7 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	@Override
 	public long createUser(UserModel userModel) throws DataAccessException {
 		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
-		final IUser user = userDao.createNew();
+		final IUser user = userDao.createDto();
 		userModel.applyTo(user);
 		user.setPassword(passwordGenerator.generate());
 

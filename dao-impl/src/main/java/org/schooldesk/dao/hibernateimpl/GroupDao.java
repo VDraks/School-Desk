@@ -14,7 +14,7 @@ public class GroupDao extends AbstractDao<IGroup> implements IGroupDao {
 	}
 
 	@Override
-	public IGroup createNew() {
+	public IGroup createDto() {
 		return GroupDto.createNew();
 	}
 }

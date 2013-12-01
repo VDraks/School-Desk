@@ -1,13 +1,14 @@
 package org.schooldesk.dao.hibernateimpl;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.*;
+import org.hibernate.criterion.Restrictions;
 import org.schooldesk.core.UserCore;
-import org.schooldesk.dao.*;
+import org.schooldesk.dao.DataAccessException;
+import org.schooldesk.dao.IUserDao;
 import org.schooldesk.dto.IUser;
 import org.schooldesk.dto.impl.UserDto;
 
-import java.util.*;
+import java.util.List;
 
 
 public class UserDao extends AbstractDao<IUser> implements IUserDao {
@@ -16,7 +17,7 @@ public class UserDao extends AbstractDao<IUser> implements IUserDao {
 	}
 
 	@Override
-	public IUser createNew() {
+	public IUser createDto() {
 		return UserDto.createNew();
 	}
 
