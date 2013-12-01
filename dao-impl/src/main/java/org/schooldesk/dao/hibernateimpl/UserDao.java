@@ -16,7 +16,7 @@ public class UserDao extends AbstractDao<IUser> implements IUserDao {
 	}
 
 	@Override
-	public IUser createNew() {
+	public IUser createDto() {
 		return UserDto.createNew();
 	}
 

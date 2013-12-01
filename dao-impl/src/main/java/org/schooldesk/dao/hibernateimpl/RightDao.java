@@ -6,13 +6,13 @@ import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 
-public class RightDao extends AbstractDao<IRightDto> implements IRightDao {
+public class RightDao extends AbstractDao<IRight> implements IRightDao {
 	public RightDao(CoreApi coreApi) {
-		super(coreApi, IRightDto.class, RightCore.class);
+		super(coreApi, IRight.class, RightCore.class);
 	}
 
 	@Override
-	public IRightDto createNew(String code) {
+	public IRight createDto(String code) {
 		return RightDto.createNew(code);
 	}
 }

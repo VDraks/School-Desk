@@ -23,7 +23,7 @@ public class AbstractTest {
 		when(user.getId()).thenReturn(42L);
 
 		IUserDao userDao = mock(IUserDao.class);
-		when(userDao.createNew()).thenReturn(user);
+		when(userDao.createDto()).thenReturn(user);
 		try {
 			when(userDao.save(any(IUser.class))).thenReturn(user);
 		}
