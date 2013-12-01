@@ -18,7 +18,7 @@ public class CoreApi {
 		this.sessionFactory = sessionFactory;
 	}
 
-	protected Session getSession() {
+	public Session getSession() {
 		if (session == null) {
 			session = sessionFactory.openSession();
 		}
