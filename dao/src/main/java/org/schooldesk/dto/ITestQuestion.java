@@ -2,16 +2,17 @@ package org.schooldesk.dto;
 
 import java.util.Set;
 
+
 public interface ITestQuestion extends IResource {
-	public String getQuestion();
+	String getQuestion();
+	void setQuestion(String question);
 
-	public void setQuestion(String question);
+	TestQuestionType getType();
+	void setType(TestQuestionType type);
 
-	public Set<Long> getAnswerIds();
+	Set<ITestAnswer> getAnswers();
+	void setAnswers(Set<ITestAnswer> answers);
 
-	public void setAnswerIds(Set<Long> answerIds);
-
-	public Long getCorrectAnswerId();
-
-	public void setCorrectAnswerId(Long id);
+	ITestAnswer getCorrectAnswers();
+	void setCorrectAnswers(Set<ITestAnswer> answers);
 }

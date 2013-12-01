@@ -1,8 +1,8 @@
 package org.schooldesk.dao;
 
-import org.schooldesk.dto.IRightDto;
+import org.schooldesk.dto.IRight;
 
 
-public interface IRightDao extends IDao<IRightDto> {
-	public IRightDto createNew(String code);
+public interface IRightDao extends IDao<IRight> {
+	public IRight createNew(String code);
 }
