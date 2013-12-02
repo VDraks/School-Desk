@@ -1,15 +1,14 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import org.hibernate.SessionFactory;
-import org.schooldesk.core.RightCore;
-import org.schooldesk.dao.IRightDao;
-import org.schooldesk.dto.IRight;
-import org.schooldesk.dto.impl.RightDto;
+import org.schooldesk.core.*;
+import org.schooldesk.dao.*;
+import org.schooldesk.dto.*;
+import org.schooldesk.dto.impl.*;
 
 
 public class RightDao extends AbstractDao<IRight> implements IRightDao {
-	public RightDao(SessionFactory sessionFactory) {
-		super(sessionFactory, RightCore.class);
+	public RightDao(CoreApi coreApi) {
+		super(coreApi, IRight.class, RightCore.class);
 	}
 
 	@Override

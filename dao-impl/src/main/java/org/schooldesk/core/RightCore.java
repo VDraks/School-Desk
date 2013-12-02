@@ -1,9 +1,10 @@
 package org.schooldesk.core;
 
-import javax.persistence.*;
-
+import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -33,7 +34,7 @@ public class RightCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto) {
+	public void fromDto(IDto dto, CoreApi coreApi) {
 		RightDto rightDto = (RightDto) dto;
 		setCode(rightDto.getCode());
 	}

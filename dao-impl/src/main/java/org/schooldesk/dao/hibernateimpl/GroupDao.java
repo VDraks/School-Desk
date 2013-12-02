@@ -1,16 +1,15 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import org.hibernate.SessionFactory;
-import org.schooldesk.core.GroupCore;
-import org.schooldesk.dao.IGroupDao;
-import org.schooldesk.dto.IGroup;
-import org.schooldesk.dto.impl.GroupDto;
+import org.schooldesk.core.*;
+import org.schooldesk.dao.*;
+import org.schooldesk.dto.*;
+import org.schooldesk.dto.impl.*;
 
 
 public class GroupDao extends AbstractDao<IGroup> implements IGroupDao {
 
-	public GroupDao(SessionFactory sessionFactory) {
-		super(sessionFactory, GroupCore.class);
+	public GroupDao(CoreApi coreApi) {
+		super(coreApi, IGroup.class, GroupCore.class);
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package org.schooldesk.core;
 
-import java.util.*;
-
-import javax.persistence.*;
-
+import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
+
+import javax.persistence.*;
+import java.util.*;
 
 
 @Entity
@@ -88,13 +88,13 @@ public class UserCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto) {
+	public void fromDto(IDto dto, CoreApi coreApi) {
 		UserDto userDto = (UserDto) dto;
 		setFirstName(userDto.getFirstName());
 		setMiddleName(userDto.getMiddleName());
 		setLastName(userDto.getLastName());
 		setEmail(userDto.getEmail());
 		setPassword(userDto.getPassword());
-//		setGroups(userDto.getGroupIds()); // FIXME
+		setGroups(coreApi.loadByIdsSafe(userDto.getGroupIds(), GroupCore.class));
 	}
 }
