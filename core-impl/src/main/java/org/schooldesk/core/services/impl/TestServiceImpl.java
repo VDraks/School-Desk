@@ -27,90 +27,74 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 	}
 
 	@Override
-	public Set<CourseModel> getCourses(long educationStageId) {
-		Set<CourseModel> courseModels = null;
-		try {
-			EducationStageModel educationStageModel = loadEducationStageModel(educationStageId);
-			courseModels = educationStageModel.getCourseModels();
-		}
-		catch (DataAccessException e) {
-			e.printStackTrace();  //TODO change body of catch statement use File | Settings | File Templates.
+	public Set<CourseModel> getCourses(Long educationStageId) throws DataAccessException {
+		IEducationStage educationStage = educationStageDao.loadById(educationStageId);
+
+		Set<CourseModel> courseModels = new HashSet<>();
+		for (long courseId : educationStage.getCourseIds()) {
+			courseModels.add(loadCourseModel(courseId));
 		}
 		return courseModels;
 	}
 
 	@Override
-	public Set<CourseSectionModel> getCourseSections(long courseId) {
-		Set<CourseSectionModel> courseSectionModels = null;
-		try {
-			CourseModel courseModel = loadCourseModel(courseId);
-			courseSectionModels = courseModel.getSectionModels();
-		}
-		catch (DataAccessException e) {
-			e.printStackTrace();  //TODO change body of catch statement use File | Settings | File Templates.
+	public Set<CourseSectionModel> getCourseSections(Long courseId) throws DataAccessException {
+		ICourse course = courseDao.loadById(courseId);
+
+		Set<CourseSectionModel> courseSectionModels = new HashSet<>();
+		for (ICourseSection courseSection : course.getCourseSections()) {
+			courseSectionModels.add(loadCourseSectionModel(courseSection.getId()));
 		}
 		return courseSectionModels;
 	}
 
 	@Override
-	public TestModel getTest(long courseSectionId) {
-		TestModel testModel = null;
-		try {
-			CourseSectionModel courseSectionModel = loadCourseSectionModel(courseSectionId);
-			testModel = courseSectionModel.getTestModel();
-		}
-		catch (DataAccessException e) {
-			e.printStackTrace();  //TODO change body of catch statement use File | Settings | File Templates.
-		}
-		return testModel;
+	public TestModel getTest(Long courseSectionId) throws DataAccessException {
+		ICourseSection courseSection = courseSectionDao.loadById(courseSectionId);
+		return loadTestModel(courseSection.getTestId());
 	}
 
 	@Override
-	public TestResultModel validateUserTestPassing(UserTestPassing userTestPassing) {
-		TestResultModel testResultModel = null;
-		try {
-			ITest test = testDao.loadById(userTestPassing.getTestId());
+	public TestResultModel validateUserTestPassing(UserTestPassing userTestPassing) throws DataAccessException {
+		ITest test = testDao.loadById(userTestPassing.getTestId());
 
-			testResultModel = new TestResultModel();
-			testResultModel.setTestName(test.getName());
+		TestResultModel testResultModel = new TestResultModel();
+		testResultModel.setTestName(test.getName());
 
-			List<TestResultModel.ValidatedTestAnswer> validatedTestAnswers = new ArrayList<>();
-			for (UserTestPassing.UserAnswer userAnswer : userTestPassing.getUserAnswers()) {
-				TestResultModel.ValidatedTestAnswer validatedTestAnswer = new TestResultModel.ValidatedTestAnswer();
+		List<TestResultModel.ValidatedTestAnswer> validatedTestAnswers = new ArrayList<>();
+		for (UserTestPassing.UserAnswer userAnswer : userTestPassing.getUserAnswers()) {
+			TestResultModel.ValidatedTestAnswer validatedTestAnswer = new TestResultModel.ValidatedTestAnswer();
 
-				ITestQuestion testQuestion = testQuestionDao.loadById(userAnswer.getQuestionId());
-				validatedTestAnswer.setQuestion(testQuestion.getQuestion());
+			ITestQuestion testQuestion = testQuestionDao.loadById(userAnswer.getQuestionId());
 
-				ITestAnswer testUserAnswer = testAnswerDao.loadById(userAnswer.getAnswerId());
-				validatedTestAnswer.setUserAnswer(testUserAnswer.getAnswer());
+			validatedTestAnswer.setQuestionModel(loadTestQuestionModel(userAnswer.getQuestionId()));
 
-				ITestAnswer testCorrectAnswer = testAnswerDao.loadById(testQuestion.getCorrectAnswerId());
-				validatedTestAnswer.setCorrectAnswer(testCorrectAnswer.getAnswer());
-
-				validatedTestAnswers.add(validatedTestAnswer);
+			Set<Long> correctAnswerIds = new HashSet<>();
+			for (ITestAnswer correctAnswer : testQuestion.getAnswers()) {
+				correctAnswerIds.add(correctAnswer.getId());
 			}
-			testResultModel.setValidatedTestAnswers(validatedTestAnswers);
+			validatedTestAnswer.setCorrectAnswerIds(correctAnswerIds);
 
+			validatedTestAnswer.setUserAnswerIds(userAnswer.getAnswerIds());
+
+			validatedTestAnswers.add(validatedTestAnswer);
 		}
-		catch (DataAccessException e) {
-			e.printStackTrace();  //TODO change body of catch statement use File | Settings | File Templates.
-		}
+		testResultModel.setValidatedTestAnswers(validatedTestAnswers);
 
 		return testResultModel;
 	}
 
 	@Override
 	public Set<EducationStageModel> getAllAvailableEducationStages() throws DataAccessException {
-		Set<EducationStageModel> result = new HashSet<EducationStageModel>();
-		for (IEducationStage stage : educationStageDao.loadAll())
-		{
+		Set<EducationStageModel> result = new HashSet<>();
+		for (IEducationStage stage : educationStageDao.loadAll()) {
 			result.add(getEducationStageModel(stage));
 		}
 
 		return result;
 	}
 
-	private EducationStageModel loadEducationStageModel(long id) throws DataAccessException{
+	private EducationStageModel loadEducationStageModel(long id) throws DataAccessException {
 		return getEducationStageModel(educationStageDao.loadById(id));
 	}
 
@@ -119,44 +103,30 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		educationStageModel.setId(stage.getId());
 		educationStageModel.setName(stage.getName());
 
-		Set<CourseModel> courseModels = new HashSet<>();
-		for (long courseId : stage.getCourseIds()) {
-			courseModels.add(loadCourseModel(courseId));
-		}
-		educationStageModel.setCourseModels(courseModels);
-
 		return educationStageModel;
 	}
 
-	private CourseModel loadCourseModel(long id) throws DataAccessException{
+	private CourseModel loadCourseModel(Long id) throws DataAccessException{
 		CourseModel courseModel = new CourseModel();
 		ICourse course = courseDao.loadById(id);
 
 		courseModel.setId(id);
 		courseModel.setName(course.getName());
 
-		Set<CourseSectionModel> courseSectionModels = new HashSet<>();
-
-		for (ICourseSection courseSection : course.getCourseSections()) {
-			courseSectionModels.add(loadCourseSectionModel(courseSection.getId()));
-		}
-		courseModel.setSectionModels(courseSectionModels);
-
 		return courseModel;
 	}
 
-	private CourseSectionModel loadCourseSectionModel(long id) throws DataAccessException{
+	private CourseSectionModel loadCourseSectionModel(Long id) throws DataAccessException{
 		CourseSectionModel courseSectionModel = new CourseSectionModel();
 		ICourseSection courseSection = courseSectionDao.loadById(id);
 
 		courseSectionModel.setId(id);
 		courseSectionModel.setName(courseSection.getName());
-		courseSectionModel.setTestModel(loadTestModel(courseSection.getId()));
 
 		return courseSectionModel;
 	}
 
-	private TestModel loadTestModel(long id) throws DataAccessException{
+	private TestModel loadTestModel(Long id) throws DataAccessException{
 		TestModel testModel = new TestModel();
 		ITest test = testDao.loadById(id);
 
@@ -172,23 +142,24 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return testModel;
 	}
 
-	private TestQuestionModel loadTestQuestionModel(long id) throws DataAccessException{
+	private TestQuestionModel loadTestQuestionModel(Long id) throws DataAccessException{
 		TestQuestionModel testQuestionModel = new TestQuestionModel();
 		ITestQuestion testQuestion = testQuestionDao.loadById(id);
 
 		testQuestionModel.setId(id);
 		testQuestionModel.setQuestion(testQuestion.getQuestion());
+		testQuestionModel.setTestQuestionType(testQuestion.getType());
 
 		Set<TestAnswerModel> answerModels = new HashSet<>();
-		for (long answerId : testQuestion.getAnswerIds()) {
-			answerModels.add(loadTestAnswerModel(answerId));
+		for (ITestAnswer answer : testQuestion.getAnswers()) {
+			answerModels.add(loadTestAnswerModel(answer.getId()));
 		}
 		testQuestionModel.setAnswers(answerModels);
 
 		return testQuestionModel;
 	}
 
-	private TestAnswerModel loadTestAnswerModel(long id) throws DataAccessException{
+	private TestAnswerModel loadTestAnswerModel(Long id) throws DataAccessException{
 		TestAnswerModel testAnswerModel = new TestAnswerModel();
 		ITestAnswer testAnswer = testAnswerDao.loadById(id);
 

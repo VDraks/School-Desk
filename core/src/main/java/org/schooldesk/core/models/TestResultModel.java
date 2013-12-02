@@ -1,6 +1,6 @@
 package org.schooldesk.core.models;
 
-import java.util.List;
+import java.util.*;
 
 
 public class TestResultModel {
@@ -25,32 +25,32 @@ public class TestResultModel {
 
 
 	public static class ValidatedTestAnswer {
-		private String question;
-		private String userAnswer;
-		private String correctAnswer;
+		private TestQuestionModel questionModel;
+		private Set<Long> userAnswerIds;
+		private Set<Long> correctAnswerIds;
 
-		public String getQuestion() {
-			return question;
+		public TestQuestionModel getQuestionModel() {
+			return questionModel;
 		}
 
-		public void setQuestion(String question) {
-			this.question = question;
+		public void setQuestionModel(TestQuestionModel questionModel) {
+			this.questionModel = questionModel;
 		}
 
-		public String getUserAnswer() {
-			return userAnswer;
+		public Set<Long> getUserAnswerIds() {
+			return userAnswerIds;
 		}
 
-		public void setUserAnswer(String userAnswer) {
-			this.userAnswer = userAnswer;
+		public void setUserAnswerIds(Set<Long> userAnswerIds) {
+			this.userAnswerIds = userAnswerIds;
 		}
 
-		public String getCorrectAnswer() {
-			return correctAnswer;
+		public Set<Long> getCorrectAnswerIds() {
+			return correctAnswerIds;
 		}
 
-		public void setCorrectAnswer(String correctAnswer) {
-			this.correctAnswer = correctAnswer;
+		public void setCorrectAnswerIds(Set<Long> correctAnswerIds) {
+			this.correctAnswerIds = correctAnswerIds;
 		}
 	}
 }

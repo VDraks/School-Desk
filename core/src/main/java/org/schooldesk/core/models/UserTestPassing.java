@@ -4,23 +4,23 @@ import java.util.Set;
 
 
 public class UserTestPassing {
-	private long testId;
-	private long userId;
+	private Long testId;
+	private Long userId;
 	private Set<UserAnswer> userAnswers;
 
-	public long getTestId() {
+	public Long getTestId() {
 		return testId;
 	}
 
-	public void setTestId(long testId) {
+	public void setTestId(Long testId) {
 		this.testId = testId;
 	}
 
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -33,23 +33,23 @@ public class UserTestPassing {
 	}
 
 	public static class UserAnswer {
-		private long questionId;
-		private long answerId;
+		private Long questionId;
+		private Set<Long> answerIds;
 
-		public long getQuestionId() {
+		public Long getQuestionId() {
 			return questionId;
 		}
 
-		public void setQuestionId(long questionId) {
+		public void setQuestionId(Long questionId) {
 			this.questionId = questionId;
 		}
 
-		public long getAnswerId() {
-			return answerId;
+		public Set<Long> getAnswerIds() {
+			return answerIds;
 		}
 
-		public void setAnswerId(long answerId) {
-			this.answerId = answerId;
+		public void setAnswerIds(Set<Long> answerIds) {
+			this.answerIds = answerIds;
 		}
 	}
 }

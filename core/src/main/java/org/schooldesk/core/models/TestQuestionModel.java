@@ -2,17 +2,20 @@ package org.schooldesk.core.models;
 
 import java.util.Set;
 
+import org.schooldesk.dto.TestQuestionType;
 
 public class TestQuestionModel {
-	private long id;
+	private Long id;
 	private String question;
+	private TestQuestionType testQuestionType;
 	private Set<TestAnswerModel> answers;
 
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -22,6 +25,14 @@ public class TestQuestionModel {
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+
+	public TestQuestionType getTestQuestionType() {
+		return testQuestionType;
+	}
+
+	public void setTestQuestionType(TestQuestionType testQuestionType) {
+		this.testQuestionType = testQuestionType;
 	}
 
 	public Set<TestAnswerModel> getAnswers() {

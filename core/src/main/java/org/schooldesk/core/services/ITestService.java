@@ -10,9 +10,9 @@ public interface ITestService extends IService {
 	// TODO: add CRUD methods
 
 	Set<EducationStageModel> getAllAvailableEducationStages() throws DataAccessException;
-	Set<CourseModel> getCourses(long stageId);
-	Set<CourseSectionModel> getCourseSections(long courseId);
-	TestModel getTest(long courseSectionId);
+	Set<CourseModel> getCourses(Long stageId) throws DataAccessException;
+	Set<CourseSectionModel> getCourseSections(Long courseId) throws DataAccessException;
+	TestModel getTest(Long courseSectionId) throws DataAccessException;
 
-	TestResultModel validateUserTestPassing(UserTestPassing userTestPassing);
+	TestResultModel validateUserTestPassing(UserTestPassing userTestPassing) throws DataAccessException;
 }

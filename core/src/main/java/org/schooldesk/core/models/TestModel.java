@@ -4,15 +4,15 @@ import java.util.Set;
 
 
 public class TestModel {
-	private long id;
+	private Long id;
 	private String name;
 	private Set<TestQuestionModel> questions;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -1,15 +1,14 @@
 package org.schooldesk.core.models;
 
 public class CourseSectionModel {
-	private long id;
+	private Long id;
 	private String name;
-	private TestModel testModel;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -19,13 +18,5 @@ public class CourseSectionModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public TestModel getTestModel() {
-		return testModel;
-	}
-
-	public void setTestModel(TestModel testModel) {
-		this.testModel = testModel;
 	}
 }
