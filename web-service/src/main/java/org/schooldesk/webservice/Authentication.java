@@ -17,7 +17,7 @@ public class Authentication extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		UserCredentialModel ucm = ServletHelper.readValue(req.getParameter("userInfo"), UserCredentialModel.class);
+		UserCredentialModel ucm = ServletHelper.readValue(req.getParameter("UserCredentials"), UserCredentialModel.class);
 		try {
 			Long result = ApplicationContext.getServiceFactory().getService(IUserService.class).checkCredentials(ucm);
 			ServletHelper.writeResponse(result != null, null, result, resp.getOutputStream());
