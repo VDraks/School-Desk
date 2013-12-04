@@ -14,15 +14,16 @@ import org.schooldesk.dto.IUser;
 
 class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	private final IPasswordGenerator passwordGenerator;
+	private final IUserDao userDao;
 
 	public UserServiceImpl(IDaoFactory daoFactory, IPasswordGenerator passwordGenerator) {
 		super(daoFactory);
 		this.passwordGenerator = passwordGenerator;
+		userDao = getDaoFactory().getDao(IUserDao.class);
 	}
 
 	@Override
 	public long createUser(UserModel userModel) throws DataAccessException {
-		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		final IUser user = userDao.createDto();
 		userModel.applyTo(user);
 		user.setPassword(passwordGenerator.generate());
@@ -33,7 +34,6 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 
 	@Override
 	public void updateUser(UserModel userModel) throws ServiceException, DataAccessException {
-		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		final IUser user = userDao.loadById(userModel.getId());
 		if (user == null) {
 			throw new ServiceException("Couldn't find user with id '%d'", userModel.getId());
@@ -45,7 +45,6 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 
 	@Override
 	public void deleteUser(long userId) throws DataAccessException {
-		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		userDao.delete(userId);
 	}
 
@@ -55,7 +54,6 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 			throw new IllegalArgumentException("userFetchModel have no email specified");
 		}
 
-		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		final IUser user = userDao.loadByEmail(userFetchModel.getEmail());
 
 		return (user == null) ? null : new UserModel(user);
@@ -63,7 +61,6 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 
 	@Override
 	public Long checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException {
-		final IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
 		final IUser user = userDao.loadByEmail(userCredentialModel.getEmail());
 
 		boolean validPassword = user.getPassword().equals(userCredentialModel.getPassword());

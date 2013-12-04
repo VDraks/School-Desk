@@ -3,10 +3,10 @@ package org.schooldesk.core.models;
 import java.util.Set;
 
 
-public class UserTestPassing {
+public class UserTestPassingModel {
 	private Long testId;
 	private Long userId;
-	private Set<UserAnswer> userAnswers;
+	private Set<UserAnswerModel> userAnswers;
 
 	public Long getTestId() {
 		return testId;
@@ -24,15 +24,15 @@ public class UserTestPassing {
 		this.userId = userId;
 	}
 
-	public Set<UserAnswer> getUserAnswers() {
+	public Set<UserAnswerModel> getUserAnswers() {
 		return userAnswers;
 	}
 
-	public void setUserAnswers(Set<UserAnswer> userAnswers) {
+	public void setUserAnswers(Set<UserAnswerModel> userAnswers) {
 		this.userAnswers = userAnswers;
 	}
 
-	public static class UserAnswer {
+	public static class UserAnswerModel {
 		private Long questionId;
 		private Set<Long> answerIds;
 

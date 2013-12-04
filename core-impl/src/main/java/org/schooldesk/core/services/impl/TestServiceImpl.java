@@ -5,16 +5,19 @@ import org.schooldesk.core.services.ITestService;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 class TestServiceImpl extends AbstractServiceImpl implements ITestService {
-	final private IEducationStageDao educationStageDao;
-	final private ICourseDao courseDao;
-	final private ICourseSectionDao courseSectionDao;
-	final private ITestDao testDao;
-	final private ITestQuestionDao testQuestionDao;
-	final private ITestAnswerDao testAnswerDao;
+	private final IEducationStageDao educationStageDao;
+	private final ICourseDao courseDao;
+	private final ICourseSectionDao courseSectionDao;
+	private final ITestDao testDao;
+	private final ITestQuestionDao testQuestionDao;
+	private final ITestAnswerDao testAnswerDao;
 
 	public TestServiceImpl(IDaoFactory daoFactory) {
 		super(daoFactory);
@@ -24,6 +27,61 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		testDao = getDaoFactory().getDao(ITestDao.class);
 		testQuestionDao = getDaoFactory().getDao(ITestQuestionDao.class);
 		testAnswerDao = getDaoFactory().getDao(ITestAnswerDao.class);
+	}
+
+	@Override
+	public long createTest(TestCreationModel testCreationModel) throws DataAccessException {
+		final ITest test = testDao.createDto();
+		test.setName(testCreationModel.getName());
+
+		Set<Long> testQuestionIds = new HashSet<>(testCreationModel.getQuestions().size());
+		for (TestQuestionCreationModel testQuestionModel : testCreationModel.getQuestions()) {
+			testQuestionIds.add(createTestQuestion(testQuestionModel));
+		}
+
+		test.setTestQuestionIds(testQuestionIds);
+
+		return testDao.save(test).getId();
+	}
+
+	private long createTestQuestion(TestQuestionCreationModel testQuestionCreationModel) throws DataAccessException {
+		final ITestQuestion testQuestion = testQuestionDao.createDto();
+		testQuestion.setQuestion(testQuestionCreationModel.getQuestion());
+		testQuestion.setType(testQuestionCreationModel.getTestQuestionType());
+
+		Set<Long> testAnswerIds = new HashSet<>();
+		Set<Long> correctTestAnswersIds = new HashSet<>();
+		for (TestAnswerCreationModel testAnswerModel : testQuestionCreationModel.getAnswers()) {
+			final long testAnswerId = createTestAnswer(testAnswerModel);
+			testAnswerIds.add(testAnswerId);
+
+			if (testQuestionCreationModel.getCorrectAnswers().contains(testAnswerModel)) {
+				correctTestAnswersIds.add(testAnswerId);
+			}
+		}
+
+		testQuestion.setAnswerIds(testAnswerIds);
+		testQuestion.setCorrectAnswerIds(correctTestAnswersIds);
+
+		return testQuestionDao.save(testQuestion).getId();
+	}
+
+	private long createTestAnswer(TestAnswerCreationModel testAnswerCreationModel) throws DataAccessException {
+		final ITestAnswer testAnswer = testAnswerDao.createDto();
+		testAnswer.setAnswer(testAnswerCreationModel.getAnswer());
+
+		return testAnswerDao.save(testAnswer).getId();
+	}
+
+	@Override
+	public void updateTest(TestModel testModel) {
+		// TODO: implement me!
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void deleteTest(long testId) throws DataAccessException {
+		testDao.delete(testId);
 	}
 
 	@Override
@@ -55,26 +113,19 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 	}
 
 	@Override
-	public TestResultModel validateUserTestPassing(UserTestPassing userTestPassing) throws DataAccessException {
+	public TestResultModel validateUserTestPassing(UserTestPassingModel userTestPassing) throws DataAccessException {
 		ITest test = testDao.loadById(userTestPassing.getTestId());
 
 		TestResultModel testResultModel = new TestResultModel();
 		testResultModel.setTestName(test.getName());
 
-		List<TestResultModel.ValidatedTestAnswer> validatedTestAnswers = new ArrayList<>();
-		for (UserTestPassing.UserAnswer userAnswer : userTestPassing.getUserAnswers()) {
-			TestResultModel.ValidatedTestAnswer validatedTestAnswer = new TestResultModel.ValidatedTestAnswer();
+		List<TestResultModel.ValidatedTestAnswerModel> validatedTestAnswers = new ArrayList<>();
+		for (UserTestPassingModel.UserAnswerModel userAnswer : userTestPassing.getUserAnswers()) {
+			TestResultModel.ValidatedTestAnswerModel validatedTestAnswer = new TestResultModel.ValidatedTestAnswerModel();
 
-			ITestQuestion testQuestion = testQuestionDao.loadById(userAnswer.getQuestionId());
-
-			validatedTestAnswer.setQuestionModel(loadTestQuestionModel(userAnswer.getQuestionId()));
-
-			Set<Long> correctAnswerIds = new HashSet<>();
-			for (ITestAnswer correctAnswer : testQuestion.getAnswers()) {
-				correctAnswerIds.add(correctAnswer.getId());
-			}
-			validatedTestAnswer.setCorrectAnswerIds(correctAnswerIds);
-
+			final Long questionId = userAnswer.getQuestionId();
+			validatedTestAnswer.setQuestionModel(loadTestQuestionModel(questionId));
+			validatedTestAnswer.setCorrectAnswerIds(testQuestionDao.loadById(questionId).getCorrectAnswerIds());
 			validatedTestAnswer.setUserAnswerIds(userAnswer.getAnswerIds());
 
 			validatedTestAnswers.add(validatedTestAnswer);
@@ -98,7 +149,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return getEducationStageModel(educationStageDao.loadById(id));
 	}
 
-	private EducationStageModel getEducationStageModel(IEducationStage stage) throws DataAccessException{
+	private EducationStageModel getEducationStageModel(IEducationStage stage) throws DataAccessException {
 		EducationStageModel educationStageModel = new EducationStageModel();
 		educationStageModel.setId(stage.getId());
 		educationStageModel.setName(stage.getName());
@@ -106,7 +157,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return educationStageModel;
 	}
 
-	private CourseModel loadCourseModel(Long id) throws DataAccessException{
+	private CourseModel loadCourseModel(Long id) throws DataAccessException {
 		CourseModel courseModel = new CourseModel();
 		ICourse course = courseDao.loadById(id);
 
@@ -116,7 +167,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return courseModel;
 	}
 
-	private CourseSectionModel loadCourseSectionModel(Long id) throws DataAccessException{
+	private CourseSectionModel loadCourseSectionModel(Long id) throws DataAccessException {
 		CourseSectionModel courseSectionModel = new CourseSectionModel();
 		ICourseSection courseSection = courseSectionDao.loadById(id);
 
@@ -126,7 +177,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return courseSectionModel;
 	}
 
-	private TestModel loadTestModel(Long id) throws DataAccessException{
+	private TestModel loadTestModel(Long id) throws DataAccessException {
 		TestModel testModel = new TestModel();
 		ITest test = testDao.loadById(id);
 
@@ -142,7 +193,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		return testModel;
 	}
 
-	private TestQuestionModel loadTestQuestionModel(Long id) throws DataAccessException{
+	private TestQuestionModel loadTestQuestionModel(Long id) throws DataAccessException {
 		TestQuestionModel testQuestionModel = new TestQuestionModel();
 		ITestQuestion testQuestion = testQuestionDao.loadById(id);
 
@@ -151,15 +202,15 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		testQuestionModel.setTestQuestionType(testQuestion.getType());
 
 		Set<TestAnswerModel> answerModels = new HashSet<>();
-		for (ITestAnswer answer : testQuestion.getAnswers()) {
-			answerModels.add(loadTestAnswerModel(answer.getId()));
+		for (Long answerId : testQuestion.getAnswerIds()) {
+			answerModels.add(loadTestAnswerModel(answerId));
 		}
 		testQuestionModel.setAnswers(answerModels);
 
 		return testQuestionModel;
 	}
 
-	private TestAnswerModel loadTestAnswerModel(Long id) throws DataAccessException{
+	private TestAnswerModel loadTestAnswerModel(Long id) throws DataAccessException {
 		TestAnswerModel testAnswerModel = new TestAnswerModel();
 		ITestAnswer testAnswer = testAnswerDao.loadById(id);
 

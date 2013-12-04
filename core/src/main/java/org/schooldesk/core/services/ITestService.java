@@ -7,12 +7,14 @@ import java.util.Set;
 
 
 public interface ITestService extends IService {
-	// TODO: add CRUD methods
+	long createTest(TestCreationModel testModel) throws DataAccessException;
+	void updateTest(TestModel testModel);
+	void deleteTest(long testId) throws DataAccessException;
 
 	Set<EducationStageModel> getAllAvailableEducationStages() throws DataAccessException;
 	Set<CourseModel> getCourses(Long stageId) throws DataAccessException;
 	Set<CourseSectionModel> getCourseSections(Long courseId) throws DataAccessException;
 	TestModel getTest(Long courseSectionId) throws DataAccessException;
 
-	TestResultModel validateUserTestPassing(UserTestPassing userTestPassing) throws DataAccessException;
+	TestResultModel validateUserTestPassing(UserTestPassingModel userTestPassing) throws DataAccessException;
 }

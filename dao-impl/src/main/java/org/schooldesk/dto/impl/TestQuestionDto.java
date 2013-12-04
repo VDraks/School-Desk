@@ -1,8 +1,11 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.*;
+import org.schooldesk.dto.ITestAnswer;
+import org.schooldesk.dto.ITestQuestion;
+import org.schooldesk.dto.TestQuestionType;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class TestQuestionDto extends ResourceDto implements ITestQuestion {
@@ -17,8 +20,8 @@ public class TestQuestionDto extends ResourceDto implements ITestQuestion {
 
 	public static TestQuestionDto createNew() {
 		TestQuestionDto dto = new TestQuestionDto();
-		dto.setAnswers(new HashSet<ITestAnswer>());
-		dto.setCorrectAnswers(new HashSet<ITestAnswer>());
+		dto.setAnswerIds(new HashSet<ITestAnswer>());
+		dto.setCorrectAnswerIds(new HashSet<ITestAnswer>());
 		return dto;
 	}
 
@@ -43,22 +46,22 @@ public class TestQuestionDto extends ResourceDto implements ITestQuestion {
 	}
 
 	@Override
-	public Set<ITestAnswer> getAnswers() {
+	public Set<ITestAnswer> getAnswerIds() {
 		return answers;
 	}
 
 	@Override
-	public void setAnswers(Set<ITestAnswer> answers) {
-		this.answers = answers;
+	public void setAnswerIds(Set<Long> answerIds) {
+		this.answers = answerIds;
 	}
 
 	@Override
-	public Set<ITestAnswer> getCorrectAnswers() {
+	public Set<Long> getCorrectAnswerIds() {
 		return correctAnswers;
 	}
 
 	@Override
-	public void setCorrectAnswers(Set<ITestAnswer> correctAnswers) {
+	public void setCorrectAnswerIds(Set<Long> correctAnswers) {
 		this.correctAnswers = correctAnswers;
 	}
 }

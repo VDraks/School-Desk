@@ -1,11 +1,12 @@
 package org.schooldesk.core.models;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 
 public class TestResultModel {
 	private String testName;
-	private List<ValidatedTestAnswer> validatedTestAnswers;
+	private List<ValidatedTestAnswerModel> validatedTestAnswers;
 
 	public String getTestName() {
 		return testName;
@@ -15,16 +16,16 @@ public class TestResultModel {
 		this.testName = testName;
 	}
 
-	public List<ValidatedTestAnswer> getValidatedTestAnswers() {
+	public List<ValidatedTestAnswerModel> getValidatedTestAnswers() {
 		return validatedTestAnswers;
 	}
 
-	public void setValidatedTestAnswers(List<ValidatedTestAnswer> validatedTestAnswers) {
+	public void setValidatedTestAnswers(List<ValidatedTestAnswerModel> validatedTestAnswers) {
 		this.validatedTestAnswers = validatedTestAnswers;
 	}
 
 
-	public static class ValidatedTestAnswer {
+	public static class ValidatedTestAnswerModel {
 		private TestQuestionModel questionModel;
 		private Set<Long> userAnswerIds;
 		private Set<Long> correctAnswerIds;

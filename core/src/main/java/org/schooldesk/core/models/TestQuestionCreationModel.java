@@ -4,19 +4,12 @@ import org.schooldesk.dto.TestQuestionType;
 
 import java.util.Set;
 
-public class TestQuestionModel {
-	private Long id;
+
+public class TestQuestionCreationModel {
 	private String question;
 	private TestQuestionType testQuestionType;
-	private Set<TestAnswerModel> answers;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private Set<TestAnswerCreationModel> answers;
+	private Set<TestAnswerCreationModel> correctAnswers;
 
 	public String getQuestion() {
 		return question;
@@ -34,11 +27,19 @@ public class TestQuestionModel {
 		this.testQuestionType = testQuestionType;
 	}
 
-	public Set<TestAnswerModel> getAnswers() {
+	public Set<TestAnswerCreationModel> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(Set<TestAnswerModel> answers) {
+	public void setAnswers(Set<TestAnswerCreationModel> answers) {
 		this.answers = answers;
+	}
+
+	public Set<TestAnswerCreationModel> getCorrectAnswers() {
+		return correctAnswers;
+	}
+
+	public void setCorrectAnswers(Set<TestAnswerCreationModel> correctAnswers) {
+		this.correctAnswers = correctAnswers;
 	}
 }

@@ -10,9 +10,9 @@ public interface ITestQuestion extends IResource {
 	TestQuestionType getType();
 	void setType(TestQuestionType type);
 
-	Set<ITestAnswer> getAnswers();
-	void setAnswers(Set<ITestAnswer> answers);
+	Set<Long> getAnswerIds();
+	void setAnswerIds(Set<Long> answerIds);
 
-	Set<ITestAnswer> getCorrectAnswers();
-	void setCorrectAnswers(Set<ITestAnswer> answers);
+	Set<Long> getCorrectAnswerIds();
+	void setCorrectAnswerIds(Set<Long> answerIds);
 }
