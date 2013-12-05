@@ -20,7 +20,8 @@ public class Authentication extends HttpServlet
 		UserCredentialModel ucm = ServletHelper.readValue(req.getParameter("UserCredentials"), UserCredentialModel.class);
 		try {
 			Long result = ApplicationContext.getServiceFactory().getService(IUserService.class).checkCredentials(ucm);
-			ServletHelper.writeResponse(result != null, null, result, resp.getOutputStream());
+			ServletHelper.writeResponse(result != null, null, null, resp.getOutputStream());
+			req.getSession().setAttribute("userId", result);
 		}
 		catch (DataAccessException e){
 			ServletHelper.writeResponse(false, e.getMessage(), null, resp.getOutputStream());

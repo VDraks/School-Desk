@@ -49,6 +49,13 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	}
 
 	@Override
+	public UserModel getUserById(Long id) throws DataAccessException {
+		IUserDao userDao = getDaoFactory().getDao(IUserDao.class);
+		IUser user = userDao.loadById(id);
+		return  user == null ? null : new UserModel(user);
+	}
+
+	@Override
 	public UserModel fetchUserByEmail(UserFetchByEmailModel userFetchModel) throws DataAccessException {
 		if (userFetchModel.getEmail() == null) {
 			throw new IllegalArgumentException("userFetchModel have no email specified");

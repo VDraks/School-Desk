@@ -11,6 +11,7 @@ public interface IUserService extends IService {
 	void updateUser(UserModel userModel) throws ServiceException, DataAccessException;
 	void deleteUser(long userId) throws DataAccessException;
 
+	UserModel getUserById(Long id) throws DataAccessException;
 	UserModel fetchUserByEmail(UserFetchByEmailModel userFetchModel) throws DataAccessException;
 
 	Long checkCredentials(UserCredentialModel userCredentialModel) throws DataAccessException;
