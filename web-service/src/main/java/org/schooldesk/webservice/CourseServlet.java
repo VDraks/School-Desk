@@ -21,7 +21,7 @@ import static org.schooldesk.webservice.SessionAttribute.USER_ID;
 @WebServlet("/course/*")
 public class CourseServlet extends AbstractDispatchedServlet {
 	@ActionHandler
-	public void getCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public void getCourses(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		ITestService testService = ApplicationContext.getServiceFactory().getService(ITestService.class);
 		IUserService userService = ApplicationContext.getServiceFactory().getService(IUserService.class);
 
@@ -39,7 +39,7 @@ public class CourseServlet extends AbstractDispatchedServlet {
 	}
 
 	@ActionHandler
-	public void getCourseSection(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public void getCourseSections(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		ITestService testService = ApplicationContext.getServiceFactory().getService(ITestService.class);
 
 		Long courseId = Long.parseLong(req.getParameter("CourseId"));
