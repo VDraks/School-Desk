@@ -12,8 +12,7 @@ public class ApplicationContext {
 		serviceFactory = ServiceFactory.create(daoFactory);
 	}
 
-	private ApplicationContext(){
-	}
+	private ApplicationContext(){}
 
 	public static IServiceFactory getServiceFactory(){
 		return serviceFactory;
