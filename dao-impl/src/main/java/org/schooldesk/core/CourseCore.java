@@ -48,7 +48,14 @@ public class CourseCore extends AbstractCore {
 			courseSections.add(courseSectionCore.toDto());
 		}
 
-		courseDto.setCourseSectionIds(courseSections);
+		List<Long> courseSectionsIds = new ArrayList<Long>();
+
+		for (ICourseSection courseSection : courseSections)
+		{
+			courseSectionsIds.add(courseSection.getId());
+		}
+
+		courseDto.setCourseSectionIds(courseSectionsIds);
 		return courseDto;
 	}
 

@@ -10,10 +10,14 @@ import java.util.*;
  * A DAO factory based on hibernate implementation
  */
 public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
-	private static final String CONFIG_FILE = "dao.factory.config";
+	private static final String DEFAULT_CONFIG_FILE = "dao.factory.config";
 
 	private Map<Class<? extends IDao<?>>, IDao<?>> daoPool = new HashMap<>();
 	private CoreApi coreApi;
+
+	public HibernateDaoFactory() throws IOException {
+		this(DEFAULT_CONFIG_FILE);
+	}
 
 	/**
 	 * Constructor for the DAO factory<br/>
@@ -22,8 +26,8 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 	 *
 	 * @throws IOException if config is missing or can't be read
 	 */
-	public HibernateDaoFactory() throws IOException {
-		Properties configuration = getFactoryConfiguration();
+	public HibernateDaoFactory(String configurationFileName) throws IOException {
+		Properties configuration = getFactoryConfiguration(configurationFileName);
 		coreApi = new CoreApi(HibernateConfiguration.buildSessionFactory(
 				configuration.getProperty("db_login"),
 				configuration.getProperty("db_password"),
@@ -31,9 +35,9 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 		));
 	}
 
-	private Properties getFactoryConfiguration() throws IOException {
+	private Properties getFactoryConfiguration(String configurationFileName) throws IOException {
 		Properties configuration = new Properties();
-		try (InputStream is = new BufferedInputStream(new FileInputStream(CONFIG_FILE))) {
+		try (InputStream is = new BufferedInputStream(new FileInputStream(configurationFileName))) {
 			configuration.load(is);
 		}
 		return configuration;
