@@ -35,4 +35,12 @@ public abstract class AbstractCore implements IDtoable {
 		}
 		return ids;
 	}
+
+	protected static List<Long> getIds(List<? extends IDtoable> dtoables) {
+		List<Long> ids = new ArrayList<>(dtoables.size());
+		for (IDtoable dtoable : dtoables) {
+			ids.add(dtoable.getId());
+		}
+		return ids;
+	}
 }

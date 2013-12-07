@@ -50,6 +50,6 @@ public class GroupCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) {
 		GroupDto groupDto = (GroupDto) dto;
 		setName(groupDto.getName());
-		setRights(coreApi.loadByIdsSafe(groupDto.getRightIds(), RightCore.class));
+		setRights(new HashSet<>(coreApi.loadByIdsSafe(RightCore.class, groupDto.getRightIds())));
 	}
 }

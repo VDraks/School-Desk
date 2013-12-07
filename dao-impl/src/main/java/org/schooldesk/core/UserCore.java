@@ -89,12 +89,12 @@ public class UserCore extends AbstractCore {
 
 	@Override
 	public void fromDto(IDto dto, CoreApi coreApi) {
-		UserDto userDto = (UserDto) dto;
-		setFirstName(userDto.getFirstName());
-		setMiddleName(userDto.getMiddleName());
-		setLastName(userDto.getLastName());
-		setEmail(userDto.getEmail());
-		setPassword(userDto.getPassword());
-		setGroups(coreApi.loadByIdsSafe(userDto.getGroupIds(), GroupCore.class));
+		IUser user = (UserDto) dto;
+		setFirstName(user.getFirstName());
+		setMiddleName(user.getMiddleName());
+		setLastName(user.getLastName());
+		setEmail(user.getEmail());
+		setPassword(user.getPassword());
+		setGroups(new HashSet<>(coreApi.loadByIdsSafe(GroupCore.class, user.getGroupIds())));
 	}
 }

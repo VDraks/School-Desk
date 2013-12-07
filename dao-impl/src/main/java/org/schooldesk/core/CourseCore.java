@@ -1,18 +1,18 @@
 package org.schooldesk.core;
 
-import org.schooldesk.dao.hibernateimpl.CoreApi;
-import org.schooldesk.dto.ICourseSection;
-import org.schooldesk.dto.IDto;
-import org.schooldesk.dto.impl.AbstractDto;
-import org.schooldesk.dto.impl.CourseDto;
+import org.schooldesk.dao.hibernateimpl.*;
+import org.schooldesk.dto.*;
+import org.schooldesk.dto.impl.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.persistence.*;
+import java.util.*;
 
 
+@Entity
 public class CourseCore extends AbstractCore {
 	private String name;
+
+	@OneToMany
 	private List<CourseSectionCore> courseSections;
 
 	public CourseCore() {}
@@ -42,13 +42,7 @@ public class CourseCore extends AbstractCore {
 	protected CourseDto mapDto(AbstractDto dto) {
 		CourseDto courseDto = (CourseDto) super.mapDto(dto);
 		courseDto.setName(getName());
-
-		List<ICourseSection> courseSections = new ArrayList<>(getCourseSections().size());
-		for (CourseSectionCore courseSectionCore : getCourseSections()) {
-			courseSections.add(courseSectionCore.toDto());
-		}
-
-		courseDto.setCourseSectionIds(courseSections);
+		courseDto.setCourseSectionIds(getIds(getCourseSections()));
 		return courseDto;
 	}
 
@@ -56,6 +50,6 @@ public class CourseCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) {
 		CourseDto courseDto = (CourseDto) dto;
 		setName(courseDto.getName());
-		setCourseSections(Collections.<CourseSectionCore>emptyList()); // FIXME
+		setCourseSections(coreApi.loadByIdsSafe(CourseSectionCore.class, courseDto.getCourseSectionIds()));
 	}
 }

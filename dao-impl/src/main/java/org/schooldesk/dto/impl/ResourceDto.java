@@ -1,6 +1,6 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IResource;
+import org.schooldesk.dto.*;
 
 
 public abstract class ResourceDto extends AbstractDto implements IResource {
@@ -17,7 +17,7 @@ public abstract class ResourceDto extends AbstractDto implements IResource {
 	}
 
 	@Override
-	public void setRight(Long rightId) {
+	public void setRightId(Long rightId) {
 		this.rightId = rightId;
 	}
 

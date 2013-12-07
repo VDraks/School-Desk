@@ -111,16 +111,16 @@ public class CoreApi {
 	}
 
 	@SuppressWarnings("unchecked")
-	public AbstractCore loadById(Long id, Class<? extends AbstractCore> objectClass) throws HibernateException {
+	public AbstractCore loadById(Class<? extends AbstractCore> objectClass, Long id) throws HibernateException {
 		Criteria criteria = getSession().createCriteria(objectClass);
 		criteria.add(Restrictions.eq("id", id));
 		return (AbstractCore) criteria.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractCore> T loadByIdSafe(Long id, Class<T> objectClass) throws HibernateException {
+	public <T extends AbstractCore> T loadByIdSafe(Class<T> objectClass, Long id) throws HibernateException {
 		try {
-			return (T) loadById(id, objectClass);
+			return (T) loadById(objectClass, id);
 		}
 		catch (HibernateException ex) {
 			return null;
@@ -128,11 +128,11 @@ public class CoreApi {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Set<AbstractCore> loadByIds(Set<Long> ids, Class<? extends AbstractCore> objectsClass) throws HibernateException {
+	public List<AbstractCore> loadByIds(Class<? extends AbstractCore> objectsClass, Collection<Long> ids) throws HibernateException {
 		try {
 			Criteria criteria = getSession().createCriteria(objectsClass);
 			criteria.add(Restrictions.in("id", ids));
-			return new HashSet<AbstractCore>(criteria.list());
+			return criteria.list();
 		}
 		catch (HibernateException ex) {
 			rollbackTransaction();
@@ -141,12 +141,12 @@ public class CoreApi {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractCore> Set<T> loadByIdsSafe(Set<Long> ids, Class<T> objectsClass) throws HibernateException {
+	public <T extends AbstractCore> List<T> loadByIdsSafe(Class<T> objectsClass, Collection<Long> ids) {
 		try {
-			return (Set<T>) loadByIds(ids, objectsClass);
+			return (List<T>) loadByIds(objectsClass, ids);
 		}
 		catch (HibernateException e) {
-			return Collections.emptySet();
+			return Collections.emptyList();
 		}
 	}
 
@@ -162,7 +162,7 @@ public class CoreApi {
 		}
 	}
 
-	public void delete(Long id, Class<? extends AbstractCore> objectClass) throws HibernateException {
+	public void delete(Class<? extends AbstractCore> objectClass, Long id) throws HibernateException {
 		try {
 			beginTransaction();
 			Query query = getSession().createQuery("delete " + objectClass.getName() + " where id = " + id);

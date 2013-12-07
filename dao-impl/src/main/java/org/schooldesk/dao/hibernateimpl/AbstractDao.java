@@ -83,7 +83,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@SuppressWarnings("unchecked")
 	public T loadById(Long id) throws DataAccessException {
 		try {
-			return (T) getApi().loadById(id, coreClass).toDto();
+			return (T) getApi().loadById(coreClass, id).toDto();
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entity of class %s", dtoClass.getName());
@@ -93,7 +93,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public Set<T> loadByIds(Set<Long> ids) throws DataAccessException {
 		try {
-			return toDto(getApi().loadByIds(ids, coreClass));
+			return toDto(getApi().loadByIds(coreClass, ids));
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entities of class %s", dtoClass.getName());
@@ -113,7 +113,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public void delete(Long id) throws DataAccessException {
 		try {
-			getApi().delete(id, coreClass);
+			getApi().delete(coreClass, id);
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not delete entity of class %s with id = %d", dtoClass.getName(), id);
@@ -121,7 +121,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	}
 
 	protected AbstractCore getCoreObject(IDto entity) throws HibernateException {
-		AbstractCore coreObject = getApi().loadById(entity.getId(), coreClass);
+		AbstractCore coreObject = getApi().loadById(coreClass, entity.getId());
 		coreObject.fromDto(entity, getApi());
 		return coreObject;
 	}

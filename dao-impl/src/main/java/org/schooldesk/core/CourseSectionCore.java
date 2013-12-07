@@ -4,9 +4,15 @@ import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+import javax.persistence.*;
 
+
+@Entity
 public class CourseSectionCore extends AbstractCore {
 	private String name;
+
+	@OneToOne
+	private TestCore test;
 
 	public CourseSectionCore() {}
 
@@ -18,6 +24,14 @@ public class CourseSectionCore extends AbstractCore {
 		this.name = name;
 	}
 
+	public TestCore getTest() {
+		return test;
+	}
+
+	public void setTest(TestCore test) {
+		this.test = test;
+	}
+
 	@Override
 	public CourseSectionDto toDto() {
 		return mapDto(new CourseSectionDto());
@@ -27,6 +41,7 @@ public class CourseSectionCore extends AbstractCore {
 	protected CourseSectionDto mapDto(AbstractDto dto) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) super.mapDto(dto);
 		courseSectionDto.setName(getName());
+		courseSectionDto.setTestId(getTest().getId());
 		return courseSectionDto;
 	}
 
@@ -34,5 +49,6 @@ public class CourseSectionCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) dto;
 		setName(courseSectionDto.getName());
+		setTest(coreApi.loadByIdSafe(TestCore.class, courseSectionDto.getTestId()));
 	}
 }
