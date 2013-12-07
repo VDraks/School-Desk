@@ -5,27 +5,34 @@ import org.schooldesk.dto.IUser;
 import java.util.Set;
 
 
-public class UserModel {
-	private Long id;
+public class UserUpdateModel {
+	private long id;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 
 	private String email;
+	private String password;
 
 	private Set<Long> groupIds;
 
-	public UserModel(Long id, String firstName, String middleName, String lastName, String email, Set<Long> groupIds) {
+	public UserUpdateModel(long id, String firstName, String middleName, String lastName, String email, String password, Set<Long> groupIds) {
 		setId(id);
 		setFirstName(firstName);
 		setMiddleName(middleName);
 		setLastName(lastName);
 		setEmail(email);
+		setPassword(password);
 		setGroupIds(groupIds);
 	}
 
-	public UserModel(IUser user) {
-		this(user.getId(), user.getEmail(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getGroupIds());
+	public void applyTo(IUser user) {
+		user.setFirstName(getFirstName());
+		user.setMiddleName(getMiddleName());
+		user.setLastName(getLastName());
+		user.setEmail(getEmail());
+		user.setPassword(getPassword());
+		user.setGroupIds(getGroupIds());
 	}
 
 	public long getId() {
@@ -66,6 +73,14 @@ public class UserModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Set<Long> getGroupIds() {

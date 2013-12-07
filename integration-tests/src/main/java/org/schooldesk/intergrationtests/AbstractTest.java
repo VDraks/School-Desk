@@ -14,10 +14,11 @@ import static org.mockito.Mockito.when;
 
 
 public class AbstractTest {
+	private IDaoFactory daoFactory;
 	private IServiceFactory serviceFactory;
 
 	@Before
-	public void init() {
+	public final void init() {
 		// TODO: use DaoFactory.create() when dao-impl will be adjusted
 		IUser user = mock(IUser.class);
 		when(user.getId()).thenReturn(42L);
@@ -31,17 +32,17 @@ public class AbstractTest {
 			// never happens
 		}
 
-		IDaoFactory daoFactory = mock(IDaoFactory.class);
+		daoFactory = mock(IDaoFactory.class);
 		when(daoFactory.getDao(IUserDao.class)).thenReturn(userDao);
 
-		setServiceFactory(ServiceFactory.create(daoFactory));
+		serviceFactory = ServiceFactory.create(daoFactory);
+	}
+
+	protected IDaoFactory getDaoFactory() {
+		return daoFactory;
 	}
 
 	protected IServiceFactory getServiceFactory() {
 		return serviceFactory;
-	}
-
-	private void setServiceFactory(IServiceFactory serviceFactory) {
-		this.serviceFactory = serviceFactory;
 	}
 }
