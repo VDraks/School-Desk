@@ -17,7 +17,7 @@ public class CourseDto extends AbstractDto implements ICourse {
 
 	public static CourseDto createNew() {
 		CourseDto result = new CourseDto();
-		result.setCourseSections(new ArrayList<ICourseSection>());
+		result.setCourseSectionIds(new ArrayList<ICourseSection>());
 		return result;
 	}
 
@@ -32,12 +32,12 @@ public class CourseDto extends AbstractDto implements ICourse {
 	}
 
 	@Override
-	public List<ICourseSection> getCourseSections() {
+	public List<Long> getCourseSectionIds() {
 		return courseSections;
 	}
 
 	@Override
-	public void setCourseSections(List<ICourseSection> courseSections) {
-		this.courseSections = courseSections;
+	public void setCourseSectionIds(List<Long> courseSectionIds) {
+		this.courseSections = courseSectionIds;
 	}
 }

@@ -1,10 +1,14 @@
 package org.schooldesk.core;
 
-import org.schooldesk.dao.hibernateimpl.*;
-import org.schooldesk.dto.*;
-import org.schooldesk.dto.impl.*;
+import org.schooldesk.dao.hibernateimpl.CoreApi;
+import org.schooldesk.dto.ICourseSection;
+import org.schooldesk.dto.IDto;
+import org.schooldesk.dto.impl.AbstractDto;
+import org.schooldesk.dto.impl.CourseDto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class CourseCore extends AbstractCore {
@@ -44,7 +48,7 @@ public class CourseCore extends AbstractCore {
 			courseSections.add(courseSectionCore.toDto());
 		}
 
-		courseDto.setCourseSections(courseSections);
+		courseDto.setCourseSectionIds(courseSections);
 		return courseDto;
 	}
 
