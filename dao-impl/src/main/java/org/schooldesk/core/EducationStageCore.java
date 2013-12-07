@@ -1,5 +1,6 @@
 package org.schooldesk.core;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -47,9 +48,9 @@ public class EducationStageCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		IEducationStage educationStage = (IEducationStage) dto;
 		setName(educationStage.getName());
-		setCourses(coreApi.loadByIdsSafe(CourseCore.class, educationStage.getCourseIds()));
+		setCourses(coreApi.loadByIds(CourseCore.class, educationStage.getCourseIds()));
 	}
 }

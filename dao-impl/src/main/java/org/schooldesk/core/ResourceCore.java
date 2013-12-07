@@ -1,5 +1,6 @@
 package org.schooldesk.core;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -38,9 +39,9 @@ public abstract class ResourceCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		IResource resource = (IResource) dto;
-		setRight(coreApi.loadByIdSafe(RightCore.class, resource.getRightId()));
+		setRight(coreApi.loadById(RightCore.class, resource.getRightId()));
 		setName(resource.getName());
 	}
 }

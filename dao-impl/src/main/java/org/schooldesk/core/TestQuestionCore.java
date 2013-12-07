@@ -1,5 +1,6 @@
 package org.schooldesk.core;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -69,12 +70,12 @@ public class TestQuestionCore extends ResourceCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		ITestQuestion testQuestion = (ITestQuestion) dto;
 		setQuestion(testQuestion.getQuestion());
 		setType(testQuestion.getType());
-		setAnswers(new HashSet<>(coreApi.loadByIdsSafe(TestAnswerCore.class, testQuestion.getAnswerIds())));
-		setCorrectAnswers(new HashSet<>(coreApi.loadByIdsSafe(TestAnswerCore.class, testQuestion.getCorrectAnswerIds())));
+		setAnswers(new HashSet<>(coreApi.loadByIds(TestAnswerCore.class, testQuestion.getAnswerIds())));
+		setCorrectAnswers(new HashSet<>(coreApi.loadByIds(TestAnswerCore.class, testQuestion.getCorrectAnswerIds())));
 
 		super.fromDto(dto, coreApi);
 	}
