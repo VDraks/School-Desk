@@ -48,20 +48,38 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 	private <T extends IDao<?>> T getFromPool(Class<T> daoClass) {
 		IDao<?> dao = daoPool.get(daoClass);
 		if (dao == null) {
-			if (daoClass == IGroupDao.class) {
+			if (daoClass == ICourseDao.class) {
+				daoPool.put(daoClass, dao = new CourseDao(coreApi));
+			}
+			else if (daoClass == ICourseSectionDao.class) {
+				daoPool.put(daoClass, dao = new CourseSectionDao(coreApi));
+			}
+			else if (daoClass == IEducationStageDao.class) {
+				daoPool.put(daoClass, dao = new EducationStageDao(coreApi));
+			}
+			else if (daoClass == IGroupDao.class) {
 				daoPool.put(daoClass, dao = new GroupDao(coreApi));
 			}
 			else if (daoClass == IRightDao.class) {
 				daoPool.put(daoClass, dao = new RightDao(coreApi));
 			}
+			else if (daoClass == ITestAnswerDao.class) {
+				daoPool.put(daoClass, dao = new TestAnswerDao(coreApi));
+			}
+			else if (daoClass == ITestDao.class) {
+				daoPool.put(daoClass, dao = new TestDao(coreApi));
+			}
+			else if (daoClass == ITestQuestionDao.class) {
+				daoPool.put(daoClass, dao = new TestQuestionDao(coreApi));
+			}
+			else if (daoClass == ITestResultDao.class) {
+				daoPool.put(daoClass, dao = new TestResultDao(coreApi));
+			}
 			else if (daoClass == IUserDao.class) {
 				daoPool.put(daoClass, dao = new UserDao(coreApi));
 			}
-			else if (daoClass == ICourseDao.class) {
-				daoPool.put(daoClass, dao = new CourseDao(coreApi));
-			}
-			else if (daoClass == ICourseSectionDao.class) {
-				daoPool.put(daoClass, dao = new CourseSectionDao(coreApi));
+			else if (daoClass == IUserTestAnswerDao.class) {
+				daoPool.put(daoClass, dao = new UserTestAnswerDao(coreApi));
 			}
 			else {
 				throw new NoImplementationException();

@@ -93,7 +93,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public Set<T> loadByIds(Set<Long> ids) throws DataAccessException {
 		try {
-			return toDto(getApi().loadByIds(coreClass, ids));
+			return toDto(new HashSet<>(getApi().loadByIds(coreClass, ids)));
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entities of class %s", dtoClass.getName());
