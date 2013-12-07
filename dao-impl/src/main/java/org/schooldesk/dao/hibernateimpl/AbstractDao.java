@@ -6,8 +6,6 @@ import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
 import org.slf4j.*;
 
-import java.lang.InstantiationException;
-import java.lang.reflect.*;
 import java.util.*;
 
 
@@ -126,17 +124,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 		return coreObject;
 	}
 
-	private AbstractCore createCoreObject(T entity) {
-		try {
-			AbstractCore coreObject = coreClass.getConstructor(null).newInstance(null);
-			coreObject.fromDto(entity, getApi());
-			return coreObject;
-		}
-		catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-			logger.warn("Cannot create core object", e);
-		}
-		return null;
-	}
+	protected abstract AbstractCore createCoreObject(T entity) throws HibernateException;
 
 	@SuppressWarnings("unchecked")
 	private Set<T> toDto(Set<? extends IDtoable> objects) {

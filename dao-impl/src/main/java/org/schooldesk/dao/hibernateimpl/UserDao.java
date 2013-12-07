@@ -1,6 +1,7 @@
 package org.schooldesk.dao.hibernateimpl;
 
 import com.google.common.collect.*;
+import org.hibernate.*;
 import org.hibernate.criterion.*;
 import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
@@ -30,5 +31,12 @@ public class UserDao extends AbstractDao<IUser> implements IUserDao {
 		return user == null ?
 		       null :
 		       user.toDto();
+	}
+
+	@Override
+	protected UserCore createCoreObject(IUser entity) throws HibernateException {
+		UserCore result = new UserCore();
+		result.fromDto(entity, getApi());
+		return result;
 	}
 }

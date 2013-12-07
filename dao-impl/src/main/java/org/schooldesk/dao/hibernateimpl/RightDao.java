@@ -1,5 +1,6 @@
 package org.schooldesk.dao.hibernateimpl;
 
+import org.hibernate.*;
 import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
@@ -14,5 +15,12 @@ public class RightDao extends AbstractDao<IRight> implements IRightDao {
 	@Override
 	public IRight createDto(String code) {
 		return RightDto.createNew(code);
+	}
+
+	@Override
+	protected RightCore createCoreObject(IRight entity) throws HibernateException {
+		RightCore result = new RightCore();
+		result.fromDto(entity, getApi());
+		return result;
 	}
 }

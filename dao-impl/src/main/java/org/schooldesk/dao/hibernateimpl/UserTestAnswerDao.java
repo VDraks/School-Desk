@@ -1,5 +1,6 @@
 package org.schooldesk.dao.hibernateimpl;
 
+import org.hibernate.*;
 import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
@@ -14,5 +15,12 @@ public class UserTestAnswerDao extends AbstractDao<IUserTestAnswer> implements I
 	@Override
 	public IUserTestAnswer createDto() {
 		return UserTestAnswerDto.createNew();
+	}
+
+	@Override
+	protected UserTestAnswerCore createCoreObject(IUserTestAnswer entity) throws HibernateException {
+		UserTestAnswerCore result = new UserTestAnswerCore();
+		result.fromDto(entity, getApi());
+		return result;
 	}
 }
