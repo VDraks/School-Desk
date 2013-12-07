@@ -1,18 +1,16 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IGroup;
+import org.schooldesk.dto.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class GroupDto extends AbstractDto implements IGroup {
 	private String name;
 	private Set<Long> rightIds;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated
+	@UsedForMapping
 	public GroupDto() {}
 
 	public static GroupDto createNew() {

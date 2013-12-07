@@ -1,15 +1,13 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.ICourse;
-import org.schooldesk.dto.ICourseSection;
+import org.schooldesk.dto.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class CourseDto extends AbstractDto implements ICourse {
 	private String name;
-	private List<ICourseSection> courseSections;
+	private List<Long> courseSectionIds;
 
 	@Deprecated
 	@UsedForMapping
@@ -17,7 +15,7 @@ public class CourseDto extends AbstractDto implements ICourse {
 
 	public static CourseDto createNew() {
 		CourseDto result = new CourseDto();
-		result.setCourseSectionIds(new ArrayList<ICourseSection>());
+		result.setCourseSectionIds(new ArrayList<Long>());
 		return result;
 	}
 
@@ -33,11 +31,11 @@ public class CourseDto extends AbstractDto implements ICourse {
 
 	@Override
 	public List<Long> getCourseSectionIds() {
-		return courseSections;
+		return courseSectionIds;
 	}
 
 	@Override
 	public void setCourseSectionIds(List<Long> courseSectionIds) {
-		this.courseSections = courseSectionIds;
+		this.courseSectionIds = courseSectionIds;
 	}
 }
