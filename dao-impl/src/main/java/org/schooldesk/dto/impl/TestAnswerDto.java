@@ -10,7 +10,7 @@ public class TestAnswerDto extends ResourceDto implements ITestAnswer {
 	@UsedForMapping
 	public TestAnswerDto() {}
 
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public static TestAnswerDto createNew() {
 		return new TestAnswerDto();
 	}

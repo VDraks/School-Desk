@@ -72,7 +72,7 @@ public class UserCore extends AbstractCore {
 	}
 
 	@Override
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public UserDto toDto() {
 		return mapDto(new UserDto());
 	}

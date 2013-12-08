@@ -23,7 +23,7 @@ public class RightCore extends AbstractCore {
 	}
 
 	@Override
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public RightDto toDto() {
 		return mapDto(new RightDto());
 	}

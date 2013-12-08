@@ -13,7 +13,7 @@ public class TestDto extends ResourceDto implements ITest {
 	public TestDto() {}
 
 	public static TestDto createNew() {
-		@SuppressWarnings("deprecated")
+		@SuppressWarnings("deprecation")
 		TestDto dto = new TestDto();
 		dto.setTestQuestionIds(new HashSet<Long>());
 		return dto;

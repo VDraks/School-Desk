@@ -35,7 +35,7 @@ public class CourseCore extends AbstractCore {
 	}
 
 	@Override
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public CourseDto toDto() {
 		return mapDto(new CourseDto());
 	}

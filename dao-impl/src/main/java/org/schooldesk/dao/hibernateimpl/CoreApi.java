@@ -37,15 +37,15 @@ public class CoreApi {
 		try {
 			getSession().getTransaction().rollback();
 		}
-		catch (HibernateException e) {
-			logger.warn("Cannot rollback transaction", e);
+		catch (HibernateException ex) {
+			logger.warn("Cannot rollback transaction", ex);
 		}
 
 		try {
 			getSession().close();
 		}
-		catch (HibernateException e) {
-			logger.warn("Cannot close session", e);
+		catch (HibernateException ex) {
+			logger.warn("Cannot close session", ex);
 		}
 	}
 

@@ -14,7 +14,7 @@ public class CourseDto extends AbstractDto implements ICourse {
 	public CourseDto() {}
 
 	public static CourseDto createNew() {
-		@SuppressWarnings("deprecated")
+		@SuppressWarnings("deprecation")
 		CourseDto result = new CourseDto();
 		result.setCourseSectionIds(new ArrayList<Long>());
 		return result;
