@@ -1,20 +1,25 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import org.hibernate.*;
-import org.hibernate.cfg.*;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 
 public class HibernateConfiguration {
 	private static final Configuration CONFIGURATION;
 
 	static {
-		CONFIGURATION = new AnnotationConfiguration();
+		@SuppressWarnings("deprecation")
+		AnnotationConfiguration config = new AnnotationConfiguration();
+		CONFIGURATION = config;
 		CONFIGURATION.setProperties(makeCommonProperties());
-		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.core")) {
+		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.hibernateobjects")) {
 			CONFIGURATION.addAnnotatedClass(annotatedClass);
 		}
 	}
@@ -29,6 +34,7 @@ public class HibernateConfiguration {
 		return properties;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static SessionFactory buildSessionFactory(String login, String password, String connectionURL, Boolean dropBeforeCreate) {
 		CONFIGURATION.setProperty("hibernate.connection.url", connectionURL);
 		CONFIGURATION.setProperty("hibernate.connection.username", login);

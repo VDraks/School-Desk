@@ -1,6 +1,6 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.ITestAnswer;
+import org.schooldesk.dto.*;
 
 
 public class TestAnswerDto extends ResourceDto implements ITestAnswer {
@@ -10,6 +10,7 @@ public class TestAnswerDto extends ResourceDto implements ITestAnswer {
 	@UsedForMapping
 	public TestAnswerDto() {}
 
+	@SuppressWarnings("deprecation")
 	public static TestAnswerDto createNew() {
 		return new TestAnswerDto();
 	}

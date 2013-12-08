@@ -14,6 +14,7 @@ public class GroupDto extends AbstractDto implements IGroup {
 	public GroupDto() {}
 
 	public static GroupDto createNew() {
+		@SuppressWarnings("deprecation")
 		GroupDto dto = new GroupDto();
 		dto.setRightIds(new HashSet<Long>());
 		return dto;

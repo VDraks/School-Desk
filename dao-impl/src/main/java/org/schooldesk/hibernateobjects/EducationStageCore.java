@@ -35,6 +35,7 @@ public class EducationStageCore extends AbstractCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public EducationStageDto toDto() {
 		return mapDto(new EducationStageDto());
 	}

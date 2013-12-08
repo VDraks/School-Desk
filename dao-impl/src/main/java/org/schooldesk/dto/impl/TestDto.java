@@ -1,9 +1,8 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.ITest;
+import org.schooldesk.dto.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class TestDto extends ResourceDto implements ITest {
@@ -14,6 +13,7 @@ public class TestDto extends ResourceDto implements ITest {
 	public TestDto() {}
 
 	public static TestDto createNew() {
+		@SuppressWarnings("deprecation")
 		TestDto dto = new TestDto();
 		dto.setTestQuestionIds(new HashSet<Long>());
 		return dto;

@@ -1,8 +1,8 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.ITestResult;
+import org.schooldesk.dto.*;
 
-import java.util.Set;
+import java.util.*;
 
 
 public class TestResultDto extends AbstractDto implements ITestResult {
@@ -15,6 +15,7 @@ public class TestResultDto extends AbstractDto implements ITestResult {
 	public TestResultDto() {}
 
 	public static TestResultDto createNew(Long testId, Long userId, Set<Long> userTestAnswerIds) {
+		@SuppressWarnings("deprecation")
 		TestResultDto result = new TestResultDto();
 		result.setTestId(testId);
 		result.setUserId(userId);

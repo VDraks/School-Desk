@@ -14,6 +14,7 @@ public class EducationStageDto extends AbstractDto implements IEducationStage {
 	public EducationStageDto() {}
 
 	public static EducationStageDto createNew() {
+		@SuppressWarnings("deprecation")
 		EducationStageDto result = new EducationStageDto();
 		result.setCourseIds(new ArrayList<Long>());
 		return result;

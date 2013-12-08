@@ -55,6 +55,7 @@ public class TestQuestionCore extends ResourceCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public TestQuestionDto toDto() {
 		return mapDto(new TestQuestionDto());
 	}

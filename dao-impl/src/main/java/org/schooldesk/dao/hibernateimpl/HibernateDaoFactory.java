@@ -2,8 +2,12 @@ package org.schooldesk.dao.hibernateimpl;
 
 import org.schooldesk.dao.*;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -15,10 +19,6 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 	private Map<Class<? extends IDao<?>>, IDao<?>> daoPool = new HashMap<>();
 	private CoreApi coreApi;
 
-	public HibernateDaoFactory() throws IOException {
-		this(DEFAULT_CONFIG_FILE);
-	}
-
 	/**
 	 * Constructor for the DAO factory<br/>
 	 * Needs <b>dao.factory.config</b> for the factory configuration with
@@ -26,6 +26,10 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 	 *
 	 * @throws IOException if config is missing or can't be read
 	 */
+	public HibernateDaoFactory() throws IOException {
+		this(DEFAULT_CONFIG_FILE);
+	}
+
 	public HibernateDaoFactory(String configurationFileName) throws IOException {
 		Properties configuration = getFactoryConfiguration(configurationFileName);
 		coreApi = new CoreApi(HibernateConfiguration.buildSessionFactory(
@@ -38,7 +42,7 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 
 	private Properties getFactoryConfiguration(String configurationFileName) throws IOException {
 		Properties configuration = new Properties();
-		try (InputStream is = new BufferedInputStream(new FileInputStream(configurationFileName))) {
+		try (InputStream is = new BufferedInputStream(getClass().getResourceAsStream("/" + configurationFileName))) {
 			configuration.load(is);
 		}
 		return configuration;
@@ -91,5 +95,9 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 			}
 		}
 		return (T) dao;
+	}
+
+	protected CoreApi getCoreApi() {
+		return coreApi;
 	}
 }

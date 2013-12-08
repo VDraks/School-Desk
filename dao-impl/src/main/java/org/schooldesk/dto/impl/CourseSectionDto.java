@@ -1,6 +1,6 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.ICourseSection;
+import org.schooldesk.dto.*;
 
 
 public class CourseSectionDto extends AbstractDto implements ICourseSection {
@@ -11,6 +11,7 @@ public class CourseSectionDto extends AbstractDto implements ICourseSection {
 	@UsedForMapping
 	public CourseSectionDto() {}
 
+	@SuppressWarnings("deprecation")
 	public static CourseSectionDto createNew() {
 		return new CourseSectionDto();
 	}
