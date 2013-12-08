@@ -24,15 +24,27 @@ public class ServletHelper {
 	}
 
 
-	private static class Response {
-		boolean success;
-		String message;
-		Object data;
+	public static class Response {
+		private boolean success;
+		private String message;
+		private Object data;
 
 		Response(boolean success, String message, Object data) {
 			this.success = success;
 			this.message = message;
 			this.data = data;
+		}
+
+		public Object getData() {
+			return data;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public String getMessage() {
+			return message;
 		}
 	}
 }

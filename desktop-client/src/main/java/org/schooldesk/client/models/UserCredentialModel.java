@@ -1,16 +1,8 @@
-package org.schooldesk.core.models;
+package org.schooldesk.client.models;
 
 public class UserCredentialModel {
 	private String email;
 	private String password;
-
-	public UserCredentialModel() {
-	}
-
-	public UserCredentialModel(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
 
 	public String getEmail() {
 		return email;
