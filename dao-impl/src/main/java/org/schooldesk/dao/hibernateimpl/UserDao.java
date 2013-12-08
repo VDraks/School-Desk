@@ -24,13 +24,18 @@ public class UserDao extends AbstractDao<IUser> implements IUserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public IUser loadByEmail(String email) throws DataAccessException {
-		List<UserCore> users = getApi().getSession().createCriteria(UserCore.class)
-				.add(Restrictions.eq("email", email))
-				.list();
-		UserCore user = Iterables.getOnlyElement(users, null);
-		return user == null ?
-		       null :
-		       user.toDto();
+		try {
+			List<UserCore> users = getApi().getSession().createCriteria(UserCore.class)
+					.add(Restrictions.eq("email", email))
+					.list();
+			UserCore user = Iterables.getOnlyElement(users, null);
+			return user == null ?
+			       null :
+			       user.toDto();
+		}
+		catch (HibernateException ex) {
+			throw new DataAccessException(ex, "Couldn't get user with e-mail \"%s\"", email);
+		}
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class CourseSectionDto extends AbstractDto implements ICourseSection {
 	@UsedForMapping
 	public CourseSectionDto() {}
 
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public static CourseSectionDto createNew() {
 		return new CourseSectionDto();
 	}

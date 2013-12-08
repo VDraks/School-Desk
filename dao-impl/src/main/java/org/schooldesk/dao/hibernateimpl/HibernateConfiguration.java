@@ -14,7 +14,7 @@ public class HibernateConfiguration {
 	static {
 		CONFIGURATION = new AnnotationConfiguration();
 		CONFIGURATION.setProperties(makeCommonProperties());
-		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.core")) {
+		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.hibernateobjects")) {
 			CONFIGURATION.addAnnotatedClass(annotatedClass);
 		}
 	}
@@ -33,7 +33,9 @@ public class HibernateConfiguration {
 		CONFIGURATION.setProperty("hibernate.connection.url", connectionURL);
 		CONFIGURATION.setProperty("hibernate.connection.username", login);
 		CONFIGURATION.setProperty("hibernate.connection.password", password);
-		CONFIGURATION.setProperty("hibernate.hbm2ddl.auto", dropBeforeCreate ? "create" : "update");
+		CONFIGURATION.setProperty("hibernate.hbm2ddl.auto", dropBeforeCreate ?
+		                                                    "create" :
+		                                                    "update");
 
 		return CONFIGURATION.buildSessionFactory();
 	}

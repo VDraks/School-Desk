@@ -36,7 +36,7 @@ public class UserTestAnswerCore extends AbstractCore {
 	}
 
 	@Override
-	@SuppressWarnings("deprecated")
+	@SuppressWarnings("deprecation")
 	public UserTestAnswerDto toDto() {
 		return mapDto(new UserTestAnswerDto());
 	}

@@ -15,7 +15,7 @@ public class TestResultDto extends AbstractDto implements ITestResult {
 	public TestResultDto() {}
 
 	public static TestResultDto createNew(Long testId, Long userId, Set<Long> userTestAnswerIds) {
-		@SuppressWarnings("deprecated")
+		@SuppressWarnings("deprecation")
 		TestResultDto result = new TestResultDto();
 		result.setTestId(testId);
 		result.setUserId(userId);
