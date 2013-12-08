@@ -34,7 +34,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			return (T) getApi().save(createCoreObject(entity)).toDto();
 		}
 		catch (HibernateException ex) {
-			throw new DataAccessException("Could not save entity %s", entity);
+			throw new DataAccessException(ex, "Could not save entity %s", entity);
 		}
 	}
 
@@ -49,7 +49,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			return toDto(getApi().refresh(coreObjects));
 		}
 		catch (HibernateException ex) {
-			throw new DataAccessException("Could not save entities");
+			throw new DataAccessException(ex, "Could not save entities");
 		}
 	}
 
@@ -59,7 +59,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			getApi().update(getCoreObject(entity));
 		}
 		catch (HibernateException ex) {
-			throw new DataAccessException("Could not update entity %s", entity);
+			throw new DataAccessException(ex, "Could not update entity %s", entity);
 		}
 	}
 
@@ -73,7 +73,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			getApi().update(coreObjects);
 		}
 		catch (HibernateException ex) {
-			throw new DataAccessException("Could not update entities");
+			throw new DataAccessException(ex, "Could not update entities");
 		}
 	}
 
@@ -86,8 +86,8 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			       null :
 			       (T) result.toDto();
 		}
-		catch (HibernateException e) {
-			throw new DataAccessException("Could not load entity of class %s", dtoClass.getName());
+		catch (HibernateException ex) {
+			throw new DataAccessException(ex, "Could not load entity of class %s", dtoClass.getName());
 		}
 	}
 
@@ -96,8 +96,8 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 		try {
 			return toDto(new HashSet<>(getApi().loadByIds(coreClass, ids)));
 		}
-		catch (HibernateException e) {
-			throw new DataAccessException("Could not load entities of class %s", dtoClass.getName());
+		catch (HibernateException ex) {
+			throw new DataAccessException(ex, "Could not load entities of class %s", dtoClass.getName());
 		}
 	}
 
@@ -106,8 +106,8 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 		try {
 			return toDto(getApi().loadAll(coreClass));
 		}
-		catch (HibernateException e) {
-			throw new DataAccessException("Could not load entities of class %s", dtoClass.getName());
+		catch (HibernateException ex) {
+			throw new DataAccessException(ex, "Could not load entities of class %s", dtoClass.getName());
 		}
 	}
 
@@ -116,8 +116,8 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 		try {
 			getApi().delete(coreClass, id);
 		}
-		catch (HibernateException e) {
-			throw new DataAccessException("Could not delete entity of class %s with id = %d", dtoClass.getName(), id);
+		catch (HibernateException ex) {
+			throw new DataAccessException(ex, "Could not delete entity of class %s with id = %d", dtoClass.getName(), id);
 		}
 	}
 
