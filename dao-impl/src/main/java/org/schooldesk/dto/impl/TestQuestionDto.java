@@ -16,6 +16,7 @@ public class TestQuestionDto extends ResourceDto implements ITestQuestion {
 	public TestQuestionDto() {}
 
 	public static TestQuestionDto createNew() {
+		@SuppressWarnings("deprecated")
 		TestQuestionDto dto = new TestQuestionDto();
 		dto.setAnswerIds(new HashSet<Long>());
 		dto.setCorrectAnswerIds(new HashSet<Long>());

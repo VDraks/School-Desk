@@ -28,6 +28,7 @@ public class CourseSectionCore extends AbstractCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public CourseSectionDto toDto() {
 		return mapDto(new CourseSectionDto());
 	}

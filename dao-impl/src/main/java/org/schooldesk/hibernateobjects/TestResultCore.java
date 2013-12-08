@@ -47,6 +47,7 @@ public class TestResultCore extends AbstractCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public TestResultDto toDto() {
 		return mapDto(new TestResultDto());
 	}

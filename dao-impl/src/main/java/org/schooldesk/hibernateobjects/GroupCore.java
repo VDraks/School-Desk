@@ -35,6 +35,7 @@ public class GroupCore extends AbstractCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public GroupDto toDto() {
 		return mapDto(new GroupDto());
 	}

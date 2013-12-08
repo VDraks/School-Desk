@@ -23,6 +23,7 @@ public class TestAnswerCore extends ResourceCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public TestAnswerDto toDto() {
 		return mapDto(new TestAnswerDto());
 	}
