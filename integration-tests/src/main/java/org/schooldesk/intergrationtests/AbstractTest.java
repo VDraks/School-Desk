@@ -1,12 +1,9 @@
 package org.schooldesk.intergrationtests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.schooldesk.DbHelper;
-import org.schooldesk.core.services.IServiceFactory;
-import org.schooldesk.core.services.ServiceFactory;
-import org.schooldesk.dao.DaoFactory;
-import org.schooldesk.dao.IDaoFactory;
+import org.junit.*;
+import org.schooldesk.core.services.*;
+import org.schooldesk.dao.*;
+import org.schooldesk.dao.hibernateimpl.*;
 
 
 public class AbstractTest {
