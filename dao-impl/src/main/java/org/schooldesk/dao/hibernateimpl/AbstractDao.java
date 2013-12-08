@@ -1,9 +1,9 @@
 package org.schooldesk.dao.hibernateimpl;
 
 import org.hibernate.*;
-import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
+import org.schooldesk.hibernateobjects.*;
 import org.slf4j.*;
 
 import java.util.*;

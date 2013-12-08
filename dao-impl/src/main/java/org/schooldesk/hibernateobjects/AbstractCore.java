@@ -1,4 +1,4 @@
-package org.schooldesk.core;
+package org.schooldesk.hibernateobjects;
 
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.impl.*;

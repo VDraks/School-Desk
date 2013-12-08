@@ -1,4 +1,4 @@
-package org.schooldesk.core;
+package org.schooldesk.hibernateobjects;
 
 import com.sun.istack.internal.*;
 import org.hibernate.*;

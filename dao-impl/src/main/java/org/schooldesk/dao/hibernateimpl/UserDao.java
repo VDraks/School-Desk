@@ -3,10 +3,10 @@ package org.schooldesk.dao.hibernateimpl;
 import com.google.common.collect.*;
 import org.hibernate.*;
 import org.hibernate.criterion.*;
-import org.schooldesk.core.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
+import org.schooldesk.hibernateobjects.*;
 
 import java.util.*;
 
