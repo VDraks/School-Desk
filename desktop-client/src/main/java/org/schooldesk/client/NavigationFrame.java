@@ -7,10 +7,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.schooldesk.client.models.CourseLabel;
-import org.schooldesk.client.models.CourseModel;
-import org.schooldesk.client.models.CourseSectionLabel;
-import org.schooldesk.client.models.CourseSectionModel;
+import org.schooldesk.client.models.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,7 +106,8 @@ public class NavigationFrame extends JFrame {
 					Response resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
 
 					if (resp.isSuccess()){
-
+						TestFrame frame = new TestFrame((TestModel) resp.getData());
+						frame.setVisible(true);
 					}
 				}
 				catch (Exception e1) {

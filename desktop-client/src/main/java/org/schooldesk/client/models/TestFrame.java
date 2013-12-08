@@ -51,7 +51,6 @@ public class TestFrame extends JFrame implements ActionListener{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		pack();
 	}
 
 	private void showNewQuestion(){
