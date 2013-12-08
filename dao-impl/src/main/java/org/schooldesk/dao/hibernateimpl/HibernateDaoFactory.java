@@ -2,8 +2,12 @@ package org.schooldesk.dao.hibernateimpl;
 
 import org.schooldesk.dao.*;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -38,7 +42,7 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 
 	private Properties getFactoryConfiguration(String configurationFileName) throws IOException {
 		Properties configuration = new Properties();
-		try (InputStream is = new BufferedInputStream(new FileInputStream(configurationFileName))) {
+		try (InputStream is = new BufferedInputStream(getClass().getResourceAsStream("/" + configurationFileName))) {
 			configuration.load(is);
 		}
 		return configuration;
