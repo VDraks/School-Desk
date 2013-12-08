@@ -6,8 +6,6 @@ import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
 import org.slf4j.*;
 
-import java.lang.InstantiationException;
-import java.lang.reflect.*;
 import java.util.*;
 
 
@@ -83,8 +81,10 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@SuppressWarnings("unchecked")
 	public T loadById(Long id) throws DataAccessException {
 		try {
-			AbstractCore result = getApi().loadById(id, coreClass);
-			return result == null ? null : (T) result.toDto();
+			AbstractCore result = getApi().loadById(coreClass, id);
+			return result == null ?
+			       null :
+			       (T) result.toDto();
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entity of class %s", dtoClass.getName());
@@ -94,7 +94,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public Set<T> loadByIds(Set<Long> ids) throws DataAccessException {
 		try {
-			return toDto(getApi().loadByIds(ids, coreClass));
+			return toDto(new HashSet<>(getApi().loadByIds(coreClass, ids)));
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entities of class %s", dtoClass.getName());
@@ -114,7 +114,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public void delete(Long id) throws DataAccessException {
 		try {
-			getApi().delete(id, coreClass);
+			getApi().delete(coreClass, id);
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not delete entity of class %s with id = %d", dtoClass.getName(), id);
@@ -122,22 +122,12 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	}
 
 	protected AbstractCore getCoreObject(IDto entity) throws HibernateException {
-		AbstractCore coreObject = getApi().loadById(entity.getId(), coreClass);
+		AbstractCore coreObject = getApi().loadById(coreClass, entity.getId());
 		coreObject.fromDto(entity, getApi());
 		return coreObject;
 	}
 
-	private AbstractCore createCoreObject(T entity) {
-		try {
-			AbstractCore coreObject = coreClass.getConstructor(null).newInstance(null);
-			coreObject.fromDto(entity, getApi());
-			return coreObject;
-		}
-		catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-			logger.warn("Cannot create core object", e);
-		}
-		return null;
-	}
+	protected abstract AbstractCore createCoreObject(T entity);
 
 	@SuppressWarnings("unchecked")
 	private Set<T> toDto(Set<? extends IDtoable> objects) {

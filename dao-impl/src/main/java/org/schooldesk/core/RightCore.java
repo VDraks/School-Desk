@@ -36,7 +36,7 @@ public class RightCore extends AbstractCore {
 
 	@Override
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
-		RightDto rightDto = (RightDto) dto;
-		setCode(rightDto.getCode());
+		IRight right = (IRight) dto;
+		setCode(right.getCode());
 	}
 }

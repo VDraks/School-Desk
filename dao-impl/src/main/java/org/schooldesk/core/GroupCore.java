@@ -49,8 +49,8 @@ public class GroupCore extends AbstractCore {
 
 	@Override
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
-		GroupDto groupDto = (GroupDto) dto;
-		setName(groupDto.getName());
-		setRights(new HashSet<>(coreApi.loadByIds(RightCore.class, groupDto.getRightIds())));
+		IGroup group = (IGroup) dto;
+		setName(group.getName());
+		setRights(new HashSet<>(coreApi.loadByIds(RightCore.class, group.getRightIds())));
 	}
 }
