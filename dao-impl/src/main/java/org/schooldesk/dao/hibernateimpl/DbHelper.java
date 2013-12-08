@@ -1,9 +1,14 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import org.hibernate.jdbc.*;
+import org.hibernate.jdbc.Work;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class DbHelper {
@@ -12,10 +17,10 @@ public class DbHelper {
 //	private static final String QUERY_FOR_TABLE_NAMES_MySQL =
 //			"SELECT TABLE_NAME " +
 //			"FROM INFORMATION_SCHEMA.TABLES " +
-//			"WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='{schema_name}'";
+//			"WHERE TABLE_TYPE = 'BASE TABLE'";
 
 	private static final String QUERY_FOR_TABLE_NAMES_H2 =
-			"SHOW TABLES FROM {schema_name}";
+			"SHOW TABLES";
 
 	public DbHelper(HibernateDaoFactory daoFactory) {
 		coreApi = daoFactory.getCoreApi();
@@ -35,7 +40,7 @@ public class DbHelper {
 
 	private Set<String> queryForTableNames(Connection connection) throws SQLException {
 		Set<String> tableNames = new HashSet<>();
-		String queryText = QUERY_FOR_TABLE_NAMES_H2.replace("{schema_name}", connection.getSchema());
+		String queryText = QUERY_FOR_TABLE_NAMES_H2;
 
 		try (Statement statement = connection.createStatement();
 		     ResultSet resultSet = statement.executeQuery(queryText)) {

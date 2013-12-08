@@ -9,3 +9,9 @@
 
 # Ignore output files
 target/
+
+# Ignore H2 DB files
+*.db
+
+# Ignore configuration files
+*.config

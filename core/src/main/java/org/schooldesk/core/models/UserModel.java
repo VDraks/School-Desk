@@ -25,7 +25,7 @@ public class UserModel {
 	}
 
 	public UserModel(IUser user) {
-		this(user.getId(), user.getEmail(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getGroupIds());
+		this(user.getId(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getEmail(), user.getGroupIds());
 	}
 
 	public long getId() {
