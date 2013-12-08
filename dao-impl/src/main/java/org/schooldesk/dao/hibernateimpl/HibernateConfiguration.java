@@ -14,7 +14,7 @@ public class HibernateConfiguration {
 	static {
 		CONFIGURATION = new AnnotationConfiguration();
 		CONFIGURATION.setProperties(makeCommonProperties());
-		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.dao.hibernateimpl")) {
+		for (Class<?> annotatedClass : getClassesInPackage("org.schooldesk.core")) {
 			CONFIGURATION.addAnnotatedClass(annotatedClass);
 		}
 	}
@@ -26,14 +26,14 @@ public class HibernateConfiguration {
 		properties.setProperty("hibernate.show_sql", "false");
 //	    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 
-	public static SessionFactory buildSessionFactory(String login, String password, String connectionURL) {
+	public static SessionFactory buildSessionFactory(String login, String password, String connectionURL, Boolean dropBeforeCreate) {
 		CONFIGURATION.setProperty("hibernate.connection.url", connectionURL);
 		CONFIGURATION.setProperty("hibernate.connection.username", login);
 		CONFIGURATION.setProperty("hibernate.connection.password", password);
+		CONFIGURATION.setProperty("hibernate.hbm2ddl.auto", dropBeforeCreate ? "create" : "update");
 
 		return CONFIGURATION.buildSessionFactory();
 	}

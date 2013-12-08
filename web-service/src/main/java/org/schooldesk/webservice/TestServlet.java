@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.schooldesk.webservice.SessionAttribute.USER_ID;
+
 
 @WebServlet("/test/*")
 public class TestServlet extends AbstractDispatchedServlet {
@@ -38,7 +40,8 @@ public class TestServlet extends AbstractDispatchedServlet {
 
 	@ActionHandler
 	public void validateUserTestPassing(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		UserTestPassingModel utpModel = ServletHelper.readValue(req.getParameter("UserTestPassingModel"), UserTestPassingModel.class);
+		UserTestPassingModel utpModel = ServletHelper.readValue(req.getParameter("UserTestPassing"), UserTestPassingModel.class);
+		utpModel.setUserId((Long) USER_ID.getValue(req.getSession()));
 		try {
 			TestResultModel trModel = testService.validateUserTestPassing(utpModel);
 			ServletHelper.writeResponse(true, null, trModel, resp.getOutputStream());

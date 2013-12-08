@@ -1,9 +1,10 @@
 package org.schooldesk.dao.hibernateimpl;
 
-import org.schooldesk.core.*;
+import org.hibernate.*;
 import org.schooldesk.dao.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
+import org.schooldesk.hibernateobjects.*;
 
 
 public class CourseDao extends AbstractDao<ICourse> implements ICourseDao {
@@ -14,5 +15,12 @@ public class CourseDao extends AbstractDao<ICourse> implements ICourseDao {
 	@Override
 	public ICourse createDto() {
 		return CourseDto.createNew();
+	}
+
+	@Override
+	protected CourseCore createCoreObject(ICourse entity) throws HibernateException {
+		CourseCore result = new CourseCore();
+		result.fromDto(entity, getApi());
+		return result;
 	}
 }

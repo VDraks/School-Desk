@@ -1,14 +1,12 @@
 package org.schooldesk.core.services;
 
-import org.schooldesk.core.models.UserCredentialModel;
-import org.schooldesk.core.models.UserFetchByEmailModel;
-import org.schooldesk.core.models.UserModel;
+import org.schooldesk.core.models.*;
 import org.schooldesk.dao.DataAccessException;
 
 
 public interface IUserService extends IService {
-	long createUser(UserModel userModel) throws DataAccessException;
-	void updateUser(UserModel userModel) throws ServiceException, DataAccessException;
+	long createUser(UserCreationModel userCreationModel) throws DataAccessException;
+	void updateUser(UserUpdateModel userUpdateModel) throws ServiceException, DataAccessException;
 	void deleteUser(long userId) throws DataAccessException;
 
 	UserModel getUserById(Long id) throws DataAccessException;

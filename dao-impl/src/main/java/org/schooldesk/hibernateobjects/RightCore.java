@@ -1,5 +1,6 @@
-package org.schooldesk.core;
+package org.schooldesk.hibernateobjects;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -34,8 +35,8 @@ public class RightCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
-		RightDto rightDto = (RightDto) dto;
-		setCode(rightDto.getCode());
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
+		IRight right = (IRight) dto;
+		setCode(right.getCode());
 	}
 }

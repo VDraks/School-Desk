@@ -1,11 +1,20 @@
-package org.schooldesk.core;
+package org.schooldesk.hibernateobjects;
 
+import com.sun.istack.internal.*;
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+import javax.persistence.*;
 
+
+@Entity
 public class CourseSectionCore extends AbstractCore {
+	@ManyToOne
+	@NotNull
+	CourseCore source;
+
 	private String name;
 
 	public CourseSectionCore() {}
@@ -31,8 +40,8 @@ public class CourseSectionCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
-		CourseSectionDto courseSectionDto = (CourseSectionDto) dto;
-		setName(courseSectionDto.getName());
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
+		ICourseSection courseSection = (ICourseSection) dto;
+		setName(courseSection.getName());
 	}
 }

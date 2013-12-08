@@ -1,9 +1,8 @@
 package org.schooldesk.dto.impl;
 
-import org.schooldesk.dto.IUser;
+import org.schooldesk.dto.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class UserDto extends AbstractDto implements IUser {
@@ -16,9 +15,8 @@ public class UserDto extends AbstractDto implements IUser {
 
 	private Set<Long> groupIds;
 
-	/**
-	 * @deprecated exists for mapping purposes
-	 */
+	@Deprecated
+	@UsedForMapping
 	public UserDto() {}
 
 	public static UserDto createNew() {

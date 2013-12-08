@@ -1,4 +1,4 @@
-package org.schooldesk.core;
+package org.schooldesk.hibernateobjects;
 
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.impl.*;
@@ -30,6 +30,14 @@ public abstract class AbstractCore implements IDtoable {
 
 	protected static Set<Long> getIds(Set<? extends IDtoable> dtoables) {
 		Set<Long> ids = new HashSet<Long>(dtoables.size());
+		for (IDtoable dtoable : dtoables) {
+			ids.add(dtoable.getId());
+		}
+		return ids;
+	}
+
+	protected static List<Long> getIds(List<? extends IDtoable> dtoables) {
+		List<Long> ids = new ArrayList<>(dtoables.size());
 		for (IDtoable dtoable : dtoables) {
 			ids.add(dtoable.getId());
 		}

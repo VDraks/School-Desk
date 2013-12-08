@@ -100,8 +100,8 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		ICourse course = courseDao.loadById(courseId);
 
 		Set<CourseSectionModel> courseSectionModels = new HashSet<>();
-		for (ICourseSection courseSection : course.getCourseSections()) {
-			courseSectionModels.add(loadCourseSectionModel(courseSection.getId()));
+		for (Long courseSectionId : course.getCourseSectionIds()) {
+			courseSectionModels.add(loadCourseSectionModel(courseSectionId));
 		}
 		return courseSectionModels;
 	}
@@ -124,7 +124,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 			TestResultModel.ValidatedTestAnswerModel validatedTestAnswer = new TestResultModel.ValidatedTestAnswerModel();
 
 			final Long questionId = userAnswer.getQuestionId();
-			validatedTestAnswer.setQuestionModel(loadTestQuestionModel(questionId));
+			validatedTestAnswer.setQuestion(loadTestQuestionModel(questionId));
 			validatedTestAnswer.setCorrectAnswerIds(testQuestionDao.loadById(questionId).getCorrectAnswerIds());
 			validatedTestAnswer.setUserAnswerIds(userAnswer.getAnswerIds());
 
