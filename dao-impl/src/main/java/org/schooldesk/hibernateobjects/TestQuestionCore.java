@@ -9,15 +9,15 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class TestQuestionCore extends ResourceCore {
 	private String question;
 	private TestQuestionType type;
 
-	@OneToMany
+//	@OneToMany
 	private Set<TestAnswerCore> answers;
 
-	@OneToMany
+//	@OneToMany
 	private Set<TestAnswerCore> correctAnswers;
 
 	public TestQuestionCore() {}

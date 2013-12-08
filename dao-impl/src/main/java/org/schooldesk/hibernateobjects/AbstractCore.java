@@ -7,11 +7,11 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+@MappedSuperclass
 public abstract class AbstractCore implements IDtoable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 
 	@Override
 	public Long getId() {

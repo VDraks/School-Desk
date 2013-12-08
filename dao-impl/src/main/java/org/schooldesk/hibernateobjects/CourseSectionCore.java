@@ -2,23 +2,44 @@ package org.schooldesk.hibernateobjects;
 
 import com.sun.istack.internal.*;
 import org.hibernate.*;
+import org.hibernate.annotations.OnDelete;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 import javax.persistence.*;
-
+import static javax.persistence.InheritanceType.JOINED;
 
 @Entity
+//@Table(name = "CourseSectionCore")
 public class CourseSectionCore extends AbstractCore {
-	@ManyToOne
-	@NotNull
-	CourseCore source;
 
+////	@JoinColumn(name = "id")
+////  @ManyToOne
+//@ManyToOne//(insert="false", update="false")
+//@JoinColumn(name = "id", updatable = false, insertable = false, nullable = false)
+//	@NotNull
+
+	@ManyToOne
+//	@OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
+//	@JoinColumn(name = "id")
+	private CourseCore source;
+////
+//
+////	@JoinColumn(name = "id")
+	public CourseCore getSource()
+	{
+		return source;
+	}
+//
+public void setSource(CourseCore source)
+{
+	this.source = source;
+}
 	private String name;
 
-	@OneToOne
-	private TestCore test;
+//	@OneToOne
+//	private TestCore test;
 
 	public CourseSectionCore() {}
 
@@ -30,13 +51,14 @@ public class CourseSectionCore extends AbstractCore {
 		this.name = name;
 	}
 
-	public TestCore getTest() {
-		return test;
-	}
-
-	public void setTest(TestCore test) {
-		this.test = test;
-	}
+//	public TestCore getTest() {
+////		return test;
+//		return null;
+//	}
+//
+//	public void setTest(TestCore test) {
+////		this.test = test;
+//	}
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -48,7 +70,7 @@ public class CourseSectionCore extends AbstractCore {
 	protected CourseSectionDto mapDto(AbstractDto dto) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) super.mapDto(dto);
 		courseSectionDto.setName(getName());
-		courseSectionDto.setTestId(getTest().getId());
+//		courseSectionDto.setTestId(getTest() == null ? null : getTest().getId());
 		return courseSectionDto;
 	}
 
@@ -56,6 +78,6 @@ public class CourseSectionCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		ICourseSection courseSection = (ICourseSection) dto;
 		setName(courseSection.getName());
-		setTest(coreApi.loadById(TestCore.class, courseSection.getTestId()));
+//		setTest(coreApi.loadById(TestCore.class, courseSection.getTestId()));
 	}
 }

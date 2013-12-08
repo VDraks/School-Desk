@@ -9,15 +9,15 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class TestResultCore extends AbstractCore {
-	@OneToOne
+//	@OneToOne
 	private TestCore test;
 
-	@OneToOne
+//	@OneToOne
 	private UserCore user;
 
-	@OneToMany
+//	@OneToMany
 	private Set<UserTestAnswerCore> userTestAnswers;
 
 	public TestResultCore() {}

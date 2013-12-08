@@ -3,10 +3,12 @@ package org.schooldesk.dao.hibernateimpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+import org.schooldesk.hibernateobjects.CourseCore;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -72,7 +74,16 @@ public class HibernateConfiguration {
 			}
 		}
 
-		return classes;
+//		return classes;
+		List<Class<?>> result = new ArrayList<Class<?>>();
+		try {
+			result.add(Class.forName(packageName + ".CourseCore"));
+			result.add(Class.forName(packageName + ".CourseSectionCore"));
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+		}
+		return result;
 	}
 
 	private static Class<?> loadClass(String className) {

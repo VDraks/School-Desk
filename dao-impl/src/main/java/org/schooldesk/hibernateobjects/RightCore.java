@@ -8,7 +8,7 @@ import org.schooldesk.dto.impl.*;
 import javax.persistence.*;
 
 
-@Entity
+//@Entity
 public class RightCore extends AbstractCore {
 	private String code;
 

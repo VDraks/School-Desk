@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class EducationStageCore extends AbstractCore {
 	private String name;
 
-	@OneToMany
+//	@OneToMany
 	private List<CourseCore> courses;
 
 	public EducationStageCore() {}

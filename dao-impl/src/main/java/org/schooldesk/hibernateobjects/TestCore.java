@@ -9,9 +9,9 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class TestCore extends ResourceCore {
-	@ManyToMany
+//	@ManyToMany
 	private Set<TestQuestionCore> testQuestions;
 
 	public TestCore() {}

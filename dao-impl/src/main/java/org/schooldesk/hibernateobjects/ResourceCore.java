@@ -8,9 +8,9 @@ import org.schooldesk.dto.impl.*;
 import javax.persistence.*;
 
 
-@Entity
+//@Entity
 public abstract class ResourceCore extends AbstractCore {
-	@OneToOne
+//	@OneToOne
 	private RightCore right;
 	private String name;
 

@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class GroupCore extends AbstractCore {
 	private String name;
 
-	@OneToMany
+//	@OneToMany
 	private Set<RightCore> rights;
 
 	public GroupCore() {}

@@ -48,7 +48,7 @@ public class CoreApi {
 			getSession().save(object);
 			commitTransaction();
 //			getSession().flush();
-			getSession().refresh(object);
+//			getSession().refresh(object);
 			return object;
 		}
 		catch (HibernateException ex) {

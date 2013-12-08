@@ -75,9 +75,9 @@ public class CCourseSUR_Test extends CAbstractTest{
 		ICourseDao courseDao = getFactory().getDao(ICourseDao.class);
 		courseDao.delete(courseId);
 
-		assertEquals("Course was not successfully deleted", courseDao.loadById(courseId), null);
+		assertEquals("Course was not successfully deleted", null, courseDao.loadById(courseId));
 		assertTrue("Course was not successfully deleted", courseDao.loadAll().isEmpty());
-		assertEquals("Course section was not successfully deleted", courseSectionDao.loadById(courseSection2Id), null);
+		assertEquals("Course section was not successfully deleted", null, courseSectionDao.loadById(courseSection2Id));
 		assertTrue("Course section was not successfully deleted", courseSectionDao.loadAll().isEmpty());
 	}
 }

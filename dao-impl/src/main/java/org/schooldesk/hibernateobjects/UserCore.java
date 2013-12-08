@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.*;
 
 
-@Entity
+//@Entity
 public class UserCore extends AbstractCore {
 	private String firstName;
 	private String middleName;
@@ -18,7 +18,7 @@ public class UserCore extends AbstractCore {
 	private String email;
 	private String password;
 
-	@OneToMany
+//	@OneToMany
 	private Set<GroupCore> groups;
 
 	public UserCore() {}

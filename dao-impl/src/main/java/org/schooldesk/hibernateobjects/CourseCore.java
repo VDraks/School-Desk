@@ -1,11 +1,15 @@
 package org.schooldesk.hibernateobjects;
 
 import org.hibernate.*;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.FetchMode;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.*;
 
 
@@ -13,7 +17,18 @@ import java.util.*;
 public class CourseCore extends AbstractCore {
 	private String name;
 
-	@OneToMany(mappedBy = "source", cascade = {CascadeType.ALL})
+//	@OneToMany(mappedBy="source", cascade=CascadeType.ALL)
+//@OneToMany(mappedBy="source", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//@JoinColumn(name="id", nullable = false)
+//@Fetch(value = FetchMode.SUBSELECT)
+//	@OneToMany(cascade = {javax.persistence.CascadeType.ALL})
+//	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+//	@JoinColumn(name = "id")
+
+	@OneToMany(mappedBy = "source", cascade = {javax.persistence.CascadeType.ALL})
+//	@Cascade({org.hibernate.annotations.CascadeType.ALL, org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+//	@JoinColumn(name = "id")
 	private List<CourseSectionCore> courseSections;
 
 	public CourseCore() {}
@@ -25,6 +40,7 @@ public class CourseCore extends AbstractCore {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public List<CourseSectionCore> getCourseSections() {
 		return courseSections;
