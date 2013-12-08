@@ -1,16 +1,11 @@
 package org.schooldesk.tests;
 
-import org.hibernate.SessionFactory;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.schooldesk.dao.DaoFactory;
-import org.schooldesk.dao.IDao;
-import org.schooldesk.dao.hibernateimpl.HibernateConfiguration;
-import org.schooldesk.dao.hibernateimpl.HibernateDaoFactory;
-import org.schooldesk.dto.IDto;
+import org.junit.*;
+import org.schooldesk.dao.*;
+import org.schooldesk.dao.hibernateimpl.*;
 
 import java.io.*;
-import java.util.Properties;
+import java.util.*;
 
 
 public class CAbstractTest {
@@ -38,8 +33,7 @@ public class CAbstractTest {
 		factory = new HibernateDaoFactory(temporaryProperties.getAbsolutePath());
 	}
 
-	protected DaoFactory getFactory()
-	{
-		 return factory;
+	protected DaoFactory getFactory() {
+		return factory;
 	}
 }
