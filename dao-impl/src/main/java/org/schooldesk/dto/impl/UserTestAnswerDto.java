@@ -14,6 +14,7 @@ public class UserTestAnswerDto extends AbstractDto implements IUserTestAnswer {
 	public UserTestAnswerDto() {}
 
 	public static UserTestAnswerDto createNew() {
+		@SuppressWarnings("deprecated")
 		UserTestAnswerDto result = new UserTestAnswerDto();
 		result.setAnswerIds(new HashSet<Long>());
 		return result;

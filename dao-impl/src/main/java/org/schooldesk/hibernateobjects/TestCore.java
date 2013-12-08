@@ -25,6 +25,7 @@ public class TestCore extends ResourceCore {
 	}
 
 	@Override
+	@SuppressWarnings("deprecated")
 	public TestDto toDto() {
 		return mapDto(new TestDto());
 	}

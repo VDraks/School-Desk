@@ -11,6 +11,7 @@ public class RightDto extends AbstractDto implements IRight {
 	public RightDto() {}
 
 	public static RightDto createNew(String code) {
+		@SuppressWarnings("deprecated")
 		RightDto dto = new RightDto();
 		dto.setCode(code);
 		return dto;

@@ -20,6 +20,7 @@ public class UserDto extends AbstractDto implements IUser {
 	public UserDto() {}
 
 	public static UserDto createNew() {
+		@SuppressWarnings("deprecated")
 		UserDto dto = new UserDto();
 		dto.setGroupIds(new HashSet<Long>());
 		return dto;
