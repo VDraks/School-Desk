@@ -40,13 +40,6 @@ public class CoreApi {
 		catch (HibernateException ex) {
 			logger.warn("Cannot rollback transaction", ex);
 		}
-
-		try {
-			getSession().close();
-		}
-		catch (HibernateException ex) {
-			logger.warn("Cannot close session", ex);
-		}
 	}
 
 	public AbstractCore save(AbstractCore object) throws HibernateException {
