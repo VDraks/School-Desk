@@ -1,5 +1,6 @@
 package org.schooldesk.core;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -47,9 +48,9 @@ public class GroupCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		GroupDto groupDto = (GroupDto) dto;
 		setName(groupDto.getName());
-		setRights(coreApi.loadByIdsSafe(groupDto.getRightIds(), RightCore.class));
+		setRights(new HashSet<>(coreApi.loadByIds(RightCore.class, groupDto.getRightIds())));
 	}
 }

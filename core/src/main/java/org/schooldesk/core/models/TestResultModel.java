@@ -26,16 +26,16 @@ public class TestResultModel {
 
 
 	public static class ValidatedTestAnswerModel {
-		private TestQuestionModel questionModel;
+		private TestQuestionModel question;
 		private Set<Long> userAnswerIds;
 		private Set<Long> correctAnswerIds;
 
-		public TestQuestionModel getQuestionModel() {
-			return questionModel;
+		public TestQuestionModel getQuestion() {
+			return question;
 		}
 
-		public void setQuestionModel(TestQuestionModel questionModel) {
-			this.questionModel = questionModel;
+		public void setQuestion(TestQuestionModel question) {
+			this.question = question;
 		}
 
 		public Set<Long> getUserAnswerIds() {

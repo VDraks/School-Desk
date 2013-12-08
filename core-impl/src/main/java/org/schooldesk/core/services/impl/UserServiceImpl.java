@@ -1,8 +1,6 @@
 package org.schooldesk.core.services.impl;
 
-import org.schooldesk.core.models.UserCredentialModel;
-import org.schooldesk.core.models.UserFetchByEmailModel;
-import org.schooldesk.core.models.UserModel;
+import org.schooldesk.core.models.*;
 import org.schooldesk.core.services.IUserService;
 import org.schooldesk.core.services.ServiceException;
 import org.schooldesk.core.services.impl.utils.IPasswordGenerator;
@@ -23,9 +21,9 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	}
 
 	@Override
-	public long createUser(UserModel userModel) throws DataAccessException {
+	public long createUser(UserCreationModel userCreationModel) throws DataAccessException {
 		final IUser user = userDao.createDto();
-		userModel.applyTo(user);
+		userCreationModel.applyTo(user);
 		user.setPassword(passwordGenerator.generate());
 
 		final IUser savedUser = userDao.save(user);
@@ -33,13 +31,13 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 	}
 
 	@Override
-	public void updateUser(UserModel userModel) throws ServiceException, DataAccessException {
-		final IUser user = userDao.loadById(userModel.getId());
+	public void updateUser(UserUpdateModel userUpdateModel) throws ServiceException, DataAccessException {
+		final IUser user = userDao.loadById(userUpdateModel.getId());
 		if (user == null) {
-			throw new ServiceException("Couldn't find user with id '%d'", userModel.getId());
+			throw new ServiceException("Couldn't find user with id '%d'", userUpdateModel.getId());
 		}
 
-		userModel.applyTo(user);
+		userUpdateModel.applyTo(user);
 		userDao.update(user);
 	}
 

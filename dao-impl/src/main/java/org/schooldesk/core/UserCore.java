@@ -1,5 +1,6 @@
 package org.schooldesk.core;
 
+import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -88,13 +89,13 @@ public class UserCore extends AbstractCore {
 	}
 
 	@Override
-	public void fromDto(IDto dto, CoreApi coreApi) {
-		UserDto userDto = (UserDto) dto;
-		setFirstName(userDto.getFirstName());
-		setMiddleName(userDto.getMiddleName());
-		setLastName(userDto.getLastName());
-		setEmail(userDto.getEmail());
-		setPassword(userDto.getPassword());
-		setGroups(coreApi.loadByIdsSafe(userDto.getGroupIds(), GroupCore.class));
+	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
+		IUser user = (UserDto) dto;
+		setFirstName(user.getFirstName());
+		setMiddleName(user.getMiddleName());
+		setLastName(user.getLastName());
+		setEmail(user.getEmail());
+		setPassword(user.getPassword());
+		setGroups(new HashSet<>(coreApi.loadByIds(GroupCore.class, user.getGroupIds())));
 	}
 }
