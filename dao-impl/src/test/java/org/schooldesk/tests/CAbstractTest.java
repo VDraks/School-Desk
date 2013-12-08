@@ -16,6 +16,7 @@ import java.util.Properties;
 public class CAbstractTest {
 
 	private static DaoFactory factory;
+	private static final String databaseFileName = System.getProperty("user.dir") + "\\testDatabase";
 
 	@BeforeClass
 	public static void initializeDatabase() throws IOException {
@@ -23,19 +24,18 @@ public class CAbstractTest {
 		/**
 		 * Create file with properties for hibernate (login, password, url)
 		 */
-		String DATABASE_FILE_NAME = "testDatabase";
 		File temporaryProperties = File.createTempFile("test", ".config");
 		temporaryProperties.deleteOnExit();
 		Properties configuration = new Properties();
-		configuration.setProperty("db_login", System.getProperty("user.dir") + "\\" + DATABASE_FILE_NAME);
+		configuration.setProperty("db_login", "admin");
 		configuration.setProperty("db_password", "admin");
-		configuration.setProperty("db_connection", "admin");
+		configuration.setProperty("db_connection", "jdbc:h2:" + databaseFileName);
+		configuration.setProperty("db_drop_before_create", "true");
 		try (OutputStream os = new FileOutputStream(temporaryProperties)) {
 			configuration.store(os, "");
 
 		}
 		factory = new HibernateDaoFactory(temporaryProperties.getAbsolutePath());
-		new File(DATABASE_FILE_NAME).deleteOnExit();
 	}
 
 	protected DaoFactory getFactory()

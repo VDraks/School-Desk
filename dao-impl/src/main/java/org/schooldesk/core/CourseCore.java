@@ -1,18 +1,27 @@
 package org.schooldesk.core;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.schooldesk.dao.hibernateimpl.CoreApi;
 import org.schooldesk.dto.ICourseSection;
 import org.schooldesk.dto.IDto;
 import org.schooldesk.dto.impl.AbstractDto;
 import org.schooldesk.dto.impl.CourseDto;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+@Entity
 public class CourseCore extends AbstractCore {
 	private String name;
+
+	@OneToMany(mappedBy="source", cascade={CascadeType.ALL})
 	private List<CourseSectionCore> courseSections;
 
 	public CourseCore() {}
@@ -63,6 +72,15 @@ public class CourseCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) {
 		CourseDto courseDto = (CourseDto) dto;
 		setName(courseDto.getName());
-		setCourseSections(Collections.<CourseSectionCore>emptyList()); // FIXME
+
+		List<CourseSectionCore> sections = new ArrayList<CourseSectionCore>();
+
+		for (Long sectionId : courseDto.getCourseSectionIds())
+		{
+			CourseSectionCore section = (CourseSectionCore) coreApi.loadById(sectionId, CourseSectionCore.class);
+			sections.add(section);
+		}
+
+		setCourseSections(sections);
 	}
 }

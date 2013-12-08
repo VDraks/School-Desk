@@ -1,11 +1,21 @@
 package org.schooldesk.core;
 
+import com.sun.istack.internal.NotNull;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
+
+@Entity
 public class CourseSectionCore extends AbstractCore {
+
+	@ManyToOne
+	@NotNull
+	CourseCore source;
+
 	private String name;
 
 	public CourseSectionCore() {}

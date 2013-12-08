@@ -31,7 +31,8 @@ public class HibernateDaoFactory extends DaoFactory implements IDaoFactory {
 		coreApi = new CoreApi(HibernateConfiguration.buildSessionFactory(
 				configuration.getProperty("db_login"),
 				configuration.getProperty("db_password"),
-				configuration.getProperty("db_connection")
+				configuration.getProperty("db_connection"),
+				Boolean.valueOf(configuration.getProperty("db_drop_before_create"))
 		));
 	}
 

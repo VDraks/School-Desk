@@ -30,10 +30,10 @@ public class CCourseSUR_Test extends CAbstractTest{
 		courseSection1 = courseSectionDao.save(courseSection1);
 		courseSection1Id = courseSection1.getId();
 
-		courseSectionName1 = "New section 2";
+		courseSectionName2 = "New section 2";
 		ICourseSection courseSection2 = courseSectionDao.createDto();
-		courseSection2.setName(courseSectionName1);
-		courseSection2 = courseSectionDao.save(courseSection1);
+		courseSection2.setName(courseSectionName2);
+		courseSection2 = courseSectionDao.save(courseSection2);
 		courseSection2Id = courseSection2.getId();
 
 		courseName = "New course";
@@ -42,6 +42,7 @@ public class CCourseSUR_Test extends CAbstractTest{
 		course.setName(courseName);
 		course.setCourseSectionIds(Arrays.asList(courseSection1Id, courseSection2Id));
 		course = courseDao.save(course);
+		courseId = course.getId();
 	}
 
 	@Test
@@ -54,10 +55,14 @@ public class CCourseSUR_Test extends CAbstractTest{
 		  assertEquals("Course name was corrupted during saving", courseDto.getName(), courseName);
 
 			ICourseSectionDao courseSectionDao = getFactory().getDao(ICourseSectionDao.class);
-			ICourseSection courseSectionDto = courseSectionDao.loadById(courseId);
 
-			assertTrue("Course was not loaded", courseSectionDto != null);
-			assertEquals("Course name was corrupted during saving", courseSectionDto.getName(), courseSectionName1);
+			ICourseSection courseSectionDto1 = courseSectionDao.loadById(courseSection1Id);
+			assertTrue("Course section was not loaded", courseSectionDto1 != null);
+			assertEquals("Course section name was corrupted during saving", courseSectionDto1.getName(), courseSectionName1);
+
+			ICourseSection courseSectionDto2 = courseSectionDao.loadById(courseSection2Id);
+			assertTrue("Course section was not loaded", courseSectionDto2 != null);
+			assertEquals("Course section name was corrupted during saving", courseSectionDto2.getName(), courseSectionName2);
 	}
 
 	@After
@@ -71,8 +76,8 @@ public class CCourseSUR_Test extends CAbstractTest{
 		courseDao.delete(courseId);
 
 		assertEquals("Course was not successfully deleted", courseDao.loadById(courseId), null);
-		assertEquals("Course was not successfully deleted", courseDao.loadAll().isEmpty());
+		assertTrue("Course was not successfully deleted", courseDao.loadAll().isEmpty());
 		assertEquals("Course section was not successfully deleted", courseSectionDao.loadById(courseSection2Id), null);
-		assertEquals("Course section was not successfully deleted", courseSectionDao.loadAll().isEmpty());
+		assertTrue("Course section was not successfully deleted", courseSectionDao.loadAll().isEmpty());
 	}
 }

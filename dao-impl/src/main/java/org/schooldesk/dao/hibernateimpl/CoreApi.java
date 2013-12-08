@@ -54,6 +54,7 @@ public class CoreApi {
 			beginTransaction();
 			getSession().save(object);
 			commitTransaction();
+//			getSession().flush();
 			getSession().refresh(object);
 			return object;
 		}

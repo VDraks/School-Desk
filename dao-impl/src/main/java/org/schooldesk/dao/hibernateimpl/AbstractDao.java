@@ -36,7 +36,7 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 			return (T) getApi().save(createCoreObject(entity)).toDto();
 		}
 		catch (HibernateException ex) {
-			throw new DataAccessException("Could not save entity %s" + entity);
+			throw new DataAccessException("Could not save entity %s", entity);
 		}
 	}
 
@@ -83,7 +83,8 @@ public abstract class AbstractDao<T extends IDto> implements IDao<T> {
 	@SuppressWarnings("unchecked")
 	public T loadById(Long id) throws DataAccessException {
 		try {
-			return (T) getApi().loadById(id, coreClass).toDto();
+			AbstractCore result = getApi().loadById(id, coreClass);
+			return result == null ? null : (T) result.toDto();
 		}
 		catch (HibernateException e) {
 			throw new DataAccessException("Could not load entity of class %s", dtoClass.getName());
