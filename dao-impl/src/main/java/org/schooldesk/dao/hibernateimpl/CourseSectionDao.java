@@ -23,4 +23,15 @@ public class CourseSectionDao extends AbstractDao<ICourseSection> implements ICo
 		result.fromDto(entity, getApi());
 		return result;
 	}
+
+	@Override
+	public void delete(Long id) throws DataAccessException{
+
+		TestDao testDao = new TestDao(getApi());
+		TestCore test = getApi().loadById(TestCore.class, id);
+
+		testDao.delete(test.getId());
+
+		super.delete(id);
+	}
 }

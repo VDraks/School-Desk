@@ -57,6 +57,6 @@ public class TestCore extends ResourceCore {
 		ITest test = (ITest) dto;
 //		setTestQuestions(new HashSet<>(coreApi.loadByIds(TestQuestionCore.class, test.getTestQuestionIds())));
 
-//		super.fromDto(dto, coreApi);
+		super.fromDto(dto, coreApi);
 	}
 }

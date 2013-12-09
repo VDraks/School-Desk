@@ -60,7 +60,7 @@ public class CourseSectionCore extends AbstractCore {
 	protected CourseSectionDto mapDto(AbstractDto dto) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) super.mapDto(dto);
 		courseSectionDto.setName(getName());
-//		courseSectionDto.setTestId(getTest() == null ? null : getTest().getId());
+		courseSectionDto.setTestId(getTest() == null ? null : getTest().getId());
 		return courseSectionDto;
 	}
 
@@ -68,6 +68,6 @@ public class CourseSectionCore extends AbstractCore {
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		ICourseSection courseSection = (ICourseSection) dto;
 		setName(courseSection.getName());
-//		setTest(coreApi.loadById(TestCore.class, courseSection.getTestId()));
+		setTest(coreApi.loadById(TestCore.class, courseSection.getTestId()));
 	}
 }
