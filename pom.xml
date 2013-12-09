@@ -16,6 +16,7 @@
         <module>core-impl</module>
         <module>dao</module>
         <module>dao-impl</module>
+        <module>in-memory-dao</module>
         <module>web-service</module>
         <module>integration-tests</module>
         <module>desktop-client</module>
@@ -41,6 +42,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>dao-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>in-memory-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
