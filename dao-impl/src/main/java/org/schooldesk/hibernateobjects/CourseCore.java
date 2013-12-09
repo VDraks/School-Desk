@@ -17,6 +17,7 @@ import java.util.*;
 public class CourseCore extends AbstractCore {
 	private String name;
 
+	private EducationStageCore educationStage;
 
 	private List<CourseSectionCore> courseSections;
 
@@ -30,7 +31,16 @@ public class CourseCore extends AbstractCore {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "source", cascade = {javax.persistence.CascadeType.ALL})
+	@ManyToOne
+	public EducationStageCore getEducationStage() {
+		return educationStage;
+	}
+
+	public void setEducationStage(EducationStageCore educationStage) {
+		this.educationStage = educationStage;
+	}
+
+	@OneToMany(cascade = {javax.persistence.CascadeType.ALL})
 	public List<CourseSectionCore> getCourseSections() {
 		return courseSections;
 	}

@@ -4,10 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
-import org.schooldesk.hibernateobjects.CourseCore;
-import org.schooldesk.hibernateobjects.CourseSectionCore;
-import org.schooldesk.hibernateobjects.ResourceCore;
-import org.schooldesk.hibernateobjects.TestCore;
+import org.schooldesk.hibernateobjects.*;
 
 import java.io.File;
 import java.net.URL;
@@ -25,10 +22,12 @@ public class HibernateConfiguration {
 		AnnotationConfiguration config = new AnnotationConfiguration();
 		CONFIGURATION = config;
 		CONFIGURATION.setProperties(makeCommonProperties());
+
 		CONFIGURATION.addAnnotatedClass(ResourceCore.class);
-        CONFIGURATION.addAnnotatedClass(TestCore.class);
-        CONFIGURATION.addAnnotatedClass(CourseSectionCore.class);
-        CONFIGURATION.addAnnotatedClass(CourseCore.class);
+    CONFIGURATION.addAnnotatedClass(TestCore.class);
+    CONFIGURATION.addAnnotatedClass(CourseSectionCore.class);
+    CONFIGURATION.addAnnotatedClass(CourseCore.class);
+		CONFIGURATION.addAnnotatedClass(EducationStageCore.class);
 	}
 
 	private static Properties makeCommonProperties() {

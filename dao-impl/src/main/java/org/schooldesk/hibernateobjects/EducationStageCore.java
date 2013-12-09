@@ -1,6 +1,7 @@
 package org.schooldesk.hibernateobjects;
 
 import org.hibernate.*;
+import org.schooldesk.dao.DataAccessException;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -9,11 +10,10 @@ import javax.persistence.*;
 import java.util.*;
 
 
-//@Entity
+@Entity
 public class EducationStageCore extends AbstractCore {
 	private String name;
 
-//	@OneToMany
 	private List<CourseCore> courses;
 
 	public EducationStageCore() {}
@@ -26,6 +26,7 @@ public class EducationStageCore extends AbstractCore {
 		this.name = name;
 	}
 
+	@OneToMany(mappedBy = "educationStage", cascade = {javax.persistence.CascadeType.ALL})
 	public List<CourseCore> getCourses() {
 		return courses;
 	}

@@ -22,8 +22,6 @@ public class CourseSectionCoreSUR_test extends CAbstractTest{
 
 	private String courseSectionName;
 	private String testName;
-	private String rightName;
-	private String testQuestionName;
 
 	@Before
 	public void before() throws DataAccessException{
