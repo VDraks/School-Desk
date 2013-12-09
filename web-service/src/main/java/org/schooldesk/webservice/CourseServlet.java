@@ -28,9 +28,7 @@ public class CourseServlet extends AbstractDispatchedServlet {
 		Long userId = (Long) USER_ID.getValue(req.getSession());
 		try {
 			Set<CourseModel> courseModels = new HashSet<>();
-			for (Long stageId : userService.getUserById(userId).getGroupIds()) {
-				courseModels.addAll(testService.getCourses(stageId));
-			}
+			courseModels.addAll(testService.getCourses(userService.getUserById(userId).getEducationStageId()));
 			ServletHelper.writeResponse(true, null, courseModels, resp.getOutputStream());
 		}
 		catch (DataAccessException e) {

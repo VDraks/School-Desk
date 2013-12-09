@@ -15,6 +15,8 @@ public class UserModel {
 
 	private Set<Long> groupIds;
 
+	private Long educationStageId;
+
 	public UserModel(Long id, String firstName, String middleName, String lastName, String email, Set<Long> groupIds) {
 		setId(id);
 		setFirstName(firstName);
@@ -74,5 +76,13 @@ public class UserModel {
 
 	public void setGroupIds(Set<Long> groupIds) {
 		this.groupIds = groupIds;
+	}
+
+	public Long getEducationStageId() {
+		return educationStageId;
+	}
+
+	public void setEducationStageId(Long educationStageId) {
+		this.educationStageId = educationStageId;
 	}
 }

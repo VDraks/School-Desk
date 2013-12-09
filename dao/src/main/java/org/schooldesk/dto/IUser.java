@@ -27,4 +27,8 @@ public interface IUser extends IDto {
 	public Set<Long> getGroupIds();
 
 	public void setGroupIds(Set<Long> groupIds);
+
+	public Long getEducationStageId();
+
+	public void setEducationStageId(Long educationStageId);
 }
