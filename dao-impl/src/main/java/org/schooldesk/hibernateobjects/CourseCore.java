@@ -17,18 +17,7 @@ import java.util.*;
 public class CourseCore extends AbstractCore {
 	private String name;
 
-//	@OneToMany(mappedBy="source", cascade=CascadeType.ALL)
-//@OneToMany(mappedBy="source", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//@JoinColumn(name="id", nullable = false)
-//@Fetch(value = FetchMode.SUBSELECT)
-//	@OneToMany(cascade = {javax.persistence.CascadeType.ALL})
-//	@Cascade({org.hibernate.annotations.CascadeType.ALL})
-//	@JoinColumn(name = "id")
 
-	@OneToMany(mappedBy = "source", cascade = {javax.persistence.CascadeType.ALL})
-//	@Cascade({org.hibernate.annotations.CascadeType.ALL, org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-//	@JoinColumn(name = "id")
 	private List<CourseSectionCore> courseSections;
 
 	public CourseCore() {}
@@ -41,7 +30,7 @@ public class CourseCore extends AbstractCore {
 		this.name = name;
 	}
 
-
+	@OneToMany(mappedBy = "source", cascade = {javax.persistence.CascadeType.ALL})
 	public List<CourseSectionCore> getCourseSections() {
 		return courseSections;
 	}

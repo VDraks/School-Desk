@@ -11,35 +11,25 @@ import javax.persistence.*;
 import static javax.persistence.InheritanceType.JOINED;
 
 @Entity
-//@Table(name = "CourseSectionCore")
 public class CourseSectionCore extends AbstractCore {
 
-////	@JoinColumn(name = "id")
-////  @ManyToOne
-//@ManyToOne//(insert="false", update="false")
-//@JoinColumn(name = "id", updatable = false, insertable = false, nullable = false)
-//	@NotNull
+
+	private CourseCore source;
 
 	@ManyToOne
-//	@OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
-//	@JoinColumn(name = "id")
-	private CourseCore source;
-////
-//
-////	@JoinColumn(name = "id")
 	public CourseCore getSource()
 	{
 		return source;
 	}
-//
-public void setSource(CourseCore source)
-{
-	this.source = source;
-}
+	public void setSource(CourseCore source)
+	{
+		this.source = source;
+	}
+
 	private String name;
 
-//	@OneToOne
-//	private TestCore test;
+
+	private TestCore test;
 
 	public CourseSectionCore() {}
 
@@ -51,14 +41,14 @@ public void setSource(CourseCore source)
 		this.name = name;
 	}
 
-//	public TestCore getTest() {
-////		return test;
-//		return null;
-//	}
-//
-//	public void setTest(TestCore test) {
-////		this.test = test;
-//	}
+	@OneToOne(mappedBy = "source1", cascade = CascadeType.ALL)
+	public TestCore getTest() {
+		return test;
+	}
+
+	public void setTest(TestCore test) {
+		this.test = test;
+	}
 
 	@Override
 	@SuppressWarnings("deprecation")

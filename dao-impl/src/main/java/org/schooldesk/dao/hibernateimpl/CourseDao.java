@@ -23,4 +23,18 @@ public class CourseDao extends AbstractDao<ICourse> implements ICourseDao {
 		result.fromDto(entity, getApi());
 		return result;
 	}
+
+	@Override
+	public void delete(Long id) throws DataAccessException{
+
+		CourseSectionDao sectionDao = new CourseSectionDao(getApi());
+		CourseCore course = getApi().loadById(CourseCore.class, id);
+
+		for (CourseSectionCore section : course.getCourseSections())
+		{
+			sectionDao.delete(section.getId());
+		}
+
+		super.delete(id);
+	}
 }

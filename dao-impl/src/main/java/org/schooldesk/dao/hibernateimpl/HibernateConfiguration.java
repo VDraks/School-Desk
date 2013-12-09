@@ -38,7 +38,7 @@ public class HibernateConfiguration {
 
 	@SuppressWarnings("deprecation")
 	public static SessionFactory buildSessionFactory(String login, String password, String connectionURL, Boolean dropBeforeCreate) {
-		CONFIGURATION.setProperty("hibernate.connection.url", connectionURL);
+		CONFIGURATION.setProperty("hibernate.connection.url", connectionURL + ";DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE");
 		CONFIGURATION.setProperty("hibernate.connection.username", login);
 		CONFIGURATION.setProperty("hibernate.connection.password", password);
 		CONFIGURATION.setProperty("hibernate.hbm2ddl.auto", dropBeforeCreate ? "create" : "update");
@@ -77,8 +77,10 @@ public class HibernateConfiguration {
 //		return classes;
 		List<Class<?>> result = new ArrayList<Class<?>>();
 		try {
-			result.add(Class.forName(packageName + ".CourseCore"));
+			result.add(Class.forName(packageName + ".ResourceCore"));
+			result.add(Class.forName(packageName + ".TestCore"));
 			result.add(Class.forName(packageName + ".CourseSectionCore"));
+			result.add(Class.forName(packageName + ".CourseCore"));
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

@@ -9,10 +9,11 @@ import java.util.*;
 
 @MappedSuperclass
 public abstract class AbstractCore implements IDtoable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	protected Long id;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Override
 	public Long getId() {
 		return id;
