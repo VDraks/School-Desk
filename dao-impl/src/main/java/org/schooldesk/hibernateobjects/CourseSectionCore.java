@@ -13,21 +13,20 @@ import static javax.persistence.InheritanceType.JOINED;
 @Entity
 public class CourseSectionCore extends AbstractCore {
 
-
-	private CourseCore source;
+	@NotNull
+	private CourseCore courseCore;
 
 	@ManyToOne
-	public CourseCore getSource()
+	public CourseCore getCourseCore()
 	{
-		return source;
+		return courseCore;
 	}
-	public void setSource(CourseCore source)
+	public void setCourseCore(CourseCore courseCore)
 	{
-		this.source = source;
+		this.courseCore = courseCore;
 	}
 
 	private String name;
-
 
 	private TestCore test;
 
@@ -41,7 +40,7 @@ public class CourseSectionCore extends AbstractCore {
 		this.name = name;
 	}
 
-	@OneToOne(mappedBy = "source1", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "courseSection", cascade = CascadeType.REMOVE)
 	public TestCore getTest() {
 		return test;
 	}

@@ -8,19 +8,20 @@ import org.schooldesk.dto.impl.*;
 import javax.persistence.*;
 
 
-@MappedSuperclass
+@Entity
 public abstract class ResourceCore extends AbstractCore {
-//	@OneToOne
-//	private RightCore right;
-	private String name;
 
-//	public RightCore getRight() {
-//		return right;
-//	}
-//
-//	public void setRight(RightCore right) {
-//		this.right = right;
-//	}
+	protected RightCore right;
+	protected String name;
+
+	@OneToOne(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+	public RightCore getRight() {
+		return right;
+	}
+
+	public void setRight(RightCore right) {
+		this.right = right;
+	}
 
 	public String getName() {
 		return name;

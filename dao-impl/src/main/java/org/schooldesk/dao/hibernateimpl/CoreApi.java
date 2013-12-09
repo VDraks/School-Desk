@@ -139,8 +139,9 @@ public class CoreApi {
 	public void delete(Class<? extends AbstractCore> objectClass, Long id) throws HibernateException {
 		try {
 			beginTransaction();
-			Query query = getSession().createQuery("delete " + objectClass.getName() + " where id = " + id);
-			query.executeUpdate();
+			getSession().delete(loadById(objectClass, id));
+//			Query query = getSession().createQuery("delete " + objectClass.getName() + " where id = " + id);
+//			query.executeUpdate();
 			commitTransaction();
 		}
 		catch (HibernateException ex) {

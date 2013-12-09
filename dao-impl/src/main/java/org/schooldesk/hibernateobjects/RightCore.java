@@ -8,9 +8,30 @@ import org.schooldesk.dto.impl.*;
 import javax.persistence.*;
 
 
-//@Entity
+@Entity
 public class RightCore extends AbstractCore {
 	private String code;
+
+	private ResourceCore resource;
+	private GroupCore group;
+
+	@ManyToOne
+	public GroupCore getGroup() {
+		return group;
+	}
+
+	public void setGroup(GroupCore group) {
+		this.group = group;
+	}
+
+	@OneToOne
+	public ResourceCore getResource() {
+		return resource;
+	}
+
+	public void setResource(ResourceCore resource) {
+		this.resource = resource;
+	}
 
 	public RightCore() {}
 

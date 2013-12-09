@@ -15,18 +15,17 @@ public class TestCore extends ResourceCore {
 //	private Set<TestQuestionCore> testQuestions;
 
 
-	private CourseSectionCore source1;
+	private CourseSectionCore courseSection;
 
-	public void setSource1(CourseSectionCore source1)
+	public void setCourseSection(CourseSectionCore courseSection)
 	{
-		this.source1 = source1;
+		this.courseSection = courseSection;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public CourseSectionCore getSource1()
+	@OneToOne
+	public CourseSectionCore getCourseSection()
 	{
-		return source1;
+		return courseSection;
 	}
 
 	public TestCore() {}

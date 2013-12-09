@@ -26,7 +26,7 @@ public class EducationStageCore extends AbstractCore {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "educationStage", cascade = {javax.persistence.CascadeType.ALL})
+	@OneToMany(mappedBy = "educationStage", cascade = {CascadeType.REMOVE})
 	public List<CourseCore> getCourses() {
 		return courses;
 	}

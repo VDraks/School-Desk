@@ -69,8 +69,8 @@ public class CCourseSUR_Test extends CAbstractTest{
 	public void after() throws DataAccessException {
 		ICourseSectionDao courseSectionDao = getFactory().getDao(ICourseSectionDao.class);
 
-		courseSectionDao.delete(courseSection1Id);
-		assertEquals("Course section was not successfully deleted", courseSectionDao.loadById(courseSection1Id), null);
+//		courseSectionDao.delete(courseSection1Id);
+//		assertEquals("Course section was not successfully deleted", courseSectionDao.loadById(courseSection1Id), null);
 
 		ICourseDao courseDao = getFactory().getDao(ICourseDao.class);
 		courseDao.delete(courseId);
