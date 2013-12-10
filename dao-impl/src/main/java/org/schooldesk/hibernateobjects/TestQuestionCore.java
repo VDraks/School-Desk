@@ -23,13 +23,18 @@ public class TestQuestionCore extends ResourceCore {
 		this.userTestAnswer = userTestAnswer;
 	}
 
+	@UsedForMapping
 	private List<TestCore> testCores;
 
 	@ManyToMany
+	@UsedForMapping
+	@SuppressWarnings("unused")
 	public List<TestCore> getTestCores() {
 		return testCores;
 	}
 
+	@UsedForMapping
+	@SuppressWarnings("unused")
 	public void setTestCores(List<TestCore> testCores) {
 		this.testCores = testCores;
 	}

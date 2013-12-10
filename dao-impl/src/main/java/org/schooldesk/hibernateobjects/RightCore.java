@@ -12,26 +12,11 @@ import javax.persistence.*;
 public class RightCore extends AbstractCore {
 	private String code;
 
+	@UsedForMapping
 	private ResourceCore resource;
+
+	@UsedForMapping
 	private GroupCore group;
-
-	@ManyToOne
-	public GroupCore getGroup() {
-		return group;
-	}
-
-	public void setGroup(GroupCore group) {
-		this.group = group;
-	}
-
-	@OneToOne
-	public ResourceCore getResource() {
-		return resource;
-	}
-
-	public void setResource(ResourceCore resource) {
-		this.resource = resource;
-	}
 
 	public RightCore() {}
 
@@ -41,6 +26,32 @@ public class RightCore extends AbstractCore {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	@OneToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public ResourceCore getResource() {
+		return resource;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setResource(ResourceCore resource) {
+		this.resource = resource;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public GroupCore getGroup() {
+		return group;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setGroup(GroupCore group) {
+		this.group = group;
 	}
 
 	@Override

@@ -6,15 +6,21 @@ import org.schooldesk.dao.DaoFactory;
 import org.schooldesk.dao.IDaoFactory;
 
 public class ApplicationContext {
-	private final static IServiceFactory serviceFactory;
+	// TODO: delete this field
+	private final static IDaoFactory DAO_FACTORY;
+	private final static IServiceFactory SERVICE_FACTORY;
 	static {
-		IDaoFactory daoFactory = DaoFactory.create();
-		serviceFactory = ServiceFactory.create(daoFactory);
+		DAO_FACTORY = DaoFactory.create();
+		SERVICE_FACTORY = ServiceFactory.create(DAO_FACTORY);
 	}
 
 	private ApplicationContext(){}
 
+	public static IDaoFactory getDaoFactory() {
+		return DAO_FACTORY;
+	}
+
 	public static IServiceFactory getServiceFactory(){
-		return serviceFactory;
+		return SERVICE_FACTORY;
 	}
 }

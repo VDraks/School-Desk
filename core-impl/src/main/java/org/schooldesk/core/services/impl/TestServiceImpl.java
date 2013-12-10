@@ -41,7 +41,13 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 
 		test.setTestQuestionIds(testQuestionIds);
 
-		return testDao.save(test).getId();
+		long savedTestId = testDao.save(test).getId();
+
+		ICourseSection courseSection = courseSectionDao.loadById(testCreationModel.getCourseSectionId());
+		courseSection.setTestId(savedTestId);
+		courseSectionDao.save(courseSection);
+
+		return savedTestId;
 	}
 
 	private long createTestQuestion(TestQuestionCreationModel testQuestionCreationModel) throws DataAccessException {

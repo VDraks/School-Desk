@@ -11,8 +11,12 @@ import javax.persistence.*;
 @Entity
 public class TestAnswerCore extends ResourceCore {
 
+	private String answer;
+
+	@UsedForMapping
 	private TestQuestionCore testQuestion1;
 
+	@UsedForMapping
 	private TestQuestionCore testQuestion2;
 
 	private UserTestAnswerCore userTestAnswer;
@@ -26,26 +30,6 @@ public class TestAnswerCore extends ResourceCore {
 		this.userTestAnswer = userTestAnswer;
 	}
 
-	@ManyToOne
-	public TestQuestionCore getTestQuestion1() {
-		return testQuestion1;
-	}
-
-	public void setTestQuestion1(TestQuestionCore testQuestion1) {
-		this.testQuestion1 = testQuestion1;
-	}
-
-	@ManyToOne
-	public TestQuestionCore getTestQuestion2() {
-		return testQuestion2;
-	}
-
-	public void setTestQuestion2(TestQuestionCore testQuestion2) {
-		this.testQuestion2 = testQuestion2;
-	}
-
-	private String answer;
-
 	public TestAnswerCore() {}
 
 	public String getAnswer() {
@@ -54,6 +38,32 @@ public class TestAnswerCore extends ResourceCore {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public TestQuestionCore getTestQuestion1() {
+		return testQuestion1;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setTestQuestion1(TestQuestionCore testQuestion1) {
+		this.testQuestion1 = testQuestion1;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public TestQuestionCore getTestQuestion2() {
+		return testQuestion2;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setTestQuestion2(TestQuestionCore testQuestion2) {
+		this.testQuestion2 = testQuestion2;
 	}
 
 	@Override

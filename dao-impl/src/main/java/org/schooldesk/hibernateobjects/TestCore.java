@@ -27,17 +27,6 @@ public class TestCore extends ResourceCore {
 
 	private CourseSectionCore courseSection;
 
-	public void setCourseSection(CourseSectionCore courseSection)
-	{
-		this.courseSection = courseSection;
-	}
-
-	@OneToOne//(mappedBy = "test")
-	public CourseSectionCore getCourseSection()
-	{
-		return courseSection;
-	}
-
 	public TestCore() {}
 
 	@ManyToMany(mappedBy = "testCores")
@@ -47,6 +36,19 @@ public class TestCore extends ResourceCore {
 
 	public void setTestQuestions(Set<TestQuestionCore> testQuestions) {
 		this.testQuestions = testQuestions;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setCourseSection(CourseSectionCore courseSection) {
+		this.courseSection = courseSection;
+	}
+
+	@OneToOne//(mappedBy = "test")
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public CourseSectionCore getCourseSection() {
+		return courseSection;
 	}
 
 	@Override
