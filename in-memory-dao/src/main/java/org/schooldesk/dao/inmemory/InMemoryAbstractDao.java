@@ -54,7 +54,7 @@ public abstract class InMemoryAbstractDao<T extends IDto> implements IDao<T> {
 
 	@Override
 	public Set<T> loadAll() throws DataAccessException {
-		return (Set<T>) Database.database.get(getClass()).values();
+		return new HashSet(Database.database.get(getClass()).values());
 	}
 
 	@Override

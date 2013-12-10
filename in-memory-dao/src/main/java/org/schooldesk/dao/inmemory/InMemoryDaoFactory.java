@@ -20,6 +20,8 @@ public class InMemoryDaoFactory extends DaoFactory implements IDaoFactory {
 		daoPool.registerDao(ITestAnswerDao.class, new InMemoryTestAnswerDao());
 		daoPool.registerDao(ITestResultDao.class, new InMemoryTestResultDao());
 		daoPool.registerDao(IUserTestAnswerDao.class, new InMemoryUserTestAnswerDao());
+
+		daoPool.registerDao(IRightDao.class, new InMemoryRightDao());
 	}
 
 	@Override
