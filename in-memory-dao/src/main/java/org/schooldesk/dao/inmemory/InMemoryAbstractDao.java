@@ -4,6 +4,7 @@ import org.schooldesk.dao.DataAccessException;
 import org.schooldesk.dao.IDao;
 import org.schooldesk.dao.inmemory.inmemory.Database;
 import org.schooldesk.dto.IDto;
+import org.schooldesk.dto.inmemory.InMemoryAbstractDto;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 public abstract class InMemoryAbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public T save(T entity) throws DataAccessException {
+		((InMemoryAbstractDto) entity).setId(IdGenerator.getNext());
 		Database.database.get(getClass()).put(entity.getId(), entity);
 		return  entity;
 	}
@@ -58,5 +60,14 @@ public abstract class InMemoryAbstractDao<T extends IDto> implements IDao<T> {
 	@Override
 	public void delete(Long id) throws DataAccessException {
 		Database.database.get(getClass()).remove(id);
+	}
+
+
+	private static final class IdGenerator {
+		private static long lastId = -1;
+
+		public static long getNext() {
+			return ++lastId;
+		}
 	}
 }

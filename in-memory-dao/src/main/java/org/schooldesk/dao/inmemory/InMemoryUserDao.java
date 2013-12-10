@@ -2,6 +2,8 @@ package org.schooldesk.dao.inmemory;
 
 import org.schooldesk.dao.DataAccessException;
 import org.schooldesk.dao.IUserDao;
+import org.schooldesk.dao.inmemory.inmemory.Database;
+import org.schooldesk.dto.IDto;
 import org.schooldesk.dto.IUser;
 import org.schooldesk.dto.inmemory.InMemoryUser;
 
@@ -14,7 +16,12 @@ public class InMemoryUserDao extends InMemoryAbstractDao<IUser> implements IUser
 
 	@Override
 	public IUser loadByEmail(String email) throws DataAccessException {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		for (IDto dto : Database.users.values()) {
+			IUser user = (IUser) dto;
+			if (user.getEmail().equals(email)) {
+				return user;
+			}
+		}
+		return null;
 	}
 }
