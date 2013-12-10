@@ -15,6 +15,8 @@ public class UserDto extends AbstractDto implements IUser {
 
 	private Set<Long> groupIds;
 
+	private Long educationStageId;
+
 	@Deprecated
 	@UsedForMapping
 	public UserDto() {}
@@ -84,5 +86,14 @@ public class UserDto extends AbstractDto implements IUser {
 	@Override
 	public void setGroupIds(Set<Long> groupIds) {
 		this.groupIds = groupIds;
+	}
+
+	@Override
+	public Long getEducationStageId() {
+		return educationStageId;
+	}
+
+	public void setEducationStageId(Long educationStageId) {
+		this.educationStageId = educationStageId;
 	}
 }

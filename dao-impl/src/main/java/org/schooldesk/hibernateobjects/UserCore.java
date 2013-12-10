@@ -5,7 +5,6 @@ import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
-import javax.persistence.*;
 import java.util.*;
 
 
@@ -18,8 +17,10 @@ public class UserCore extends AbstractCore {
 	private String email;
 	private String password;
 
-//	@OneToMany
+	//	@OneToMany
 	private Set<GroupCore> groups;
+
+	private EducationStageCore educationStage;
 
 	public UserCore() {}
 
@@ -71,6 +72,14 @@ public class UserCore extends AbstractCore {
 		this.groups = groups;
 	}
 
+	public EducationStageCore getEducationStage() {
+		return educationStage;
+	}
+
+	public void setEducationStage(EducationStageCore educationStage) {
+		this.educationStage = educationStage;
+	}
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public UserDto toDto() {
@@ -80,23 +89,25 @@ public class UserCore extends AbstractCore {
 	@Override
 	protected UserDto mapDto(AbstractDto dto) {
 		UserDto userDto = (UserDto) super.mapDto(dto);
-//		userDto.setFirstName(getFirstName());
-//		userDto.setMiddleName(getMiddleName());
-//		userDto.setLastName(getLastName());
-//		userDto.setEmail(getEmail());
-//		userDto.setPassword(getPassword());
-//		userDto.setGroupIds(getIds(getGroups()));
+		userDto.setFirstName(getFirstName());
+		userDto.setMiddleName(getMiddleName());
+		userDto.setLastName(getLastName());
+		userDto.setEmail(getEmail());
+		userDto.setPassword(getPassword());
+		userDto.setGroupIds(getIds(getGroups()));
+		userDto.setEducationStageId(getEducationStage().getId());
 		return userDto;
 	}
 
 	@Override
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
-//		IUser user = (UserDto) dto;
-//		setFirstName(user.getFirstName());
-//		setMiddleName(user.getMiddleName());
-//		setLastName(user.getLastName());
-//		setEmail(user.getEmail());
-//		setPassword(user.getPassword());
-//		setGroups(new HashSet<>(coreApi.loadByIds(GroupCore.class, user.getGroupIds())));
+		IUser user = (UserDto) dto;
+		setFirstName(user.getFirstName());
+		setMiddleName(user.getMiddleName());
+		setLastName(user.getLastName());
+		setEmail(user.getEmail());
+		setPassword(user.getPassword());
+		setGroups(new HashSet<>(coreApi.loadByIds(GroupCore.class, user.getGroupIds())));
+		setEducationStage(coreApi.loadById(EducationStageCore.class, user.getEducationStageId()));
 	}
 }
