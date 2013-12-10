@@ -17,17 +17,18 @@ public class UserModel {
 
 	private Long educationStageId;
 
-	public UserModel(Long id, String firstName, String middleName, String lastName, String email, Set<Long> groupIds) {
+	public UserModel(Long id, String firstName, String middleName, String lastName, String email, Set<Long> groupIds, Long educationStageId) {
 		setId(id);
 		setFirstName(firstName);
 		setMiddleName(middleName);
 		setLastName(lastName);
 		setEmail(email);
 		setGroupIds(groupIds);
+		setEducationStageId(educationStageId);
 	}
 
 	public UserModel(IUser user) {
-		this(user.getId(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getEmail(), user.getGroupIds());
+		this(user.getId(), user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getEmail(), user.getGroupIds(), user.getEducationStageId());
 	}
 
 	public long getId() {

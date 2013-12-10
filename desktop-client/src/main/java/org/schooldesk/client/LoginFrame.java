@@ -1,7 +1,5 @@
 package org.schooldesk.client;
 
-import org.schooldesk.client.models.CourseModel;
-import org.schooldesk.client.models.UserCredentialModel;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -11,6 +9,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.schooldesk.client.models.CourseModel;
+import org.schooldesk.client.models.UserCredentialModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 
 public class LoginFrame extends JFrame implements ActionListener{
@@ -123,11 +124,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 				{
 					lblAuthenticationFaild.setVisible(false);
 
-					HttpGet get = new HttpGet("http://127.0.0.1:8080/course/getCourse");
+					HttpGet get = new HttpGet("http://127.0.0.1:8080/course/getCourses");
 					response = httpClient.execute(get);
 					resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
 					if (resp.isSuccess()){
-						NavigationFrame testFrame = new NavigationFrame((Set<CourseModel>) resp.getData());
+						ArrayList<CourseModel> courses = (ArrayList<CourseModel>) resp.getData();
+						NavigationFrame testFrame = new NavigationFrame(new LinkedHashSet<>(courses));
 						testFrame.setVisible(true);
 					}
 				}

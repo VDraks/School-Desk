@@ -21,8 +21,10 @@ public class UserServlet extends AbstractDispatchedServlet {
 		UserCredentialModel ucm = ServletHelper.readValue(req.getParameter("UserCredentials"), UserCredentialModel.class);
 		try {
 			Long result = ApplicationContext.getServiceFactory().getService(IUserService.class).checkCredentials(ucm);
+			if (result != null) {
+				USER_ID.setValue(req.getSession(), result);
+			}
 			ServletHelper.writeResponse(result != null, null, null, resp.getOutputStream());
-			USER_ID.setValue(req.getSession(), result);
 		}
 		catch (DataAccessException e) {
 			ServletHelper.writeResponse(false, e.getMessage(), null, resp.getOutputStream());
