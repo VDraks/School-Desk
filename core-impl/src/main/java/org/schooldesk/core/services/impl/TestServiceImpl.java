@@ -40,6 +40,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		}
 
 		test.setTestQuestionIds(testQuestionIds);
+		test.setRightId(createRight());
 
 		long savedTestId = testDao.save(test).getId();
 
@@ -54,6 +55,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 		final ITestQuestion testQuestion = testQuestionDao.createDto();
 		testQuestion.setQuestion(testQuestionCreationModel.getQuestion());
 		testQuestion.setType(testQuestionCreationModel.getTestQuestionType());
+		testQuestion.setName(testQuestionCreationModel.getQuestion());
 
 		Set<Long> testAnswerIds = new HashSet<>();
 		Set<Long> correctTestAnswersIds = new HashSet<>();
@@ -66,6 +68,7 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 			}
 		}
 
+		testQuestion.setRightId(createRight());
 		testQuestion.setAnswerIds(testAnswerIds);
 		testQuestion.setCorrectAnswerIds(correctTestAnswersIds);
 
@@ -75,8 +78,15 @@ class TestServiceImpl extends AbstractServiceImpl implements ITestService {
 	private long createTestAnswer(TestAnswerCreationModel testAnswerCreationModel) throws DataAccessException {
 		final ITestAnswer testAnswer = testAnswerDao.createDto();
 		testAnswer.setAnswer(testAnswerCreationModel.getAnswer());
+		testAnswer.setName(testAnswerCreationModel.getAnswer());
+		testAnswer.setRightId(createRight());
 
 		return testAnswerDao.save(testAnswer).getId();
+	}
+
+	private long createRight() throws DataAccessException {
+		final IRight right = getDaoFactory().getDao(IRightDao.class).createDto("RightTest");
+		return getDaoFactory().getDao(IRightDao.class).save(right).getId();
 	}
 
 	@Override

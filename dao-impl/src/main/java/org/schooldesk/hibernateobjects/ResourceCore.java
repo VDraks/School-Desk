@@ -8,7 +8,7 @@ import org.schooldesk.dto.impl.*;
 import javax.persistence.*;
 
 
-@Entity
+@MappedSuperclass
 public abstract class ResourceCore extends AbstractCore {
 
 	protected RightCore right;

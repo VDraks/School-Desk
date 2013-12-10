@@ -40,4 +40,36 @@ public class InMemoryTestAnswer extends InMemoryAbstractDto implements ITestAnsw
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		InMemoryTestAnswer that = (InMemoryTestAnswer) o;
+
+		if (!answer.equals(that.answer)) {
+			return false;
+		}
+		if (!name.equals(that.name)) {
+			return false;
+		}
+		if (!rightId.equals(that.rightId)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = answer.hashCode();
+		result = 31 * result + rightId.hashCode();
+		result = 31 * result + name.hashCode();
+		return result;
+	}
 }
