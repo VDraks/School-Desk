@@ -92,6 +92,6 @@ public class UserServiceTest extends AbstractTest {
 
 	private static UserCreationModel createDefaultUserCreationModel() {
 		Set<Long> groupIds = new HashSet<>();
-		return new UserCreationModel("John", "William", "Smith", "jonh@example.com", groupIds);
+		return new UserCreationModel("John", "William", "Smith", "jonh@example.com", groupIds, null);
 	}
 }
