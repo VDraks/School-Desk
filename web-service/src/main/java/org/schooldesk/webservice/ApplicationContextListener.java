@@ -54,8 +54,8 @@ public class ApplicationContextListener implements ServletContextListener {
 			final TestAnswerCreationModel answer21 = new TestAnswerCreationModel("Фермионы");
 			final TestAnswerCreationModel answer22 = new TestAnswerCreationModel("Бозоны");
 			final TestAnswerCreationModel answer23 = new TestAnswerCreationModel("Адроны");
-			question1.setAnswers(new HashSet<TestAnswerCreationModel>() {{ add(answer21); add(answer22); add(answer23); }});
-			question1.setCorrectAnswers(new HashSet<TestAnswerCreationModel>() {{ add(answer21); add(answer22); }});
+			question2.setAnswers(new HashSet<TestAnswerCreationModel>() {{ add(answer21); add(answer22); add(answer23); }});
+			question2.setCorrectAnswers(new HashSet<TestAnswerCreationModel>() {{ add(answer21); add(answer22); }});
 
 			TestCreationModel test1 = new TestCreationModel();
 			test1.setName("Странный тест");

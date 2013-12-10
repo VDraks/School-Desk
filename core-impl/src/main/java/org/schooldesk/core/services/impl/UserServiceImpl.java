@@ -25,6 +25,7 @@ class UserServiceImpl extends AbstractServiceImpl implements IUserService {
 		final IUser user = userDao.createDto();
 		userCreationModel.applyTo(user);
 		user.setPassword(passwordGenerator.generate());
+		user.setEducationStageId(userCreationModel.getEducationStageId());
 
 		final IUser savedUser = userDao.save(user);
 		return savedUser.getId();
