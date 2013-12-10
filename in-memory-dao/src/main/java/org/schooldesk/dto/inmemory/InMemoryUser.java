@@ -2,91 +2,91 @@ package org.schooldesk.dto.inmemory;
 
 import org.schooldesk.dto.IUser;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 public class InMemoryUser extends InMemoryAbstractDto implements IUser {
+	private String firstName;
+	private String middleName;
+	private String lastName;
+
+	private String email;
+	private String password;
+
+	private Set<Long> groupIds;
+
+	private Long educationStageId;
+
+	@Deprecated
+	public InMemoryUser() {}
+
 	@Override
 	public String getFirstName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return firstName;
 	}
 
 	@Override
 	public void setFirstName(String firstName) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.firstName = firstName;
 	}
 
 	@Override
 	public String getMiddleName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return middleName;
 	}
 
 	@Override
 	public void setMiddleName(String middleName) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.middleName = middleName;
 	}
 
 	@Override
 	public String getLastName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return lastName;
 	}
 
 	@Override
 	public void setLastName(String lastName) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.lastName = lastName;
 	}
 
 	@Override
 	public String getEmail() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return email;
 	}
 
 	@Override
 	public void setEmail(String email) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.email = email;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return password;
 	}
 
 	@Override
 	public void setPassword(String password) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.password = password;
 	}
 
 	@Override
 	public Set<Long> getGroupIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return groupIds;
 	}
 
 	@Override
 	public void setGroupIds(Set<Long> groupIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.groupIds = groupIds;
 	}
 
 	@Override
 	public Long getEducationStageId() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return educationStageId;
 	}
 
-	@Override
 	public void setEducationStageId(Long educationStageId) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.educationStageId = educationStageId;
 	}
 }

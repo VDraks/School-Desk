@@ -6,27 +6,28 @@ import java.util.List;
 
 
 public class InMemoryCourse extends InMemoryAbstractDto implements ICourse {
+	private String name;
+	private List<Long> courseSectionIds;
+
+	public InMemoryCourse() {}
+
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 
 	@Override
 	public List<Long> getCourseSectionIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return courseSectionIds;
 	}
 
 	@Override
 	public void setCourseSectionIds(List<Long> courseSectionIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.courseSectionIds = courseSectionIds;
 	}
 }

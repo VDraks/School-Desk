@@ -4,39 +4,40 @@ import org.schooldesk.dto.ITestAnswer;
 
 
 public class InMemoryTestAnswer extends InMemoryAbstractDto implements ITestAnswer {
+	private String answer;
+	private Long rightId;
+	private String name;
+
+	@Deprecated
+	public InMemoryTestAnswer() {}
+
 	@Override
 	public String getAnswer() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return answer;
 	}
 
 	@Override
 	public void setAnswer(String answer) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.answer = answer;
 	}
 
 	@Override
 	public Long getRightId() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return rightId;
 	}
 
 	@Override
 	public void setRightId(Long rightId) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.rightId = rightId;
 	}
 
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 }

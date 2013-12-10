@@ -4,27 +4,29 @@ import org.schooldesk.dto.ICourseSection;
 
 
 public class InMemoryCourseSection extends InMemoryAbstractDto implements ICourseSection {
+	private String name;
+	private Long testId;
+
+	@Deprecated
+	public InMemoryCourseSection() {}
+
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 
 	@Override
 	public Long getTestId() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return testId;
 	}
 
 	@Override
 	public void setTestId(Long testId) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.testId = testId;
 	}
 }

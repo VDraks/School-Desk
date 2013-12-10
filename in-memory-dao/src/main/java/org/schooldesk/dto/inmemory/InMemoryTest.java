@@ -2,43 +2,45 @@ package org.schooldesk.dto.inmemory;
 
 import org.schooldesk.dto.ITest;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 public class InMemoryTest extends InMemoryAbstractDto implements ITest {
+	private Set<Long> testQuestionIds;
+	private Long rightId;
+	private String name;
+
+	@Deprecated
+	public InMemoryTest() {}
+
 	@Override
 	public Set<Long> getTestQuestionIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return testQuestionIds;
 	}
 
 	@Override
 	public void setTestQuestionIds(Set<Long> testQuestionIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.testQuestionIds = testQuestionIds;
 	}
 
 	@Override
 	public Long getRightId() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return rightId;
 	}
 
 	@Override
 	public void setRightId(Long rightId) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.rightId = rightId;
 	}
 
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 }

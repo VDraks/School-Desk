@@ -2,31 +2,34 @@ package org.schooldesk.dto.inmemory;
 
 import org.schooldesk.dto.IEducationStage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class InMemoryEducationStage extends InMemoryAbstractDto implements IEducationStage {
+	private String name;
+	private List<Long> courseIds;
+
+	@Deprecated
+	public InMemoryEducationStage() {}
+
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 
 	@Override
 	public List<Long> getCourseIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return courseIds;
 	}
 
 	@Override
 	public void setCourseIds(List<Long> courseIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.courseIds = courseIds;
 	}
 }

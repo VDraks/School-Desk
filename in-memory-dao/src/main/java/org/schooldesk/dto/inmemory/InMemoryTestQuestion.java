@@ -3,79 +3,78 @@ package org.schooldesk.dto.inmemory;
 import org.schooldesk.dto.ITestQuestion;
 import org.schooldesk.dto.TestQuestionType;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 public class InMemoryTestQuestion extends InMemoryAbstractDto implements ITestQuestion {
+	private String question;
+	private TestQuestionType type;
+	private Set<Long> answersIds;
+	private Set<Long> correctAnswersIds;
+	private Long rightId;
+	private String name;
+
+	@Deprecated
+	public InMemoryTestQuestion() {}
+
 	@Override
 	public String getQuestion() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return question;
 	}
 
 	@Override
 	public void setQuestion(String question) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.question = question;
 	}
 
 	@Override
 	public TestQuestionType getType() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return type;
 	}
 
 	@Override
 	public void setType(TestQuestionType type) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.type = type;
 	}
 
 	@Override
 	public Set<Long> getAnswerIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return answersIds;
 	}
 
 	@Override
 	public void setAnswerIds(Set<Long> answerIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.answersIds = answerIds;
 	}
 
 	@Override
 	public Set<Long> getCorrectAnswerIds() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return correctAnswersIds;
 	}
 
 	@Override
-	public void setCorrectAnswerIds(Set<Long> answerIds) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+	public void setCorrectAnswerIds(Set<Long> correctAnswers) {
+		this.correctAnswersIds = correctAnswers;
 	}
 
 	@Override
 	public Long getRightId() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return rightId;
 	}
 
 	@Override
 	public void setRightId(Long rightId) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.rightId = rightId;
 	}
 
 	@Override
 	public String getName() {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO: implement me
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 }
