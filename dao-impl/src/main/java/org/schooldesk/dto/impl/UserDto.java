@@ -93,6 +93,7 @@ public class UserDto extends AbstractDto implements IUser {
 		return educationStageId;
 	}
 
+	@Override
 	public void setEducationStageId(Long educationStageId) {
 		this.educationStageId = educationStageId;
 	}
