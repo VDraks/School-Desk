@@ -11,9 +11,8 @@ import java.util.*;
 
 @Entity
 public class TestCore extends ResourceCore {
-//	@ManyToMany
-//	private Set<TestQuestionCore> testQuestions;
 
+	private Set<TestQuestionCore> testQuestions;
 
 	private CourseSectionCore courseSection;
 
@@ -22,7 +21,7 @@ public class TestCore extends ResourceCore {
 		this.courseSection = courseSection;
 	}
 
-	@OneToOne
+	@OneToOne//(mappedBy = "test")
 	public CourseSectionCore getCourseSection()
 	{
 		return courseSection;
@@ -30,13 +29,14 @@ public class TestCore extends ResourceCore {
 
 	public TestCore() {}
 
-//	public Set<TestQuestionCore> getTestQuestions() {
-//		return testQuestions;
-//	}
-//
-//	public void setTestQuestions(Set<TestQuestionCore> testQuestions) {
-//		this.testQuestions = testQuestions;
-//	}
+	@ManyToMany(mappedBy = "testCores")
+	public Set<TestQuestionCore> getTestQuestions() {
+		return testQuestions;
+	}
+
+	public void setTestQuestions(Set<TestQuestionCore> testQuestions) {
+		this.testQuestions = testQuestions;
+	}
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -47,14 +47,14 @@ public class TestCore extends ResourceCore {
 	@Override
 	protected TestDto mapDto(AbstractDto dto) {
 		TestDto testDto = (TestDto) super.mapDto(dto);
-//		testDto.setTestQuestionIds(getIds(getTestQuestions()));
+		testDto.setTestQuestionIds(getIds(getTestQuestions()));
 		return testDto;
 	}
 
 	@Override
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		ITest test = (ITest) dto;
-//		setTestQuestions(new HashSet<>(coreApi.loadByIds(TestQuestionCore.class, test.getTestQuestionIds())));
+		setTestQuestions(new HashSet<>(coreApi.loadByIds(TestQuestionCore.class, test.getTestQuestionIds())));
 
 		super.fromDto(dto, coreApi);
 	}

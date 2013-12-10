@@ -9,15 +9,26 @@ import javax.persistence.*;
 import java.util.*;
 
 
-//@Entity
+@Entity
 public class TestQuestionCore extends ResourceCore {
-	private String question;
-	private TestQuestionType type;
 
-//	@OneToMany
+
+	private List<TestCore> testCores;
+
+	@ManyToMany
+	public List<TestCore> getTestCores() {
+		return testCores;
+	}
+
+	public void setTestCores(List<TestCore> testCores) {
+		this.testCores = testCores;
+	}
+
+	private String question;
+//	private TestQuestionType type;
+
 	private Set<TestAnswerCore> answers;
 
-//	@OneToMany
 	private Set<TestAnswerCore> correctAnswers;
 
 	public TestQuestionCore() {}
@@ -30,14 +41,15 @@ public class TestQuestionCore extends ResourceCore {
 		this.question = question;
 	}
 
-	public TestQuestionType getType() {
-		return type;
-	}
+//	public TestQuestionType getType() {
+//		return type;
+//	}
+//
+//	public void setType(TestQuestionType type) {
+//		this.type = type;
+//	}
 
-	public void setType(TestQuestionType type) {
-		this.type = type;
-	}
-
+	@OneToMany(mappedBy = "testQuestion1", cascade = {CascadeType.REMOVE})
 	public Set<TestAnswerCore> getAnswers() {
 		return answers;
 	}
@@ -46,6 +58,7 @@ public class TestQuestionCore extends ResourceCore {
 		this.answers = answers;
 	}
 
+	@OneToMany(mappedBy = "testQuestion2", cascade = {CascadeType.REMOVE})
 	public Set<TestAnswerCore> getCorrectAnswers() {
 		return correctAnswers;
 	}
@@ -64,7 +77,7 @@ public class TestQuestionCore extends ResourceCore {
 	protected TestQuestionDto mapDto(AbstractDto dto) {
 		TestQuestionDto testQuestionDto = (TestQuestionDto) super.mapDto(dto);
 		testQuestionDto.setQuestion(getQuestion());
-		testQuestionDto.setType(getType());
+//		testQuestionDto.setType(getType());
 		testQuestionDto.setAnswerIds(getIds(getAnswers()));
 		testQuestionDto.setCorrectAnswerIds(getIds(getCorrectAnswers()));
 		return testQuestionDto;
@@ -74,7 +87,7 @@ public class TestQuestionCore extends ResourceCore {
 	public void fromDto(IDto dto, CoreApi coreApi) throws HibernateException {
 		ITestQuestion testQuestion = (ITestQuestion) dto;
 		setQuestion(testQuestion.getQuestion());
-		setType(testQuestion.getType());
+//		setType(testQuestion.getType());
 		setAnswers(new HashSet<>(coreApi.loadByIds(TestAnswerCore.class, testQuestion.getAnswerIds())));
 		setCorrectAnswers(new HashSet<>(coreApi.loadByIds(TestAnswerCore.class, testQuestion.getCorrectAnswerIds())));
 
