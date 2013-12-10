@@ -27,14 +27,18 @@ public class CourseSectionDao extends AbstractDao<ICourseSection> implements ICo
 	@Override
 	public void delete(Long id) throws DataAccessException{
 
-		CourseSectionCore courseSection = getApi().loadById(CourseSectionCore.class, id);
+//		CourseSectionCore courseSection = getApi().loadById(CourseSectionCore.class, id);
 
-		if (courseSection.getTest() != null)
-		{
-			TestDao testDao = new TestDao(getApi());
-			TestCore test = getApi().loadById(TestCore.class, courseSection.getTest().getId());
-			testDao.delete(test.getId());
-		}
+//		CourseCore course = courseSection.getCourseCore();
+//		course.getCourseSections().remove(courseSection);
+//		getApi().update(course);
+
+//		if (courseSection.getTest() != null)
+//		{
+//			TestDao testDao = new TestDao(getApi());
+//			TestCore test = getApi().loadById(TestCore.class, courseSection.getTest().getId());
+//			testDao.delete(test.getId());
+//		}
 
 
 

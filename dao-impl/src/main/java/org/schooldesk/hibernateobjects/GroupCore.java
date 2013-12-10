@@ -9,11 +9,10 @@ import javax.persistence.*;
 import java.util.*;
 
 
-//@Entity
+@Entity
 public class GroupCore extends AbstractCore {
 	private String name;
 
-//	@OneToMany
 	private Set<RightCore> rights;
 
 	public GroupCore() {}
@@ -26,6 +25,7 @@ public class GroupCore extends AbstractCore {
 		this.name = name;
 	}
 
+	@OneToMany(mappedBy = "group", cascade = {CascadeType.REMOVE})
 	public Set<RightCore> getRights() {
 		return rights;
 	}

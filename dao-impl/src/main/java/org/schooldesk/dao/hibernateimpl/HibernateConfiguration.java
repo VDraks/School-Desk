@@ -28,6 +28,9 @@ public class HibernateConfiguration {
     CONFIGURATION.addAnnotatedClass(CourseSectionCore.class);
     CONFIGURATION.addAnnotatedClass(CourseCore.class);
 		CONFIGURATION.addAnnotatedClass(EducationStageCore.class);
+		CONFIGURATION.addAnnotatedClass(GroupCore.class);
+		CONFIGURATION.addAnnotatedClass(RightCore.class);
+		CONFIGURATION.addAnnotatedClass(TestAnswerCore.class);
 	}
 
 	private static Properties makeCommonProperties() {

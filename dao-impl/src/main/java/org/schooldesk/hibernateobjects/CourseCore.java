@@ -40,7 +40,7 @@ public class CourseCore extends AbstractCore {
 		this.educationStage = educationStage;
 	}
 
-	@OneToMany(cascade = {javax.persistence.CascadeType.ALL})
+	@OneToMany(mappedBy = "courseCore", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
 	public List<CourseSectionCore> getCourseSections() {
 		return courseSections;
 	}

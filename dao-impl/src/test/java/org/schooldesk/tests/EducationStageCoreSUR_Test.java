@@ -75,15 +75,14 @@ public class EducationStageCoreSUR_Test extends CAbstractTest{
 	public void after() throws DataAccessException {
 
 		ICourseDao courseDao = getFactory().getDao(ICourseDao.class);
-		courseDao.delete(course1Id);
-
-		assertEquals("Course 1 was not successfully deleted", null, courseDao.loadById(course1Id));
+//		courseDao.delete(course1Id);
 
 		IEducationStageDao educationStageDao = getFactory().getDao(IEducationStageDao.class);
 		educationStageDao.delete(educationStageId);
 
 		assertEquals("Course 2 was not successfully deleted", null, courseDao.loadById(course2Id));
-		assertTrue("Course 2 was not successfully deleted", courseDao.loadAll().isEmpty());
+		assertEquals("Course 1 was not successfully deleted", null, courseDao.loadById(course1Id));
+		assertTrue("Course 1 and course 2 was not successfully deleted", courseDao.loadAll().isEmpty());
 		assertEquals("Education stage was not successfully deleted", null, educationStageDao.loadById(educationStageId));
 		assertTrue("Education stage was not successfully deleted", educationStageDao.loadAll().isEmpty());
 	}

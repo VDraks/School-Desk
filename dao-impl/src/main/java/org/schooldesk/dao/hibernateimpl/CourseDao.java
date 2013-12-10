@@ -27,13 +27,13 @@ public class CourseDao extends AbstractDao<ICourse> implements ICourseDao {
 	@Override
 	public void delete(Long id) throws DataAccessException{
 
-		CourseSectionDao sectionDao = new CourseSectionDao(getApi());
-		CourseCore course = getApi().loadById(CourseCore.class, id);
-
-		for (CourseSectionCore section : course.getCourseSections())
-		{
-			sectionDao.delete(section.getId());
-		}
+//		CourseSectionDao sectionDao = new CourseSectionDao(getApi());
+//		CourseCore course = getApi().loadById(CourseCore.class, id);
+//
+//		for (CourseSectionCore section : course.getCourseSections())
+//		{
+//			sectionDao.delete(section.getId());
+//		}
 
 		super.delete(id);
 	}

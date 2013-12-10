@@ -24,17 +24,17 @@ public class EducationStageDao extends AbstractDao<IEducationStage> implements I
 		return result;
 	}
 
-	@Override
-	public void delete(Long id) throws DataAccessException {
-
-		EducationStageCore educationStage = getApi().loadById(EducationStageCore.class, id);
-		CourseDao courseDao = new CourseDao(getApi());
-
-		for (CourseCore courseCore : educationStage.getCourses())
-		{
-			   courseDao.delete(id);
-		}
-
-		super.delete(id);
-	}
+//	@Override
+//	public void delete(Long id) throws DataAccessException {
+//
+//		EducationStageCore educationStage = getApi().loadById(EducationStageCore.class, id);
+//		CourseDao courseDao = new CourseDao(getApi());
+//
+//		for (CourseCore courseCore : educationStage.getCourses())
+//		{
+//			   courseDao.delete(id);
+//		}
+//
+//		super.delete(id);
+//	}
 }
