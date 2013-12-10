@@ -9,16 +9,28 @@ import javax.persistence.*;
 import java.util.*;
 
 
-//@Entity
+@Entity
 public class UserTestAnswerCore extends AbstractCore {
-//	@OneToOne
+
+
+	private TestResultCore testResult;
+
+	@ManyToOne
+	public TestResultCore getTestResult() {
+		return testResult;
+	}
+
+	public void setTestResult(TestResultCore testResult) {
+		this.testResult = testResult;
+	}
+
 	private TestQuestionCore testQuestion;
 
-//	@OneToMany
 	private Set<TestAnswerCore> answers;
 
 	public UserTestAnswerCore() {}
 
+	@OneToOne(mappedBy = "userTestAnswer", cascade = CascadeType.REMOVE)
 	public TestQuestionCore getTestQuestion() {
 		return testQuestion;
 	}
@@ -27,6 +39,7 @@ public class UserTestAnswerCore extends AbstractCore {
 		this.testQuestion = testQuestion;
 	}
 
+	@OneToMany(mappedBy = "userTestAnswer", cascade = CascadeType.REMOVE)
 	public Set<TestAnswerCore> getAnswers() {
 		return answers;
 	}

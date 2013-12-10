@@ -12,6 +12,18 @@ import java.util.*;
 
 @Entity
 public class EducationStageCore extends AbstractCore {
+
+	private UserCore userCore;
+
+	@OneToOne
+	public UserCore getUserCore() {
+		return userCore;
+	}
+
+	public void setUserCore(UserCore userCore) {
+		this.userCore = userCore;
+	}
+
 	private String name;
 
 	private List<CourseCore> courses;

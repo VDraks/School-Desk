@@ -15,6 +15,17 @@ public class TestAnswerCore extends ResourceCore {
 
 	private TestQuestionCore testQuestion2;
 
+	private UserTestAnswerCore userTestAnswer;
+
+	@ManyToOne
+	public UserTestAnswerCore getUserTestAnswer() {
+		return userTestAnswer;
+	}
+
+	public void setUserTestAnswer(UserTestAnswerCore userTestAnswer) {
+		this.userTestAnswer = userTestAnswer;
+	}
+
 	@ManyToOne
 	public TestQuestionCore getTestQuestion1() {
 		return testQuestion1;

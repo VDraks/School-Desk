@@ -33,7 +33,9 @@ public class HibernateConfiguration {
 		CONFIGURATION.addAnnotatedClass(TestAnswerCore.class);
 		CONFIGURATION.addAnnotatedClass(TestCore.class);
 		CONFIGURATION.addAnnotatedClass(TestQuestionCore.class);
-
+		CONFIGURATION.addAnnotatedClass(TestResultCore.class);
+		CONFIGURATION.addAnnotatedClass(UserCore.class);
+		CONFIGURATION.addAnnotatedClass(UserTestAnswerCore.class);
 	}
 
 	private static Properties makeCommonProperties() {

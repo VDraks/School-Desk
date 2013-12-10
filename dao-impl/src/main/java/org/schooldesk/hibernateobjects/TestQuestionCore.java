@@ -12,6 +12,16 @@ import java.util.*;
 @Entity
 public class TestQuestionCore extends ResourceCore {
 
+	private UserTestAnswerCore userTestAnswer;
+
+	@OneToOne
+	public UserTestAnswerCore getUserTestAnswer() {
+		return userTestAnswer;
+	}
+
+	public void setUserTestAnswer(UserTestAnswerCore userTestAnswer) {
+		this.userTestAnswer = userTestAnswer;
+	}
 
 	private List<TestCore> testCores;
 

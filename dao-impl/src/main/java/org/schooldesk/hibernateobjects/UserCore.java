@@ -5,10 +5,13 @@ import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.*;
 
-
-//@Entity
+@Entity
 public class UserCore extends AbstractCore {
 	private String firstName;
 	private String middleName;
@@ -17,7 +20,18 @@ public class UserCore extends AbstractCore {
 	private String email;
 	private String password;
 
-	//	@OneToMany
+	private TestResultCore testResult;
+
+	@OneToOne
+	public TestResultCore getTestResult() {
+		return testResult;
+	}
+
+	public void setTestResult(TestResultCore testResult) {
+		this.testResult = testResult;
+	}
+
+
 	private Set<GroupCore> groups;
 
 	private EducationStageCore educationStage;
@@ -64,6 +78,7 @@ public class UserCore extends AbstractCore {
 		this.password = password;
 	}
 
+	@OneToMany(mappedBy = "userCore", cascade = CascadeType.REMOVE)
 	public Set<GroupCore> getGroups() {
 		return groups;
 	}
@@ -72,6 +87,7 @@ public class UserCore extends AbstractCore {
 		this.groups = groups;
 	}
 
+	@OneToOne(mappedBy = "userCore", cascade = CascadeType.REMOVE)
 	public EducationStageCore getEducationStage() {
 		return educationStage;
 	}

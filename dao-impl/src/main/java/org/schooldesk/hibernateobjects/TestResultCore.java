@@ -9,19 +9,18 @@ import javax.persistence.*;
 import java.util.*;
 
 
-//@Entity
+@Entity
 public class TestResultCore extends AbstractCore {
-//	@OneToOne
-	private TestCore test;
 
-//	@OneToOne
+	private TestCore test;
 	private UserCore user;
 
-//	@OneToMany
+
 	private Set<UserTestAnswerCore> userTestAnswers;
 
 	public TestResultCore() {}
 
+	@OneToOne(mappedBy = "testResult", cascade = CascadeType.REMOVE)
 	public TestCore getTest() {
 		return test;
 	}
@@ -30,6 +29,7 @@ public class TestResultCore extends AbstractCore {
 		this.test = test;
 	}
 
+	@OneToOne(mappedBy = "testResult", cascade = CascadeType.REMOVE)
 	public UserCore getUser() {
 		return user;
 	}
@@ -38,9 +38,11 @@ public class TestResultCore extends AbstractCore {
 		this.user = user;
 	}
 
+	@OneToMany(mappedBy = "testResult", cascade = CascadeType.REMOVE)
 	public Set<UserTestAnswerCore> getUserTestAnswers() {
 		return userTestAnswers;
 	}
+
 
 	public void setUserTestAnswers(Set<UserTestAnswerCore> userTestAnswers) {
 		this.userTestAnswers = userTestAnswers;

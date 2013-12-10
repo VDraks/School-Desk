@@ -11,6 +11,19 @@ import java.util.*;
 
 @Entity
 public class GroupCore extends AbstractCore {
+
+
+	private UserCore userCore;
+
+	@ManyToOne
+	public UserCore getUserCore() {
+		return userCore;
+	}
+
+	public void setUserCore(UserCore userCore) {
+		this.userCore = userCore;
+	}
+
 	private String name;
 
 	private Set<RightCore> rights;
