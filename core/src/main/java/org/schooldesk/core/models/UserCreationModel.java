@@ -14,12 +14,15 @@ public class UserCreationModel {
 
 	private Set<Long> groupIds;
 
-	public UserCreationModel(String firstName, String middleName, String lastName, String email, Set<Long> groupIds) {
+	private Long educationStageId;
+
+	public UserCreationModel(String firstName, String middleName, String lastName, String email, Set<Long> groupIds, Long educationStageId) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.email = email;
 		this.groupIds = groupIds;
+		this.educationStageId = educationStageId;
 	}
 
 	public void applyTo(IUser user) {
@@ -68,5 +71,13 @@ public class UserCreationModel {
 
 	public void setGroupIds(Set<Long> groupIds) {
 		this.groupIds = groupIds;
+	}
+
+	public Long getEducationStageId() {
+		return educationStageId;
+	}
+
+	public void setEducationStageId(Long educationStageId) {
+		this.educationStageId = educationStageId;
 	}
 }
