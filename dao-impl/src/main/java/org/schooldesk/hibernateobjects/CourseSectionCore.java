@@ -2,35 +2,38 @@ package org.schooldesk.hibernateobjects;
 
 import com.sun.istack.internal.*;
 import org.hibernate.*;
-import org.hibernate.annotations.OnDelete;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 import javax.persistence.*;
-import static javax.persistence.InheritanceType.JOINED;
+
 
 @Entity
 public class CourseSectionCore extends AbstractCore {
 
 	@NotNull
+	@UsedForMapping
 	private CourseCore courseCore;
-
-	@ManyToOne
-	public CourseCore getCourseCore()
-	{
-		return courseCore;
-	}
-	public void setCourseCore(CourseCore courseCore)
-	{
-		this.courseCore = courseCore;
-	}
 
 	private String name;
 
 	private TestCore test;
 
 	public CourseSectionCore() {}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public CourseCore getCourseCore() {
+		return courseCore;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setCourseCore(CourseCore courseCore) {
+		this.courseCore = courseCore;
+	}
 
 	public String getName() {
 		return name;
@@ -59,7 +62,9 @@ public class CourseSectionCore extends AbstractCore {
 	protected CourseSectionDto mapDto(AbstractDto dto) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) super.mapDto(dto);
 		courseSectionDto.setName(getName());
-		courseSectionDto.setTestId(getTest() == null ? null : getTest().getId());
+		courseSectionDto.setTestId(getTest() == null ?
+		                           null :
+		                           getTest().getId());
 		return courseSectionDto;
 	}
 

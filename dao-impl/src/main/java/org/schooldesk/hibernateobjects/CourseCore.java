@@ -1,15 +1,11 @@
 package org.schooldesk.hibernateobjects;
 
 import org.hibernate.*;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.FetchMode;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import java.util.*;
 
 
@@ -17,6 +13,7 @@ import java.util.*;
 public class CourseCore extends AbstractCore {
 	private String name;
 
+	@UsedForMapping
 	private EducationStageCore educationStage;
 
 	private List<CourseSectionCore> courseSections;
@@ -32,10 +29,14 @@ public class CourseCore extends AbstractCore {
 	}
 
 	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
 	public EducationStageCore getEducationStage() {
 		return educationStage;
 	}
 
+	@UsedForMapping
+	@SuppressWarnings("unused")
 	public void setEducationStage(EducationStageCore educationStage) {
 		this.educationStage = educationStage;
 	}

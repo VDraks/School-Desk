@@ -12,18 +12,6 @@ import java.util.*;
 @Entity
 public class TestQuestionCore extends ResourceCore {
 
-
-	private List<TestCore> testCores;
-
-	@ManyToMany
-	public List<TestCore> getTestCores() {
-		return testCores;
-	}
-
-	public void setTestCores(List<TestCore> testCores) {
-		this.testCores = testCores;
-	}
-
 	private String question;
 
 	@Enumerated(EnumType.STRING)
@@ -32,6 +20,9 @@ public class TestQuestionCore extends ResourceCore {
 	private Set<TestAnswerCore> answers;
 
 	private Set<TestAnswerCore> correctAnswers;
+
+	@UsedForMapping
+	private List<TestCore> testCores;
 
 	public TestQuestionCore() {}
 
@@ -67,6 +58,19 @@ public class TestQuestionCore extends ResourceCore {
 
 	public void setCorrectAnswers(Set<TestAnswerCore> correctAnswers) {
 		this.correctAnswers = correctAnswers;
+	}
+
+	@ManyToMany
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public List<TestCore> getTestCores() {
+		return testCores;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setTestCores(List<TestCore> testCores) {
+		this.testCores = testCores;
 	}
 
 	@Override
