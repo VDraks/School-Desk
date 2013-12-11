@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 
 public class LoginFrame extends JFrame implements ActionListener{
@@ -126,10 +127,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 
 					HttpGet get = new HttpGet("http://127.0.0.1:8080/course/getCourses");
 					response = httpClient.execute(get);
-					resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
-					if (resp.isSuccess()){
-						ArrayList<CourseModel> courses = (ArrayList<CourseModel>) resp.getData();
-						NavigationFrame testFrame = new NavigationFrame(new LinkedHashSet<>(courses));
+					ResponseCourse resp1 = mapper.readValue(EntityUtils.toString(response.getEntity()), ResponseCourse.class);
+					if (resp1.isSuccess()){
+						NavigationFrame testFrame = new NavigationFrame(new LinkedHashSet<>(resp1.getData()));
 						testFrame.setVisible(true);
 					}
 				}
@@ -141,6 +141,45 @@ public class LoginFrame extends JFrame implements ActionListener{
 			catch (Exception e1) {
 				lblAuthenticationFaild.setVisible(true);
 			}
+		}
+	}
+
+	public static class ResponseCourse {
+		private boolean success;
+		private String message;
+		private Set<CourseModel> data;
+
+		ResponseCourse() {
+		}
+
+		ResponseCourse(boolean success, String message, Set<CourseModel> data) {
+			this.success = success;
+			this.message = message;
+			this.data = data;
+		}
+
+		public Set<CourseModel> getData() {
+			return data;
+		}
+
+		public void setData(Set<CourseModel> data) {
+			this.data = data;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public void setSuccess(boolean success) {
+			this.success = success;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
 		}
 	}
 }

@@ -30,8 +30,9 @@ public class NavigationFrame extends JFrame {
 		adapter = new Adapter();
 		add(panel, BorderLayout.CENTER);
 		createAndLayoutCourseLabels(courseModels);
-		pack();
+
 		setPreferredSize(new Dimension(800, 600));
+		pack();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,6 +62,8 @@ public class NavigationFrame extends JFrame {
 				panel.add(label);
 			}
 		}
+		panel.repaint();
+		pack();
 	}
 
 	private class Adapter extends MouseAdapter{
@@ -82,9 +85,9 @@ public class NavigationFrame extends JFrame {
 
 					CloseableHttpResponse response = httpClient.execute(httpget);
 
-					Response resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
+					ResponseCourse resp = mapper.readValue(EntityUtils.toString(response.getEntity()), ResponseCourse.class);
 					if (resp.isSuccess()){
-						createAndLayoutCourseSectionLabels((Set<CourseSectionModel>) resp.getData());
+						createAndLayoutCourseSectionLabels(resp.getData());
 					}
 				}
 				catch (Exception e1) {
@@ -103,16 +106,94 @@ public class NavigationFrame extends JFrame {
 					HttpGet httpget = new HttpGet(uri);
 
 					CloseableHttpResponse response = httpClient.execute(httpget);
-					Response resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
+					ResponseTest resp = mapper.readValue(EntityUtils.toString(response.getEntity()), ResponseTest.class);
 
 					if (resp.isSuccess()){
-						TestFrame frame = new TestFrame((TestModel) resp.getData());
+						TestFrame frame = new TestFrame(resp.getData());
 						frame.setVisible(true);
 					}
 				}
 				catch (Exception e1) {
 				}
 			}
+		}
+	}
+
+	public static class ResponseCourse {
+		private boolean success;
+		private String message;
+		private Set<CourseSectionModel> data;
+
+		ResponseCourse() {
+		}
+
+		ResponseCourse(boolean success, String message, Set<CourseSectionModel> data) {
+			this.success = success;
+			this.message = message;
+			this.data = data;
+		}
+
+		public Set<CourseSectionModel> getData() {
+			return data;
+		}
+
+		public void setData(Set<CourseSectionModel> data) {
+			this.data = data;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public void setSuccess(boolean success) {
+			this.success = success;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+	}
+
+	public static class ResponseTest {
+		private boolean success;
+		private String message;
+		private TestModel data;
+
+		ResponseTest() {
+		}
+
+		ResponseTest(boolean success, String message, TestModel data) {
+			this.success = success;
+			this.message = message;
+			this.data = data;
+		}
+
+		public TestModel getData() {
+			return data;
+		}
+
+		public void setData(TestModel data) {
+			this.data = data;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public void setSuccess(boolean success) {
+			this.success = success;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
 		}
 	}
 }
