@@ -98,7 +98,7 @@ public class UserCore extends AbstractCore {
 		userDto.setEmail(getEmail());
 		userDto.setPassword(getPassword());
 		userDto.setGroupIds(getIds(getGroups()));
-		userDto.setEducationStageId(getEducationStage().getId());
+		userDto.setEducationStageId(getId(getEducationStage()));
 		return userDto;
 	}
 
