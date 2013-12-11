@@ -23,7 +23,7 @@ public class ResultFrame extends JFrame{
 		List<TestResultModel.ValidatedTestAnswerModel> validatedAnswers = testResult.getValidatedTestAnswers();
 
 		for (TestResultModel.ValidatedTestAnswerModel vta : validatedAnswers){
-			TestQuestionModel tqm = vta.getQuestionModel();
+			TestQuestionModel tqm = vta.getQuestion();
 			sb.append("<tr>").append(tqm.getQuestion()).append("</tr>");
 			for (TestAnswerModel tam : tqm.getAnswers()){
 				String selectedAnswer = vta.getUserAnswerIds().contains(tam.getId()) ? "*" : "";

@@ -38,6 +38,7 @@ public class TestFrame extends JFrame implements ActionListener{
 		super();
 		panel = new JPanel();
 		footer = new JPanel();
+		userAnswers = new HashSet<>();
 		setLayout(new BorderLayout());
 		add(panel, BorderLayout.CENTER);
 		add(footer, BorderLayout.SOUTH);
@@ -48,6 +49,7 @@ public class TestFrame extends JFrame implements ActionListener{
 		testId = model.getId();
 		showNewQuestion();
 		setPreferredSize(new Dimension(800, 600));
+		pack();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,6 +82,8 @@ public class TestFrame extends JFrame implements ActionListener{
 					currentQuestionAnswers.add(new ToggleButtonAnswer(btn, tam.getId()));
 				}
 			}
+			panel.repaint();
+			pack();
 		}
 	}
 
@@ -115,16 +119,16 @@ public class TestFrame extends JFrame implements ActionListener{
 				HttpPost post = new HttpPost("http://127.0.0.1:8080/test/validateUserTestPassing");
 
 				java.util.List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
-				nvps.add(new BasicNameValuePair("UserTestPassingModel", new String(baos.toByteArray())));
+				nvps.add(new BasicNameValuePair("UserTestPassing", new String(baos.toByteArray())));
 
 				try {
 					post.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
 					CloseableHttpResponse response = httpClient.execute(post);
 
-					Response resp = mapper.readValue(EntityUtils.toString(response.getEntity()), Response.class);
+					ResponseTest resp = mapper.readValue(EntityUtils.toString(response.getEntity()), ResponseTest.class);
 
 					if (resp.isSuccess()){
-						ResultFrame frame = new ResultFrame((TestResultModel) resp.getData());
+						ResultFrame frame = new ResultFrame(resp.getData());
 						frame.setVisible(true);
 					}
 				}
@@ -142,6 +146,45 @@ public class TestFrame extends JFrame implements ActionListener{
 		private ToggleButtonAnswer(JToggleButton btn, Long answerId) {
 			this.btn = btn;
 			this.answerId = answerId;
+		}
+	}
+
+	public static class ResponseTest {
+		private boolean success;
+		private String message;
+		private TestResultModel data;
+
+		ResponseTest() {
+		}
+
+		ResponseTest(boolean success, String message, TestResultModel data) {
+			this.success = success;
+			this.message = message;
+			this.data = data;
+		}
+
+		public TestResultModel getData() {
+			return data;
+		}
+
+		public void setData(TestResultModel data) {
+			this.data = data;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public void setSuccess(boolean success) {
+			this.success = success;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
 		}
 	}
 }
