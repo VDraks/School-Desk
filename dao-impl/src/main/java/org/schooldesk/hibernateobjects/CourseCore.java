@@ -10,13 +10,13 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "courses")
 public class CourseCore extends AbstractCore {
 	private String name;
+	private List<CourseSectionCore> courseSections;
 
 	@UsedForMapping
 	private EducationStageCore educationStage;
-
-	private List<CourseSectionCore> courseSections;
 
 	public CourseCore() {}
 
@@ -28,7 +28,17 @@ public class CourseCore extends AbstractCore {
 		this.name = name;
 	}
 
+	@OneToMany(mappedBy = "course", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+	public List<CourseSectionCore> getCourseSections() {
+		return courseSections;
+	}
+
+	public void setCourseSections(List<CourseSectionCore> courseSections) {
+		this.courseSections = courseSections;
+	}
+
 	@ManyToOne
+	@JoinColumn(name = "education_stage_id")
 	@UsedForMapping
 	@SuppressWarnings("unused")
 	public EducationStageCore getEducationStage() {
@@ -39,15 +49,6 @@ public class CourseCore extends AbstractCore {
 	@SuppressWarnings("unused")
 	public void setEducationStage(EducationStageCore educationStage) {
 		this.educationStage = educationStage;
-	}
-
-	@OneToMany(mappedBy = "courseCore", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
-	public List<CourseSectionCore> getCourseSections() {
-		return courseSections;
-	}
-
-	public void setCourseSections(List<CourseSectionCore> courseSections) {
-		this.courseSections = courseSections;
 	}
 
 	@Override

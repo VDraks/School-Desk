@@ -1,5 +1,6 @@
 package org.schooldesk.hibernateobjects;
 
+import org.hibernate.annotations.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.impl.*;
 
@@ -13,7 +14,8 @@ public abstract class AbstractCore implements IDtoable {
 	protected Long id;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	@Override
 	public Long getId() {
 		return id;
@@ -27,6 +29,12 @@ public abstract class AbstractCore implements IDtoable {
 	protected AbstractDto mapDto(AbstractDto dto) {
 		dto.setId(id);
 		return dto;
+	}
+
+	protected static Long getId(IDtoable dtoable) {
+		return dtoable == null ?
+		       null :
+		       dtoable.getId();
 	}
 
 	protected static Set<Long> getIds(Set<? extends IDtoable> dtoables) {

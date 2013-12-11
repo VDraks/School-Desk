@@ -1,7 +1,6 @@
 package org.schooldesk.hibernateobjects;
 
 import org.hibernate.*;
-import org.schooldesk.dao.DataAccessException;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
 import org.schooldesk.dto.impl.*;
@@ -11,21 +10,9 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "education_stages")
 public class EducationStageCore extends AbstractCore {
-
-	private UserCore userCore;
-
-	@OneToOne
-	public UserCore getUserCore() {
-		return userCore;
-	}
-
-	public void setUserCore(UserCore userCore) {
-		this.userCore = userCore;
-	}
-
 	private String name;
-
 	private List<CourseCore> courses;
 
 	public EducationStageCore() {}

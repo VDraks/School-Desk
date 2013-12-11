@@ -10,17 +10,16 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "test_results")
 public class TestResultCore extends AbstractCore {
-
 	private TestCore test;
 	private UserCore user;
-
-
 	private Set<UserTestAnswerCore> userTestAnswers;
 
 	public TestResultCore() {}
 
-	@OneToOne(mappedBy = "testResult", cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@PrimaryKeyJoinColumn
 	public TestCore getTest() {
 		return test;
 	}
@@ -29,7 +28,8 @@ public class TestResultCore extends AbstractCore {
 		this.test = test;
 	}
 
-	@OneToOne(mappedBy = "testResult", cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@PrimaryKeyJoinColumn
 	public UserCore getUser() {
 		return user;
 	}

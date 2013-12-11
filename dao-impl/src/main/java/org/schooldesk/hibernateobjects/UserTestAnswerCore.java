@@ -10,27 +10,18 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "user_test_answers")
 public class UserTestAnswerCore extends AbstractCore {
-
-
-	private TestResultCore testResult;
-
-	@ManyToOne
-	public TestResultCore getTestResult() {
-		return testResult;
-	}
-
-	public void setTestResult(TestResultCore testResult) {
-		this.testResult = testResult;
-	}
-
 	private TestQuestionCore testQuestion;
-
 	private Set<TestAnswerCore> answers;
+
+	@UsedForMapping
+	private TestResultCore testResult;
 
 	public UserTestAnswerCore() {}
 
-	@OneToOne(mappedBy = "userTestAnswer", cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@PrimaryKeyJoinColumn
 	public TestQuestionCore getTestQuestion() {
 		return testQuestion;
 	}
@@ -46,6 +37,19 @@ public class UserTestAnswerCore extends AbstractCore {
 
 	public void setAnswers(Set<TestAnswerCore> answers) {
 		this.answers = answers;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public TestResultCore getTestResult() {
+		return testResult;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setTestResult(TestResultCore testResult) {
+		this.testResult = testResult;
 	}
 
 	@Override

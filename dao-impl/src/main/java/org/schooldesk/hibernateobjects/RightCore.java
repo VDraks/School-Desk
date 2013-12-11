@@ -9,11 +9,9 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "rights")
 public class RightCore extends AbstractCore {
 	private String code;
-
-	@UsedForMapping
-	private ResourceCore resource;
 
 	@UsedForMapping
 	private GroupCore group;
@@ -26,19 +24,6 @@ public class RightCore extends AbstractCore {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	@OneToOne
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public ResourceCore getResource() {
-		return resource;
-	}
-
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public void setResource(ResourceCore resource) {
-		this.resource = resource;
 	}
 
 	@ManyToOne

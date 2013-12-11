@@ -9,26 +9,14 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "test_answers")
 public class TestAnswerCore extends ResourceCore {
-
 	private String answer;
 
 	@UsedForMapping
-	private TestQuestionCore testQuestion1;
-
+	private TestQuestionCore testQuestion;
 	@UsedForMapping
-	private TestQuestionCore testQuestion2;
-
 	private UserTestAnswerCore userTestAnswer;
-
-	@ManyToOne
-	public UserTestAnswerCore getUserTestAnswer() {
-		return userTestAnswer;
-	}
-
-	public void setUserTestAnswer(UserTestAnswerCore userTestAnswer) {
-		this.userTestAnswer = userTestAnswer;
-	}
 
 	public TestAnswerCore() {}
 
@@ -43,27 +31,27 @@ public class TestAnswerCore extends ResourceCore {
 	@ManyToOne
 	@UsedForMapping
 	@SuppressWarnings("unused")
-	public TestQuestionCore getTestQuestion1() {
-		return testQuestion1;
+	public TestQuestionCore getTestQuestion() {
+		return testQuestion;
 	}
 
 	@UsedForMapping
 	@SuppressWarnings("unused")
-	public void setTestQuestion1(TestQuestionCore testQuestion1) {
-		this.testQuestion1 = testQuestion1;
+	public void setTestQuestion(TestQuestionCore testQuestion) {
+		this.testQuestion = testQuestion;
 	}
 
 	@ManyToOne
 	@UsedForMapping
 	@SuppressWarnings("unused")
-	public TestQuestionCore getTestQuestion2() {
-		return testQuestion2;
+	public UserTestAnswerCore getUserTestAnswer() {
+		return userTestAnswer;
 	}
 
 	@UsedForMapping
 	@SuppressWarnings("unused")
-	public void setTestQuestion2(TestQuestionCore testQuestion2) {
-		this.testQuestion2 = testQuestion2;
+	public void setUserTestAnswer(UserTestAnswerCore userTestAnswer) {
+		this.userTestAnswer = userTestAnswer;
 	}
 
 	@Override

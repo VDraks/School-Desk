@@ -10,43 +10,15 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "test_questions")
 public class TestQuestionCore extends ResourceCore {
-
-	private UserTestAnswerCore userTestAnswer;
-
-	@OneToOne
-	public UserTestAnswerCore getUserTestAnswer() {
-		return userTestAnswer;
-	}
-
-	public void setUserTestAnswer(UserTestAnswerCore userTestAnswer) {
-		this.userTestAnswer = userTestAnswer;
-	}
-
-	@UsedForMapping
-	private List<TestCore> testCores;
-
-	@ManyToMany
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public List<TestCore> getTestCores() {
-		return testCores;
-	}
-
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public void setTestCores(List<TestCore> testCores) {
-		this.testCores = testCores;
-	}
-
 	private String question;
-
-	@Enumerated(EnumType.STRING)
 	private TestQuestionType type;
-
 	private Set<TestAnswerCore> answers;
-
 	private Set<TestAnswerCore> correctAnswers;
+
+	@UsedForMapping
+	private TestCore test;
 
 	public TestQuestionCore() {}
 
@@ -58,6 +30,7 @@ public class TestQuestionCore extends ResourceCore {
 		this.question = question;
 	}
 
+	@Enumerated(EnumType.STRING)
 	public TestQuestionType getType() {
 		return type;
 	}
@@ -66,7 +39,7 @@ public class TestQuestionCore extends ResourceCore {
 		this.type = type;
 	}
 
-	@OneToMany(mappedBy = "testQuestion1", cascade = {CascadeType.REMOVE})
+	@OneToMany(mappedBy = "testQuestion", cascade = {CascadeType.REMOVE})
 	public Set<TestAnswerCore> getAnswers() {
 		return answers;
 	}
@@ -75,13 +48,26 @@ public class TestQuestionCore extends ResourceCore {
 		this.answers = answers;
 	}
 
-	@OneToMany(mappedBy = "testQuestion2", cascade = {CascadeType.REMOVE})
+	@OneToMany(mappedBy = "testQuestion", cascade = {CascadeType.REMOVE})
 	public Set<TestAnswerCore> getCorrectAnswers() {
 		return correctAnswers;
 	}
 
 	public void setCorrectAnswers(Set<TestAnswerCore> correctAnswers) {
 		this.correctAnswers = correctAnswers;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public TestCore getTest() {
+		return test;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setTest(TestCore test) {
+		this.test = test;
 	}
 
 	@Override

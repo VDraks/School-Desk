@@ -10,45 +10,19 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "tests")
 public class TestCore extends ResourceCore {
-
-	private TestResultCore testResult;
-
-	@OneToOne
-	public TestResultCore getTestResult() {
-		return testResult;
-	}
-
-	public void setTestResult(TestResultCore testResult) {
-		this.testResult = testResult;
-	}
-
 	private Set<TestQuestionCore> testQuestions;
-
-	private CourseSectionCore courseSection;
 
 	public TestCore() {}
 
-	@ManyToMany(mappedBy = "testCores")
+	@OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	public Set<TestQuestionCore> getTestQuestions() {
 		return testQuestions;
 	}
 
 	public void setTestQuestions(Set<TestQuestionCore> testQuestions) {
 		this.testQuestions = testQuestions;
-	}
-
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public void setCourseSection(CourseSectionCore courseSection) {
-		this.courseSection = courseSection;
-	}
-
-	@OneToOne//(mappedBy = "test")
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public CourseSectionCore getCourseSection() {
-		return courseSection;
 	}
 
 	@Override

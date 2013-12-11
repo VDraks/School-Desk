@@ -10,23 +10,13 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "groups")
 public class GroupCore extends AbstractCore {
-
-
-	private UserCore userCore;
-
-	@ManyToOne
-	public UserCore getUserCore() {
-		return userCore;
-	}
-
-	public void setUserCore(UserCore userCore) {
-		this.userCore = userCore;
-	}
-
 	private String name;
-
 	private Set<RightCore> rights;
+
+	@UsedForMapping
+	private UserCore user;
 
 	public GroupCore() {}
 
@@ -45,6 +35,19 @@ public class GroupCore extends AbstractCore {
 
 	public void setRights(Set<RightCore> rights) {
 		this.rights = rights;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public UserCore getUser() {
+		return user;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setUser(UserCore user) {
+		this.user = user;
 	}
 
 	@Override

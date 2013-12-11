@@ -1,6 +1,5 @@
 package org.schooldesk.hibernateobjects;
 
-import com.sun.istack.internal.*;
 import org.hibernate.*;
 import org.schooldesk.dao.hibernateimpl.*;
 import org.schooldesk.dto.*;
@@ -10,30 +9,15 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "course_sections")
 public class CourseSectionCore extends AbstractCore {
-
-	@NotNull
-	@UsedForMapping
-	private CourseCore courseCore;
-
 	private String name;
-
 	private TestCore test;
 
+	@UsedForMapping
+	private CourseCore course;
+
 	public CourseSectionCore() {}
-
-	@ManyToOne
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public CourseCore getCourseCore() {
-		return courseCore;
-	}
-
-	@UsedForMapping
-	@SuppressWarnings("unused")
-	public void setCourseCore(CourseCore courseCore) {
-		this.courseCore = courseCore;
-	}
 
 	public String getName() {
 		return name;
@@ -43,13 +27,27 @@ public class CourseSectionCore extends AbstractCore {
 		this.name = name;
 	}
 
-	@OneToOne(mappedBy = "courseSection", cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
 	public TestCore getTest() {
 		return test;
 	}
 
 	public void setTest(TestCore test) {
 		this.test = test;
+	}
+
+	@ManyToOne
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public CourseCore getCourse() {
+		return course;
+	}
+
+	@UsedForMapping
+	@SuppressWarnings("unused")
+	public void setCourse(CourseCore course) {
+		this.course = course;
 	}
 
 	@Override
@@ -62,9 +60,7 @@ public class CourseSectionCore extends AbstractCore {
 	protected CourseSectionDto mapDto(AbstractDto dto) {
 		CourseSectionDto courseSectionDto = (CourseSectionDto) super.mapDto(dto);
 		courseSectionDto.setName(getName());
-		courseSectionDto.setTestId(getTest() == null ?
-		                           null :
-		                           getTest().getId());
+		courseSectionDto.setTestId(getId(getTest()));
 		return courseSectionDto;
 	}
 

@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class ResourceCore extends AbstractCore {
-
 	protected RightCore right;
 	protected String name;
 
@@ -22,7 +21,8 @@ public abstract class ResourceCore extends AbstractCore {
 		this.name = name;
 	}
 
-	@OneToOne(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@PrimaryKeyJoinColumn
 	public RightCore getRight() {
 		return right;
 	}
@@ -34,7 +34,9 @@ public abstract class ResourceCore extends AbstractCore {
 	@Override
 	protected ResourceDto mapDto(AbstractDto dto) {
 		ResourceDto resourceDto = (ResourceDto) super.mapDto(dto);
-		resourceDto.setRightId(getRight() == null ? null : getRight().getId());
+		resourceDto.setRightId(getRight() == null ?
+		                       null :
+		                       getRight().getId());
 		resourceDto.setName(getName());
 		return resourceDto;
 	}
